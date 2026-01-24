@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+
+<div id="cont">
+    <h1>Feature</h1>
+
+<p id="f_name"></p>
+
+</div>
+
+</body>
+</html>
+
+<style type="text/css">
+       #cont {
+        width: 60vw;
+        /* display: flex;
+        align-items: center;
+        justify-content: center; */
+    }
+
+    body {
+        background-color: rgb(17, 17, 17);
+    }
+
+    /* #features_cont { 
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 0;
+        position: relative;
+        top: 68px;
+        width: 1616.5px;
+
+    } */
+
+    /* .feature {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        height: 220px;
+        background-color: rgb(43, 43, 43);
+        border-radius: 3%;
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+        margin: 5px;
+    }  */
+
+    #features_cont {
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 0;
+        position: relative;
+        top: 223px;
+        width: 90vw;
+        /* bottom: 184px; */
+        left: 58px;
+    }
+
+    .features_cont_mov {
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 0;
+        position: relative;
+        top: 184.5px;
+        width: 90vw;
+        /* bottom: 184px; */
+        left: 58px;
+    }
+
+    .feature {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+        /* justify-content: center; */
+        align-items: center;
+        width: 257.5px;
+        height: 180.5px;
+        background-color: rgb(36, 36, 36);
+        border-radius: 3%;
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+        margin: 5px;
+        text-decoration: none;
+
+    }
+
+    .feature_name {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+    }
+
+    .feature_name {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        position: relative;
+        top: 137px;
+        left: 10px;
+    }
+
+
+    .movie_name {
+        font-family: roboto;
+        color: rgb(0, 0, 0);
+        margin: 0px;
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .minitype {
+        width: 21px;
+        height: 23px;
+        background-color: #534b4b;
+        position: relative;
+        top: -69px;
+        left: 214px;
+    }
+
+    /* .minitypecont {
+        position: relative;
+    } */
+
+    .contentr {
+        width: fit-content;
+        height: 23px;
+        background-color: #373737;
+        position: relative;
+        top: -60px;
+        left: 210px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 5px;
+    }
+
+    .contentrt {
+        font-family: roboto;
+        color: #7b7b7b;
+        font-size: 10px;
+    }
+
+    .movie {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100px;
+        height: 100px;
+        margin-top: -60px;
+        background-color: rgb(195, 195, 195);
+        border-radius: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* .movie_big {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 200px;
+        background-color: rgb(43, 43, 43);
+        border-radius: 3%;
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+        margin: 5px;
+    } */
+
+    .movie_big {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+        /* justify-content: center; */
+        align-items: center;
+        width: 258.5px;
+        height: 206px;
+        background-color: rgb(36, 36, 36);
+        border-radius: 3%;
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+        margin: 5px;
+    }
+
+    .mid_movies_cont {
+        display: flex;
+        flex-wrap: wrap;
+        height: 200px;
+        width: 400px;
+    }
+
+    /* .movie_page_header {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 20px;
+    }  */
+    /* 
+    .movie_page_header {
+    color: rgb(255, 255, 255);
+    font-family: roboto;
+    font-size: 20px;
+    position: relative;
+    bottom: 349px;
+    left: 109px;
+} */
+
+    /* .movie_page_header {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 20px;
+        position: relative;
+        bottom: -30px;
+        left: 108px;
+        width: 462px;
+        margin: 0px;
+    } */
+
+    /* .movie_page_header {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 20px;
+        position: relative;
+        bottom: -54px;
+        left: 130px;
+        width: 462px;
+        margin: 0px;
+    }  */
+
+    .movie_page_header {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 36px;
+        position: relative;
+        bottom: -32px;
+        left: 130px;
+        width: 462px;
+        margin: 0px;
+    }
+
+    .movie_descrip {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        position: relative;
+        bottom: -23.5px;
+        left: 130px;
+        width: 627px;
+    }
+
+    .genre_container {
+        position: relative;
+        top: 26.5px;
+        display: flex;
+        left: 126px;
+    }
+
+    .genre {
+        color: white;
+        font-family: roboto;
+        margin-right: 6px;
+        background-color: #1e1e1e;
+        width: fit-content;
+        height: fit-content;
+        padding-left: 3px;
+        padding-right: 3px;
+        border-radius: 32.5px;
+        padding: 8.5px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #848484;
+    }
+
+    .type_tag_cont {
+        background-color: #533636;
+        width: 94px;
+        border-radius: 5px;
+        height: 38px;
+        position: relative;
+        left: 307.5px;
+        top: 73.5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .type_tag {
+        font-family: roboto;
+        color: #a46767;
+        font-size: 30px;
+        margin: 0px;
+    }
+
+    .expand_button {
+        font-family: roboto;
+        color: white;
+    }
+
+    .feature_page_hea {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        position: absolute;
+        bottom: 809.5px;
+        font-size: 45px;
+        left: 130.5px;
+    }
+
+    #m_or_f_switch {
+        width: 100px;
+        height: 50px;
+        background-color: rgb(25, 25, 25);
+        position: fixed;
+        top: 12px;
+        left: 753px;
+        border-radius: 5px;
+    }
+
+    /* .thumbnail {
+        width: 300px;
+    } */
+    .thumbnail {
+        width: 255.5px;
+        position: relative;
+        bottom: 54.5px;
+        left: 1.5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    #feature_movies_cont {
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 0;
+        position: relative;
+        top: 68px;
+
+    }
+
+    .minifeature {
+        width: fit-content;
+        height: 21px;
+        background-color: rgb(57, 57, 57);
+        margin: 3.5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 16px;
+        border-style: solid;
+        border-width: 1.2px;
+        border-color: rgb(66, 66, 66);
+    }
+
+    .minifeaturename {
+        font-family: roboto;
+        color: white;
+        font-size: 10.5px;
+        display: flex;
+        /* align-content: center; */
+        /* justify-content: center; */
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .minifeatures {
+        display: flex;
+        flex-wrap: wrap;
+        position: absolute;
+        top: 175.5px;
+        width: 300.5px;
+    }
+
+    .more_minis {
+        position: relative;
+        top: -33px;
+        left: 136px;
+        background-color: #353535;
+        font-size: 12px;
+        height: 23px;
+        width: 41px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: roboto;
+        color: white;
+        border-radius: 30px;
+    }
+
+    .minifeatureswindow {
+        background-color: #151515;
+        width: 427px;
+        height: 211px;
+        position: relative;
+        top: -681px;
+        left: 489px;
+        border-radius: 30px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .preview {
+        background-color: #151515;
+        width: 233px;
+        height: 211px;
+        position: absolute;
+        top: -681px;
+        left: 489px;
+        border-radius: 5px;
+        display: grid;
+    }
+
+    #movie_name2 {
+        color: white;
+        font-family: roboto;
+        position: absolute;
+        left: 16px;
+        top: -9px;
+        font-size: 19px;
+    }
+
+    #plot_pr {
+        color: white;
+        font-family: roboto;
+        font-size: 12px;
+        width: 209px;
+        position: absolute;
+        left: 12px;
+        top: 55.5px;
+    }
+
+    #release_year_pr {
+        color: white;
+        font-family: roboto;
+        position: absolute;
+        left: 18px;
+        top: 26.5px;
+        font-size: 12px;
+    }
+
+    #votes {
+        color: white;
+        font-family: roboto;
+        position: absolute;
+        top: 0px;
+        left: 161px;
+    } 
+
+
+    .count {
+        font-family: roboto;
+        color: #111;
+        position: relative;
+        bottom: 69px;
+        left: 214px;
+        font-size: 11.5px;
+        background-color: white;
+        padding: 4px;
+        border-radius: 5px;
+    } 
+
+
+    #keynames {
+        position: relative;
+        left: 65.5px;
+        display: flex;
+        flex-wrap: wrap;
+        width: 1700px;
+        top: 258px;
+        height: 43.5px;
+    }
+
+    #related {
+        position: relative;
+    }
+
+
+    .keyname {
+        position: relative;
+        width: 177px;
+        margin: 6.5px;
+        margin-left: -1px;
+        color: #aeaeae;
+        padding: 7px;
+        background-color: #1c1c1c;
+        width: fit-content;
+        border-radius: 6.5px;
+    }
+
+    #related {
+        position: relative;
+        top: 369px;
+        left: 144.5px;
+    } 
+
+    .name_and_type {
+        position: absolute;
+        display: flex;
+        top: 46.5px;
+        height: 76px;
+        width: 496.5px;
+        background-color: #111;
+        left: 205px;
+    }
+
+</style>
+<script>
+
+    const options = { method: 'GET', headers: { "Authorization": "Bearer ACCESS_TOKEN" } };
+
+    async function getconrate(movie) {
+        response = await fetch(`http://www.omdbapi.com/?i=${movie}&apikey=f69b1da2`);
+        ar = await response.json();
+
+        return ar['Rated'];
+    }
+
+
+    async function createmovie(z, size) {
+        x = z['name']
+        movie = document.createElement("a");
+        movie.href = `/m/${z['name']}`;
+        movie_name = document.createElement('p');
+        movie_name.innerHTML = x
+        movie_name.setAttribute('class', 'feature_name')
+        if (size == "small") {
+            movie.setAttribute('class', 'movie')
+        } else {
+            movie.setAttribute('class', 'movie_big')
+        }
+        movie.setAttribute('id', x)
+        let thumbnail = document.createElement('div');
+        thumbnail.setAttribute("class", "thumbnail_cont");
+        minitype = document.createElement('div');
+        minitype.setAttribute("class", "minitype");
+        minitypecont = document.createElement('p');
+        minitypecont.setAttribute("class", "minitypecont");
+        minitypecont.innerHTML = "Movie";
+        // minitype.appendChild(minitypecont);
+
+
+
+
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${x}`, options)
+            .then(res => res.json())
+            .then(res =>
+
+                thumbnail.innerHTML = `<img class="thumbnail", src=http://image.tmdb.org/t/p/w500/${res['results'][0]['backdrop_path']}>`
+            )
+            .catch(err => console.error(err, x));
+
+
+
+
+        movie.appendChild(movie_name);
+        movie.appendChild(thumbnail);
+        // movie.appendChild(minitype);
+        minifeatures = document.createElement('div');
+        minifeatures.setAttribute("class", "minifeatures");
+        for (let i = 0; i < 3; i++) {
+            minifeature = document.createElement("div");
+            minifeature.setAttribute("class", "minifeature");
+            minifeature.innerHTML = `<p class="minifeaturename">${JSON.parse(z['keywords'])[i]}</p>`
+            minifeatures.appendChild(minifeature);
+            console.log(minifeature);
+            console.log('x hey ', i);
+
+
+        }
+
+        more_features = document.createElement("div");
+        more_features.setAttribute("class", "minifeature");
+        more_features.innerHTML = `<p class="minifeaturename">+ ${JSON.parse(z['keywords']).length - 3}</p>`
+        more_features.onclick = function () {
+            e = create_element("minifeatureswindow")
+            up_cont.append(e);
+            for (i = 0; i < JSON.parse(z['keywords']).length; i++) {
+                minifeature = document.createElement("div");
+                minifeature.setAttribute("class", "minifeature");
+                minifeature.innerHTML = `<p class="minifeaturename">${JSON.parse(z['keywords'])[i]}</p>`
+                e.appendChild(minifeature);
+            }
+        }
+        minifeatures.appendChild(more_features);
+        movie.appendChild(minifeatures);
+
+
+        // thumbnail.onclick = function () {
+        //     createmoviepage(z);
+        // }
+
+
+
+        movie.onmousemove = async function (e) {
+            preview1 = document.getElementById("preview1");
+
+
+            movie_name2 = document.getElementById("movie_name2");
+            movie_name2.innerHTML = z['name'];
+
+
+
+            response1 = await fetch(`http://www.omdbapi.com/?i=${z['imdb_id']}&apikey=f69b1da2`);
+            descript = await response1.json();
+            console.log(descript)
+
+            descriptt = document.getElementById("plot_pr");
+            release_year = document.getElementById("release_year_pr");
+            votes = document.getElementById("votes");
+            descriptt.innerHTML = "";
+            release_year.innerHTML = "";
+            votes.innerHTML = "";
+
+            descriptt.innerHTML = descript['Plot'];
+            release_year.innerHTML = descript['Year'];
+            votes.innerHTML = descript['imdbVotes'];
+
+
+            preview1.style.top = `${e.clientY}px`;
+            preview1.style.left = `${e.clientX}px`;
+
+
+
+        }
+
+
+        respone = await getconrate(z['imdb_id']);
+        contentr = document.createElement('div');
+        contentr.setAttribute("class", "contentr");
+        contentrt = document.createElement('p');
+        contentrt.setAttribute("class", "contentrt")
+        contentrt.innerHTML = respone;
+        contentr.appendChild(contentrt);
+        movie.appendChild(contentr);
+
+        return movie;
+
+
+    }
+
+    async function createfeature(x) {
+        let a = document.createElement('a');
+        a.href= `/f/${x['name']}`;
+        a.setAttribute("class", "feature");
+        a.setAttribute("id", `feature ${x}`);
+        let name = document.createElement('p');
+        let thumbnail = document.createElement('div');
+        thumbnail.setAttribute("class", "thumbnail_cont");
+        let count = document.createElement('p');
+        console.log(JSON.parse(x['movies']));
+        fetch(`https://api.themoviedb.org/3/movie/${JSON.parse(x['movies'])[1]}?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb`, options)
+            .then(res => res.json())
+            .then(res =>
+
+                thumbnail.innerHTML = `<img class="thumbnail", src=http://image.tmdb.org/t/p/w500/${res['backdrop_path']}>`
+            )
+            .catch(err => console.error(err, x['movies'][1]));
+
+        name.setAttribute("class", "feature_name");
+        count.setAttribute("class", "count");
+        feature_name = x['name']
+        name.innerHTML = feature_name;
+        count.innerHTML = x['movie_count'];
+        a.appendChild(name);
+        a.appendChild(thumbnail);
+        a.appendChild(count);
+
+        
+        // a.onclick = async function () {
+        //     console.log(feature_name, "xName");
+        //     up_cont.innerHTML = '';
+        //     cont = document.createElement("div");
+        //     cont.setAttribute("id", "features_cont");
+        //     up_cont.appendChild(cont);
+        //     feature_head = document.createElement('p');
+        //     feature_head.setAttribute("class", "feature_page_hea")
+        //     feature_head.innerHTML = x['name'];
+
+
+        //     // feature_movies_cont = document.createElement('div')
+        //     // feature_movies_cont.setAttribute("id", "feature_movies_cont")
+
+        //     movies_or_features_b = document.createElement('div');
+        //     movies_or_features_b.setAttribute("id", "m_or_f_switch")
+
+
+        //     up_cont.appendChild(movies_or_features_b);
+        //     // up_cont.appendChild(feature_movies_cont);
+        //     up_cont.appendChild(feature_head);
+
+
+        //     // loadassociates().then(brand => {
+        //     //     console.log()
+        //     //     associate_names = brand[x]
+        //     //     for (i=0; i<7; i++) {
+        //     //         // console.log(brand[x][i], "brandxi")
+        //     //         createfeature(associate_names[i]['name'])
+        //     //         console.log(brand[x].length, "lengthez")
+        //     //     }
+        //     // })
+
+        //     movies_or_features_b.onclick = async function () {
+        //         up_cont.innerHTML = '';
+        //         cont = document.createElement("div");
+        //         cont.setAttribute("id", "features_cont");
+        //         up_cont.appendChild(cont);
+
+        //         associates = JSON.parse(x['associates']);
+
+        //         c = ''
+        //         for (i = 0; i < 10; i++) {
+        //             c = c + `"${associates[i]['name']}"` + ", ";
+        //         }
+
+        //         console.log(c);
+
+        //         query1 = `SELECT * FROM features
+        //             WHERE name IN (${c.slice(0, c.length - 2)}) limit 20;`
+
+
+        //         console.log(query1);
+        //         frowlst = await calldb(query1);
+        //         console.log(frowlst);
+        //         for (let i = 0; i < rowlst.length; i++) {
+        //             console.log(rowlst[i], "APPP");
+        //             resp = await createfeature(frowlst[i])
+        //             cont.appendChild(resp);
+        //         }
+        //     }
+
+
+        //     l = ''
+        //     for (let i = 0; i < JSON.parse(x['movies']).length; i++) {
+        //         console.log(JSON.parse(x['movies'])[i]);
+        //         l = l + JSON.parse(x['movies'])[i] + ", "
+        //     }
+
+        //     console.log(l, "LLLL");
+        //     query = `SELECT * FROM users
+        //             WHERE id IN (${l.slice(0, l.length - 2)}) limit 20;`
+        //     console.log(query);
+
+        //     rowlst = await calldb(query);
+        //     for (let i = 0; i < rowlst.length; i++) {
+        //         console.log(rowlst[i], "APPP");
+        //         resp = await createmovie(rowlst[i])
+        //         cont.appendChild(resp);
+        //     }
+
+        //     const preview = create_element("preview", "preview1");
+        //     release_year = create_element("", "release_year_pr", "p");
+        //     descriptt = create_element("", "plot_pr", "p");
+        //     movie_name2 = create_element("", "movie_name2", "p");
+        //     votes = create_element("", "votes", "p");
+
+
+
+
+        //     preview.appendChild(descriptt);
+        //     preview.appendChild(release_year);
+        //     preview.appendChild(movie_name2);
+        //     preview.appendChild(votes);
+        //     up_cont.appendChild(preview);
+
+            
+        // }
+
+        // }
+        return a;
+
+    }
+
+
+
+    resy = <%-JSON.stringify(movie)%>
+    // res = resy.slice(1, -1);
+
+    console.log(JSON.parse(`"[1, 2]"`.slice(1, -1)));
+    console.log(resy);
+
+
+    
+
+    async function calldb(query = '', autocomplet=false) {
+        response = await fetch('/usey', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ a: autocomplet, b: query })
+        });
+        data = await response.json();
+
+        if (query.length < 1) {
+            for (i = 0; i < 9; i++) {
+                resy = await createfeature(data[i]);
+                cont.appendChild(resy);
+            }
+        } else {
+            return data;
+        }
+	}
+
+    // async function show() {
+    // 	res = await calldb(`SELECT * FROM features WHERE name == "jealousy" limit 10;`);
+    // 	console.log(res);
+    // } 
+
+    up_cont = document.getElementById("cont");
+
+
+    async function create_keyname(moviekey) {
+        keyname = document.createElement('p');
+        keyname.setAttribute("class", 'keyname')
+        keyname.innerHTML = moviekeynames[i];
+        
+        keyname.onclick = async function() {
+                
+                selected_keynames.push(moviekey);
+                console.log(selected_keynames);
+                rela_query = `SELECT * FROM users
+                WHERE keywords LIKE ""`;
+
+                for (i=0; i<selected_keynames.length; i++) {
+                    rela_query = rela_query + ` OR keywords LIKE "%${selected_keynames[i]}%"`;
+                }
+                
+                rela_query = rela_query + ` limit 10;`
+
+                related_keynames = await calldb(rela_query);
+                
+                related_cont.innerHTML = '';
+                for (i=0; i<related_keynames.length; i++) {
+                    rela = document.createElement('div');
+                    rela.innerHTML = related_keynames[i]['name'];
+                    related_cont.appendChild(rela);
+                }
+        }
+        return keyname;
+    }
+
+    async function createmoviepage(movieob) {
+        up_cont.innerHTML = '';
+        console.log("somethingzz", movieob['name']);
+        movie_page_header = document.createElement('p');
+        movie_page_header.innerHTML = movieob['name'];
+        movie_page_header.setAttribute('class', 'movie_page_header');
+
+        type = document.createElement('p');
+        type.setAttribute('class', 'type_tag');
+        type.innerHTML = 'Movie';
+        type_cont = document.createElement('div');
+        type_cont.setAttribute("class", "type_tag_cont");
+        type_cont.appendChild(type);
+
+
+
+        movie_descrip = document.createElement('p');
+        movie_descrip.setAttribute('class', 'movie_descrip');
+        // movie_descrip.innerHTML = "Lorem ipsum is extrodinary. "; 
+        omdb_response = await getfromomdb(movieob['imdb_id']);
+        movie_descrip.innerHTML = omdb_response['Plot'];
+
+        name_and_type = document.createElement("div");
+        name_and_type.setAttribute("class", "name_and_type");
+        name_and_type.appendChild(movie_page_header);
+        name_and_type.appendChild(type_cont);
+        up_cont.appendChild(name_and_type);
+
+        
+        // up_cont.appendChild(type_cont);
+        cont = document.createElement('div');
+        cont.setAttribute("class", "features_cont_mov");
+        // up_cont.appendChild(movie_page_header);
+        up_cont.appendChild(movie_descrip);
+        genere_lst = omdb_response['Genre'].split(', ');
+        genre_container = document.createElement('div');
+        genre_container.setAttribute("class", "genre_container");
+        for (i = 0; i < genere_lst.length; i++) {
+            genre = document.createElement('p');
+            genre.setAttribute("class", "genre")
+            genre.innerHTML = genere_lst[i];
+            genre_container.appendChild(genre);
+        }
+        up_cont.appendChild(genre_container);
+
+
+        l = ''
+        for (let i = 0; i < JSON.parse(movieob['keywords']).length; i++) {
+            console.log(JSON.parse(movieob['keywords'])[i]);
+            l = l + `"${JSON.parse(movieob['keywords'])[i]}"` + ", "
+        }
+
+        query = `SELECT * FROM features
+        WHERE name IN (${l.slice(0, l.length - 2)}) limit 20;`
+        console.log(query);
+
+        rowlstt = await calldb(query);
+        for (let i = 0; i < data.length; i++) {
+            f = await createfeature(data[i]);
+            cont.appendChild(f);
+        }
+        up_cont.appendChild(cont);
+        
+
+        
+        
+        moviekeynames = JSON.parse(movieob['keywords']);
+        
+        
+        keynames = document.createElement('div');
+        keynames.id = 'keynames';
+        selected_keynames = []
+        for (i=0; i<moviekeynames.length; i++) {
+            
+            keyname = await create_keyname(moviekeynames[i]);
+            keynames.appendChild(keyname);
+            
+            // keyname = document.createElement('p');
+            // keyname.innerHTML = moviekeynames[i];
+            
+            // nn = moviekeynames[i];
+            // keyname.onclick = async function() {
+            //     console.log(nn);
+                
+            //     up_cont.appendChild(related_cont);
+            // }
+        // up_cont.appendChild(keyname);
+        console.log("something");
+
+        } 
+        up_cont.appendChild(keynames);
+        related_cont = document.createElement("div");
+        related_cont.id = "related";
+        up_cont.appendChild(related_cont);
+
+        }
+        
+
+
+    // function return_related_(rela_query) {
+    //     related_movies = await calldb(rela_query);
+
+    // }
+
+    async function getfromomdb(movie) {
+        response = await fetch(`http://www.omdbapi.com/?i=${movie}&apikey=f69b1da2`);
+        ar = await response.json();
+
+        return ar;
+    }
+
+
+    createmoviepage(resy);
+</script>

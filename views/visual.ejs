@@ -1,0 +1,2836 @@
+<!DOCTYPE html>
+<html lang="en" id="som">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> -->
+</head>
+
+<body>
+
+    <p id="signup_button" onclick="document.getElementById('signup_window').style.visibility='visible'">Sign up</p>
+    <div id="user_options">
+        <a class="user_option" id="profile_button" href="/profile">Profile</a>
+        <p class="user_option" id="logout_button" onclick="logout()">Logout</p>
+    </div>
+    <div id="signup_window">
+        <p id="Signup_header">Sign up</p>
+
+        <form id="login_form" action="">
+            <input class="login_input" id="username" type="text" oninput="checkforuser()">
+            <input class="login_input" id="password" type="text" oninput="checkforuser()">
+        </form>
+        <button id="signup_excute" type="submit" onclick="createaccount()">Create account</button>
+
+        <p id="tologin" onclick="tologin()">Log in</p>
+
+    </div>
+
+
+    <h1 id="header">The Moviebase</h1>
+    <!-- <div id="box-container"> -->
+    <form id="box">
+        <div id="arrow">^</div>
+        <input id="search" type="text" placeholder="search" oninput="search_handler()" onclick="searchfocus()"
+            autocomplete="off">
+        <div id="fil"></div>
+        <div id="line"></div>
+        <div id="op_cont"></div>
+    </form>
+
+    <div id="condition_info">
+        <input id="conditioninfo_search" type="text" placeholder="search">
+        <div id="conditioninfo_line"></div>
+        <div id="condi_tags"></div>
+    </div>
+
+    <div id="condi_cont">
+        
+    </div>
+
+
+
+    <!-- </div> -->
+    <div id="cont">
+        <div id="perc_info"></div>
+        <div id="features_cont">
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
+
+
+<style>
+    #signup_button {
+        position: relative;
+        padding: 7px;
+        color: white;
+        font-family: roboto;
+        font-size: 18px;
+        background-color: #090909;
+        width: fit-content;
+        margin: 0px;
+        border-radius: 2px;
+        left: 3.5px;
+        top: 8.5px;
+    }
+
+    #signup_button:hover {
+        background-color: #353535;
+    }
+
+    #signup_window {
+        position: absolute;
+        width: 574px;
+        height: 444.5px;
+        background-color: #090909;
+        visibility: hidden;
+        top: 203.5px;
+        z-index: 3;
+        left: 600.5px;
+        border-radius: 5.5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #Signup_header {
+        position: absolute;
+        font-size: 76.5px;
+        font-family: roboto;
+        color: white;
+        top: 33px;
+        /* left: 156px; */
+        margin: 0px;
+    }
+
+    #login_form {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: 288.5px;
+        height: fit-content;
+        top: -14.5px;
+    }
+
+    .login_input {
+        background-color: #090909;
+        outline: none;
+        border-radius: 5.5px;
+        width: 523.5px;
+        height: 30px;
+        color: white;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #232323;
+    }
+
+    #username {
+        position: relative;
+    }
+
+    #password {
+        position: relative;
+        margin-top: 10px;
+    }
+
+    #signup_excute {
+        padding: 9.5px;
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 18px;
+        background-color: #101010;
+        width: fit-content;
+        margin: 0px;
+        border-radius: 5.5px;
+        position: absolute;
+        top: 279px;
+        outline: none;
+        border-width: -0.5px;
+        border-style: none;
+        /* border-width: 0.5px; */
+        /* border-color: #272727; */
+    }
+
+    #signup_excute:hover {
+        background-color: #1e1e1e;
+    }
+
+    #tologin {
+        position: absolute;
+        top: 331.5px;
+        left: 262.5px;
+        color: white;
+        font-family: roboto;
+    } 
+
+
+    #user_options {
+        background-color: #0b0b0b;
+        color: white;
+        width: 129px;
+        height: 61px;
+        font-family: roboto;
+        position: relative;
+        top: 14px;
+        left: 3px;
+        border-radius: 5px;
+        visibility: hidden;
+    }
+
+    .user_option {
+        margin: 0px;
+        left: 11px;
+        position: relative;
+        margin-top: 8px;
+        top: 7px;
+        text-decoration: none;
+        color: white;
+    }
+
+
+
+    .roboto-font {
+        font-family: "Roboto", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style: normal;
+        font-variation-settings:
+            "wdth" 100;
+    }
+
+    #header {
+        position: absolute;
+        left: 769px;
+        font-family: roboto;
+        color: white;
+        width: 295px;
+        top: 192px;
+        font-size: 40.5px;
+        /* top: 30px; */
+    }
+
+
+
+
+    #box-container {
+        position: relative;
+    }
+
+    #box {
+        position: absolute;
+        left: 664px;
+        width: 482px;
+        top: 329px;
+        box-sizing: border-box;
+        border-radius: 4.5px;
+        z-index: 2;
+    }
+
+    #search {
+        position: relative;
+        background-color: #111;
+        /* border: none; */
+        border-radius: 5px;
+        width: 466px;
+        height: 48.5px;
+        outline: none;
+        box-sizing: border-box;
+        padding-left: 14px;
+        color: rgb(137, 137, 137);
+        caret-color: #4d4d4d;
+        z-index: 1;
+        top: -29px;
+        border-style: solid;
+        border-width: 0.1px;
+        /* height: 8px; */
+        border-color: #292929;
+        left: 7px;
+        transition: width 0.5s, left 0.5s;
+    }
+
+    /* #search:focus {
+        background-color: #202020;
+        width: 480px;
+        left: 1px;
+        
+    } */
+
+
+
+
+
+    #fil {
+        position: relative;
+        background-color: #1c1c1c;
+        /* border-radius: 4.5px; */
+        width: 478.5px;
+        height: 0px;
+        outline: none;
+        box-sizing: border-box;
+        padding-left: 14px;
+        color: rgb(197, 197, 197);
+        caret-color: #4d4d4d;
+        top: -29.5px;
+        z-index: 0;
+        /* border-style: solid; */
+        border-color: #171717;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+        display: flex;
+        visibility: hidden;
+        left: 1.5px;
+        border-style: solid;
+        border-color: #2d2d2d;
+        border-width: 0.1px;
+        border-top: none;
+        transition: height 0.5s;
+    }
+
+
+    #tag_filter {
+        width: 400px;
+        height: 100px;
+        background-color: #1c1c1c;
+        position: absolute;
+        left: 30px;
+        top: 90px;
+        /* border-style: solid; */
+        border-width: 0.2px;
+        border-color: #282828;
+        resize: none;
+        outline: none;
+        font-family: roboto;
+        color: white;
+        display: flex;
+        flex-wrap: wrap;
+        opacity: 0%;
+        transition: top 0.5s, opacity 0.5s;
+    }
+
+    .tagfil {
+        position: relative;
+        font-family: roboto;
+        font-size: 12px;
+        background-color: #222;
+        padding: 4px;
+        border-radius: 3px;
+        height: fit-content;
+        width: fit-content;
+        margin-right: 5px;
+        left: 1.5px;
+        top: -9.5px;
+        margin-bottom: 0px;
+        border-style: solid;
+        border-width: 0.1px;
+        border-color: #373737;
+    }
+
+    #insearchfilters {
+        position: absolute;
+        display: flex;
+        top: 9.5px;
+        z-index: 2;
+        left: 16px;
+        width: fit-content;
+        /* border-radius: 29.5px; */
+    }
+
+    #filter_tag {
+        color: white;
+        font-family: roboto;
+        background-color: #232323;
+        padding: 5.5px;
+        margin: 0px;
+        border-radius: 5px;
+        background-color: #262626;
+        font-size: 13px;
+    }
+
+    #arrow {
+        width: fit-content;
+        color: gray;
+        position: relative;
+        left: 432px;
+        z-index: 2;
+        top: 10px;
+        rotate: 180deg;
+        border-radius: 100%;
+        padding: 12px;
+        height: 5px;
+        width: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: left 0.5s;
+    }
+
+
+    #arrow:hover {
+        background-color: #1f1f1f;
+
+    }
+
+    #op_cont {
+        display: grid;
+        flex-wrap: wrap;
+        width: auto;
+        position: relative;
+        left: 11px;
+        top: -28.5px;
+        font-family: roboto;
+        color: white;
+        font-size: 15px;
+        margin-bottom: -19.5px;
+    }
+
+    .option {
+        color: white;
+        font-family: roboto;
+        text-decoration: none;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 13.5px;
+    }
+
+    .option_n {
+        position: relative;
+        left: 11.5px;
+        margin: 0px;
+        top: 1px;
+    }
+
+
+    .s_thumbnail {
+        position: relative;
+        width: 57px;
+        top: -9px;
+        border-radius: 7.5px;
+    }
+
+
+    #cont {
+        width: 60vw;
+        /* display: flex;
+        align-items: center;
+        justify-content: center; */
+        position: relative;
+        transition: top 0.5s;
+        top: 0px;
+        height: 30px;
+    }
+
+    body {
+        background-color: rgb(17, 17, 17);
+    }
+
+
+
+    /* #features_cont { 
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 0;
+        position: relative;
+        top: 68px;
+        width: 1616.5px;
+
+    } */
+
+    /* .feature {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        height: 220px;
+        background-color: rgb(43, 43, 43);
+        border-radius: 3%;
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+        margin: 5px;
+    }  */
+
+    /* #features_cont {
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 0;
+        position: relative;
+        top: 386.5px;
+        width: 90vw;
+        bottom: 184px;
+        left: 58px;
+    } */
+
+    #features_cont {
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 0;
+        position: relative;
+        top: 405.5px;
+        width: 90vw;
+        /* bottom: 184px; */
+        left: 97px;
+    }
+
+    .feature {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+        /* justify-content: center; */
+        align-items: center;
+        width: 257.5px;
+        height: 180.5px;
+        background-color: rgb(36, 36, 36);
+        border-radius: 3%;
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+        margin: 5px;
+        border-bottom: none;
+        text-decoration: none;
+    }
+
+    .feature_name {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        border-bottom: none;
+    }
+
+    .feature_name {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        position: relative;
+        top: 137px;
+        left: 10px;
+    }
+
+
+    .movie_name {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        /* position: relative; */
+        /* top: 137px; */
+        /* left: 10px; */
+        margin: 0px;
+        height: fit-content;
+    }
+
+    .minitype {
+        width: 21px;
+        height: 23px;
+        background-color: #534b4b;
+        position: relative;
+        top: -69px;
+        left: 214px;
+    }
+
+    /* .minitypecont {
+        position: relative;
+    } */
+
+    .contentr {
+        width: fit-content;
+        height: 18.5px;
+        background-color: #373737;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 5px;
+        left: 5.5px;
+    }
+
+    .contentrt {
+        font-family: roboto;
+        color: #7b7b7b;
+        font-size: 10px;
+    }
+
+    .movie {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100px;
+        height: 100px;
+        margin-top: -60px;
+        background-color: rgb(195, 195, 195);
+        border-radius: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+
+
+    .movie_big {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+        /* justify-content: center; */
+        align-items: center;
+        width: 258.5px;
+        height: 206px;
+        background-color: rgb(36, 36, 36);
+        border-radius: 3%;
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+        margin: 5px;
+        text-decoration: none;
+
+    }
+
+    .nameandratcont {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        top: 151px;
+        left: 10.5px;
+        height: fit-content;
+    }
+
+
+    .thumbnail {
+        width: 255.5px;
+        position: relative;
+        bottom: 54.5px;
+        left: 1.5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    .mthumbnail {
+        width: 255.5px;
+        position: relative;
+        bottom: 27.5px;
+        left: 1.5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+
+    .vcoun {
+        position: relative;
+        text-decoration: none;
+        color: #111;
+        font-size: 11px;
+        font-family: roboto;
+        margin: 0px;
+        left: 208.5px;
+        top: -34px;
+        background-color: #469b6f;
+        height: fit-content;
+        padding: 3px;
+        border-radius: 3px;
+    }
+
+    .minifeature {
+        width: fit-content;
+        height: 21px;
+        background-color: rgb(57, 57, 57);
+        margin: 3.5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 16px;
+        border-style: solid;
+        border-width: 1.2px;
+        border-color: rgb(66, 66, 66);
+    }
+
+    .minifeaturename {
+        font-family: roboto;
+        color: white;
+        font-size: 10.5px;
+        display: flex;
+        /* align-content: center; */
+        /* justify-content: center; */
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .minifeatures {
+        display: flex;
+        flex-wrap: wrap;
+        position: absolute;
+        top: 175.5px;
+        width: 300.5px;
+    }
+
+    /* .movie_big {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 200px;
+        background-color: rgb(43, 43, 43);
+        border-radius: 3%;
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+        margin: 5px;
+    } */
+
+
+
+    .mid_movies_cont {
+        display: flex;
+        flex-wrap: wrap;
+        height: 200px;
+        width: 400px;
+    }
+
+    /* .movie_page_header {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 20px;
+    }  */
+    /* 
+    .movie_page_header {
+	color: rgb(255, 255, 255);
+	font-family: roboto;
+	font-size: 20px;
+	position: relative;
+	bottom: 349px;
+	left: 109px;
+} */
+
+    /* .movie_page_header {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 20px;
+        position: relative;
+        bottom: -30px;
+        left: 108px;
+        width: 462px;
+        margin: 0px;
+    } */
+
+    /* .movie_page_header {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 20px;
+        position: relative;
+        bottom: -54px;
+        left: 130px;
+        width: 462px;
+        margin: 0px;
+    }  */
+
+    .movie_page_header {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 36px;
+        position: relative;
+        bottom: -32px;
+        left: 130px;
+        width: 462px;
+        margin: 0px;
+    }
+
+    .movie_descrip {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        position: relative;
+        bottom: -23.5px;
+        left: 130px;
+        width: 627px;
+    }
+
+    .genre_container {
+        position: relative;
+        top: 26.5px;
+        display: flex;
+        left: 126px;
+    }
+
+    .genre {
+        color: white;
+        font-family: roboto;
+        margin-right: 6px;
+        background-color: #1e1e1e;
+        width: fit-content;
+        height: fit-content;
+        padding-left: 3px;
+        padding-right: 3px;
+        border-radius: 32.5px;
+        padding: 8.5px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #848484;
+    }
+
+    /* .type_tag_cont {
+        background-color: #484848;
+        width: 94px;
+        border-radius: 5px;
+        height: 38px;
+        position: relative;
+        left: 314px;
+        top: -36px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .type_tag {
+        font-family: roboto;
+        color: #777575;
+        font-size: 30px;
+    } */
+
+    .expand_button {
+        font-family: roboto;
+        color: white;
+    }
+
+    .feature_page_hea {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        position: absolute;
+        bottom: 809.5px;
+        font-size: 45px;
+        left: 130.5px;
+    }
+
+    #m_or_f_switch {
+        width: 100px;
+        height: 50px;
+        background-color: rgb(25, 25, 25);
+        position: fixed;
+        top: 12px;
+        left: 753px;
+        border-radius: 5px;
+    }
+
+    /* .thumbnail {
+        width: 300px;
+    } */
+
+
+    #feature_movies_cont {
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 0;
+        position: relative;
+        top: 68px;
+
+    }
+
+
+
+    .more_minis {
+        position: relative;
+        top: -33px;
+        left: 136px;
+        background-color: #353535;
+        font-size: 12px;
+        height: 23px;
+        width: 41px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: roboto;
+        color: white;
+        border-radius: 30px;
+    }
+
+    .minifeatureswindow {
+        background-color: #151515;
+        width: 427px;
+        height: 211px;
+        position: relative;
+        top: -681px;
+        left: 489px;
+        border-radius: 30px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .preview {
+        background-color: #151515;
+        width: 225.5px;
+        height: 211px;
+        position: absolute;
+        top: -681px;
+        left: 489px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #name_and_year {
+        display: flex;
+        position: relative;
+        flex-wrap: wrap;
+        top: 11px;
+        left: 13.5px;
+        height: fit-content;
+    }
+
+
+    #votes {
+        position: relative;
+        text-decoration: none;
+        color: #111;
+        font-size: 11px;
+        font-family: roboto;
+        margin: 0px;
+        left: 10px;
+        top: 7.5%;
+        background-color: #469b6f;
+        height: fit-content;
+        padding: 3px;
+        border-radius: 3px;
+        width: fit-content;
+    }
+
+
+    #score {
+        position: relative;
+        width: fit-content;
+        font-family: roboto;
+        color: #f2c100;
+        font-size: 12px;
+        top: -1.5px;
+        left: 63.5px;
+        margin: 0px;
+        height: 30px;
+        height: 18px;
+        width: fit-content;
+    }
+
+
+    #plot_pr {
+        color: white;
+        font-family: roboto;
+        font-size: 12px;
+        width: 206px;
+        position: relative;
+        left: 9px;
+        top: 1px;
+        margin: 0px;
+        height: fit-content;
+    }
+
+
+    #pgeneres {
+        display: flex;
+        height: fit-content;
+        width: fit-content;
+        top: 10px;
+        position: relative;
+        left: 5px;
+    }
+
+    #movie_name2 {
+        color: white;
+        font-family: roboto;
+        position: relative;
+        /* left: 16px; */
+        /* top: -9px; */
+        font-size: 19px;
+        margin: 0px;
+        height: fit-content;
+    }
+
+    #movie_name2::after {
+        content: var(--deg);
+        width: fit-content;
+        height: 14px;
+        position: relative;
+        background-color: #353535;
+        /* display: block; */
+        font-size: 10px;
+        left: 7px;
+        top: -2px;
+        color: #171717;
+        border-radius: 14.5px;
+        padding: 3px;
+    }
+
+    #pgeneres {
+        display: flex;
+        height: fit-content;
+        width: fit-content;
+        top: 10px;
+        position: relative;
+        left: 5px;
+    }
+
+    .pgenre {
+        position: relative;
+        margin: 0px;
+        margin-left: 3px;
+        background-color: #b9c8ce;
+        padding: 3px;
+        font-size: 12px;
+        border-radius: 4px;
+        font-family: roboto;
+    }
+
+    /* #plot_pr {
+        color: white;
+        font-family: roboto;
+        font-size: 12px;
+        width: 209px;
+        position: absolute;
+        left: 12px;
+        top: 55.5px;
+    } */
+
+    #release_year_pr {
+        color: white;
+        font-family: roboto;
+        position: absolute;
+        left: 18px;
+        top: 26.5px;
+        font-size: 12px;
+    }
+
+
+
+    .count {
+        font-family: roboto;
+        color: #111;
+        position: relative;
+        bottom: 2px;
+        /* left: 214px; */
+        font-size: 11.5px;
+        background-color: white;
+        padding: 4px;
+        border-radius: 5px;
+        margin-left: 3.5px;
+        margin: 0px;
+        height: fit-content;
+    }
+
+    #line {
+        background-color: #3e3e3e;
+        width: 450px;
+        height: 0.7px;
+        position: absolute;
+        left: 13.5px;
+        top: 48px;
+        visibility: hidden;
+        z-index: 5;
+        transition: none;
+    }
+
+
+    .s_type_f {
+        position: relative;
+        left: 19.5px;
+        margin: 0px;
+        /* left: 35px; */
+        background-color: #2c2c2c;
+        padding: 7px;
+        border-radius: 6.5px;
+        font-size: 12px;
+        width: fit-content;
+        height: 17px;
+        top: -4px;
+        color: #7d8d9b;
+    }
+
+    .s_type_g {
+        position: relative;
+        left: 19.5px;
+        margin: 0px;
+        /* left: 35px; */
+        background-color: #242424;
+        padding: 7px;
+        border-radius: 6.5px;
+        font-size: 12px;
+        width: fit-content;
+        height: 17px;
+        top: -4px;
+        color: #606060;
+    }
+
+    .s_type_m {
+        position: relative;
+        left: 19.5px;
+        margin: 0px;
+        /* left: 35px; */
+        background-color: #2c2c2c;
+        padding: 7px;
+        border-radius: 6.5px;
+        font-size: 12px;
+        width: fit-content;
+        height: 17px;
+        top: -4px;
+        color: #805f5f;
+    }
+
+    .percenty {
+        position: relative;
+        /* top: 2.5px; */
+        left: -3.5px;
+        color: white;
+        font-family: roboto;
+        background-color: #353535;
+        padding: 3px;
+        font-size: 11px;
+        border-radius: 3px;
+        margin: 0px;
+        margin-right: 5px;
+        height: fit-content;
+    }
+
+    .numbers_cont {
+        display: flex;
+        position: relative;
+        left: 220.5px;
+        top: -55px;
+        flex-direction: row-reverse;
+        width: 30px;
+    }
+
+    .circle {
+        position: relative;
+        width: 15px;
+        height: 15px;
+        background-color: white;
+        /* left: 115px; */
+        border-radius: 100%;
+        top: -15px;
+        z-index: 1;
+    }
+
+    .slide_ {
+        width: 100px;
+        height: 5px;
+        background-color: #29353c;
+        top: 1px;
+        left: 0px;
+        position: relative;
+        border-radius: 3px;
+        z-index: 1;
+    }
+
+
+    /* #circle2 {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background-color: white;
+        left: 15px;
+        border-radius: 100%;
+        top: 30px;
+        z-index: 1;
+    } */
+
+    /* #hid {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        background-color: #100f0f;
+        left: 130px;
+        top: 19.5px;
+    }  */
+
+    .behinslide_ {
+        width: 100px;
+        height: 5px;
+        background-color: #5d5d5d;
+        top: -4px;
+        left: 8.5px;
+        position: relative;
+        border-radius: 3px;
+        z-index: 0;
+    }
+
+    .val1 {
+        position: relative;
+        left: -5.5px;
+        top: 35px;
+        font-family: roboto;
+        font-size: 11px;
+        font-family: roboto;
+        font-size: 11px;
+        outline: none;
+        background-color: #0e0e0e;
+        border: none;
+        width: 30px;
+        color: white;
+        border-radius: 3.5px;
+        height: 20px;
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-items: center; */
+        /* flex-wrap: wrap; */
+        text-align: center;
+        /* width: 30px; */
+    }
+
+    .val2 {
+        position: relative;
+        left: 58px;
+        top: 35px;
+        font-family: roboto;
+        font-size: 11px;
+        outline: none;
+        background-color: #0e0e0e;
+        border: none;
+        width: 30px;
+        color: white;
+        border-radius: 3.5px;
+        height: 20px;
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-items: center; */
+        /* flex-wrap: wrap; */
+        text-align: center;
+        /* width: 30px; */
+    }
+
+    .perc_info {
+        position: absolute;
+        background-color: #171717;
+        width: 131px;
+        height: fit-content;
+        visibility: hidden;
+        left: 103px;
+        top: 97.5px;
+        z-index: 12;
+        border-radius: 3px;
+        font-family: roboto;
+        color: white;
+        font-size: 10px;
+        padding: 5.5px;
+    }
+
+    .s_vots {
+        /* position: relative; */
+        text-decoration: none;
+        color: #111;
+        font-size: 11px;
+        font-family: roboto;
+        margin: 0px;
+        left: 10px;
+        top: 7.5%;
+        background-color: #469b6f;
+        height: fit-content;
+        padding: 3px;
+        border-radius: 3px;
+        width: fit-content;
+    }
+
+    .s_mcount {
+        font-family: roboto;
+        color: #111;
+        /* position: relative; */
+        bottom: 2px;
+        /* left: 214px; */
+        font-size: 11.5px;
+        background-color: white;
+        padding: 4px;
+        border-radius: 5px;
+        margin-left: 3.5px;
+        margin: 0px;
+        height: fit-content;
+    }
+
+    .vots_cont {
+        position: absolute;
+        direction: rtl;
+        left: 378.5px;
+        width: 58.5px;
+        display: flex;
+    }
+
+
+    /* #release_year_nob {
+        position: relative;
+        top: 10.5px;
+    }  */
+
+    /* #release_year_nobname { 
+        position: relative;
+        left: 20px;
+        width: fit-content;
+        font-family: roboto;
+    } */
+
+    ._nob {
+        position: relative;
+        width: 140px;
+        top: -15px;
+    }
+
+    ._nobname {
+        font-family: roboto;
+        position: relative;
+        left: 6.5px;
+        top: 19px;
+    }
+
+    #nobscont {
+        display: flex;
+        position: relative;
+        left: 10px;
+        top: -10px;
+        opacity: 0%;
+        transition: opacity 0.5s, top 0.5s;
+
+    }
+
+
+
+     #lists_header {
+        position: relative;
+        left: 20px;
+        color: #fff9ee;
+        top: 11px;
+        font-size: 40px;
+    }
+
+
+    /* .list_item {
+        position: relative;
+        left: 14.5px;
+        background-color: #1e1e1e;
+        width: 270.5px;
+        height: 181px;
+        border-radius: 2px;
+        margin-bottom: 11px;
+    } */
+
+
+    .list_item {
+        position: relative;
+        left: 14.5px;
+        background-color: #1e1e1e;
+        width: 248px;
+        height: 168.5px;
+        border-radius: 2px;
+        margin-bottom: 11px;
+        display: block;
+    }
+
+    .list_thumbnail {
+        position: relative;
+        width: 242px;
+        left: 3.5px;
+        top: 2.5px;
+    }
+
+    .list_name {
+        position: relative;
+        top: -14px;
+        left: 7px;
+        font-family: roboto;
+        color: white;
+    }
+
+    .list_creator {
+        position: relative;
+        top: -47px;
+        left: 204px;
+        font-family: roboto;
+        color: black;
+        width: fit-content;
+        background-color: white;
+        padding: 3px;
+        font-size: 11px;
+        border-radius: 3px;
+    } 
+
+    #condi_cont {
+        position: relative;
+        top: 365px;
+        width: fit-content;
+        left: 182px;
+    }
+
+
+    .condition {
+        color: #999;
+        font-family: roboto;
+        background-color: #171717;
+        height: fit-content;
+        width: fit-content;
+        padding: 10px;
+        border-radius: 5px;
+        position: relative;
+        top: -12px;
+        left: -37px;
+        border: solid;
+        border-width: 1px;
+        /* border-style: ; */
+        border-color: #333;
+        margin: 0px;
+    }
+
+
+    #add_condition {
+        color: #999;
+        position: relative;
+        top: 29px;
+        left: 72px;
+        padding: 10px;
+        background-color: #171717;
+        width: 16px;
+        height: fit-content;
+        /* border: 3px; */
+        border-radius: 5px;
+        text-align: center;
+        border: solid;
+        border-width: 1px;
+        /* border-style: ; */
+        border-color: #333;
+    } 
+
+
+    #condition_info {
+        background-color: #0d0d0d;
+        width: 429px;
+        height: 120px;
+        position: absolute;
+        z-index: 3;
+        color: white;
+        font-family: roboto;
+        visibility: hidden;
+    }
+
+    .condiinfo {
+        color: white;
+    }
+
+    #conditioninfo_search {
+        position: relative;
+        outline: none;
+        border: none;
+        background-color: #0d0d0d;
+        /* border-radius: 7px; */
+        color: white;
+        font-family: roboto;
+        font-size: 17px;
+        top: 10px;
+        left: 13px;
+        width: 392px;
+    }
+
+    #conditioninfo_line {
+        position: relative;
+        background-color: #292929;
+        width: 409px;
+        height: 0.5px;
+        top: 17px;
+        left: 8px;
+    } 
+
+
+    .innerconditag {
+        position: relative;
+        left: 15px;
+        top: 12px;
+        color: black;
+        background-color: white;
+        width: fit-content;
+        padding: 3px;
+        border-radius: 3px;
+    }
+
+
+</style>
+
+<script>
+
+    let cont = document.getElementById("features_cont")
+
+    const up_cont = document.getElementById("cont")
+    const options = { method: 'GET', headers: { "Authorization": "Bearer ACCESS_TOKEN" } };
+    const win = document.getElementById("som")
+
+
+    let clicks = []
+
+    let data_of_features = [];
+
+
+    let nobs = { "release_year": { "max value": 2025, "min value": 1950 }, "rating": { "max value": 10, "min value": 0 }, "votes": { "max value": 2000000, "min value": 0 } }
+
+
+
+
+    function return_nob(nobnam, nobvals) {
+        fil_name = document.createElement('p');
+        fil_name.innerHTML = nobnam;
+        fil_name.id = `${nobnam}_nobname`;
+        fil_name.setAttribute("class", "_nobname");
+        circle = document.createElement("div");
+        circle.setAttribute("class", "circle");
+        circle.id = `circle ${nobnam}`;
+        slide_ = document.createElement("div");
+        slide_.setAttribute("class", "slide_");
+        slide_.id = `slide_${nobnam}`;
+        fil = document.getElementById("fil");
+        circle2 = document.createElement("div");
+        circle2.setAttribute("class", "circle");
+        circle2.id = `circle2 ${nobnam}`
+        hid = document.createElement("div");
+        hid.setAttribute("id", "hid");
+        behinslide_ = document.createElement("div");
+        behinslide_.setAttribute("class", "behinslide_");
+
+        val1 = document.createElement("input");
+
+        val1.setAttribute("class", `val1`);
+        val1.setAttribute("id", `val1 ${nobnam}`);
+        val2 = document.createElement("input");
+        val2.setAttribute("class", `val2`)
+        val2.setAttribute("id", `val2 ${nobnam}`);
+
+        max = nobvals["max value"];
+        min = nobvals["min value"];
+        val1.value = min;
+        val2.value = max;
+
+        // circle.style.top = "-14px"
+        // circle2.style.top = "-14px"
+        circle.style.left = "100px"
+        circle2.style.top = "-30px"
+        circle2.style.left = "0px"
+
+
+
+        nob_elem = document.createElement("div");
+        nob_elem.setAttribute("id", `${nobnam}_nob`);
+        nob_elem.setAttribute("class", `_nob`);
+        nob_elem.appendChild(fil_name);
+        nob_elem.appendChild(val1);
+        nob_elem.appendChild(val2);
+        nob_elem.appendChild(slide_);
+        nob_elem.appendChild(behinslide_);
+        nob_elem.appendChild(circle);
+        nob_elem.appendChild(circle2);
+        nob_elem.appendChild(hid);
+
+        return nob_elem;
+    }
+
+
+    let initial = 0;
+    // circle = document.getElementById(`circle ${nobname}`);
+    let circloc = 0;
+    let circloc2 = 0;
+    let nobyname;
+
+    nobvalues = { "release_year": { "max value": 2025, "min value": 1950 }, "vote_average": { "max value": 10, "min value": 0 }, "imdb_votes": { "max value": 2000000, "min value": 0 } };
+    function nob_motion(nobname) {
+        circle = document.getElementById(`circle ${nobname}`);
+        circle2 = document.getElementById(`circle2 ${nobname}`);
+        slide_ = document.getElementById(`slide_${nobname}`);
+        nobcont = document.getElementById(`${nobname}_nobname`);
+
+        circloc = window.getComputedStyle(circle).left.slice(0, window.getComputedStyle(circle).left.length - 2);
+
+
+
+        click = false;
+        click2 = false;
+
+
+        circle.onmousedown = function (d) {
+            circle = document.getElementById(`circle ${nobname}`);
+            circle2 = document.getElementById(`circle2 ${nobname}`);
+            slide_ = document.getElementById(`slide_${nobname}`);
+            nobcont = document.getElementById(`${nobname}_nobname`);
+            circloc = window.getComputedStyle(circle).left.slice(0, window.getComputedStyle(circle).left.length - 2);
+            nobyname = nobname;
+
+            initial = d.clientX;
+
+            circle.style.width = "18px";
+            circle.style.height = "18px";
+            circle.style.top = "-17px";
+            circle2.style.top = "-33px";
+
+            click = true;
+
+        }
+
+        circle2.onmousedown = function (dc) {
+            circle = document.getElementById(`circle ${nobname}`);
+            circle2 = document.getElementById(`circle2 ${nobname}`);
+            slide_ = document.getElementById(`slide_${nobname}`);
+            nobcont = document.getElementById(`${nobname}_nobname`);
+            circloc = window.getComputedStyle(circle).left.slice(0, window.getComputedStyle(circle).left.length - 2);
+            circloc2 = window.getComputedStyle(circle2).left.slice(0, window.getComputedStyle(circle2).left.length - 2);
+            click2 = true;
+            initial = dc.clientX;
+            nobyname = nobname;
+
+            circle2.style.width = "18px";
+            circle2.style.height = "18px";
+            circle2.style.top = "-32px";
+        }
+
+
+
+        count = 0;
+        fil.onmousemove = function (e) {
+            // console.log(nobyname);
+            // max = nobs[nobyname]['max value']
+            // min = nobs[nobyname]['min value']
+
+            circloc___ = circle.getBoundingClientRect();
+            circloc_ = window.getComputedStyle(circle).left.slice(0, window.getComputedStyle(circle).left.length - 2);
+            circloc2_ = window.getComputedStyle(circle2).left.slice(0, window.getComputedStyle(circle2).left.length - 2);
+            slideloc = window.getComputedStyle(slide_).left.slice(0, window.getComputedStyle(slide_).left.length - 2);
+            if ((click) && (circloc_ <= 100) && (parseInt(circloc_) > parseInt(circloc2_))) {
+                max = nobs[nobyname]['max value']
+                min = nobs[nobyname]['min value']
+                val2 = document.getElementById(`val2 ${nobyname}`);
+                // console.log(circloc, nobname, "shoudn't be the former2");
+
+                circle.style.left = `${parseInt(circloc) - (initial - e.clientX)}px`;
+                slide_.style.width = `${parseInt(circloc_) - parseInt(circloc2_)}px`;
+                percy = parseInt(circloc_) * 100 / 100;
+                val2.value = min + (percy * (max - min) / 100);
+                // val2.value = parseInt(circloc_) * max / 100, max;
+            }
+
+            if ((click2) && (circloc2_ >= 0) && (parseInt(circloc_) > parseInt(circloc2_))) {
+                max = nobs[nobyname]['max value']
+                min = nobs[nobyname]['min value']
+                val1 = document.getElementById(`val1 ${nobyname}`);
+                // console.log(circloc, nobname, "shoudn't be the former2");
+
+                circle2.style.left = `${parseInt(circloc2) - (initial - e.clientX)}px`;
+                slide_.style.width = `${parseInt(circloc_) - parseInt(circloc2_)}px`;
+                slide_.style.left = `${parseInt(circloc2) - (initial - e.clientX)}px`;
+                percy = parseInt(circloc2_) * 100 / 100;
+                console.log(circloc2_, "circloc2_");
+                val1.value = min + (percy * (max - min) / 100);
+            }
+        }
+
+        win.onmouseup = function () {
+            circle.style.width = "15px";
+            circle.style.height = "15px";
+            circle.style.top = "-15px";
+
+            circle2.style.width = "15px";
+            circle2.style.height = "15px";
+            circle2.style.top = "-30px";
+            click = false;
+            click2 = false;
+            circloc_ = window.getComputedStyle(circle).left.slice(0, window.getComputedStyle(circle).left.length - 2);
+            circloc2_ = window.getComputedStyle(circle2).left.slice(0, window.getComputedStyle(circle2).left.length - 2);
+            if (circloc_ > 100) {
+                circle.style.left = `100px`;
+            }
+            if (circloc2_ < 0) {
+                circle2.style.left = `0px`;
+                slide_.style.left = `${parseInt(circloc2)}px`;
+            }
+
+            if (parseInt(circloc_) <= parseInt(circloc2_)) {
+                circle.style.left = `${parseInt(circloc2_) + 4}px`;
+                circle2.style.left = `${parseInt(circloc2_) - 4}px`;
+            }
+
+            for (i = 0; i < Object.keys(nobvalues).length; i++) {
+                val1 = document.getElementById(`val1 ${Object.keys(nobs)[i]}`)
+                val2 = document.getElementById(`val2 ${Object.keys(nobs)[i]}`)
+
+                nobvalues[Object.keys(nobvalues)[i]] = { "max value": val2.value, "min value": val1.value }
+            }
+
+            console.log(nobvalues);
+
+
+
+
+            // slide_.style.width = `${parseInt(circloc_) - parseInt(circloc2_)}px`;
+        }
+
+
+
+
+
+        val1.oninput = function () { change_circ1(`circle2 ${nobname}`, nobs[nobname]['max value'], nobs[nobname]['min value']) }
+        function change_circ1(circid, max_, min_) {
+            circle = document.getElementById(circid);
+            circle1 = document.getElementById(`circle ${nobname}`);
+            val1 = document.getElementById(`val1 ${nobname}`);
+            slide_ = document.getElementById(`slide_${nobname}`);
+            console.log("num")
+            circloc1 = window.getComputedStyle(circle1).left.slice(0, window.getComputedStyle(circle1).left.length - 2);
+            circloc2 = window.getComputedStyle(circle2).left.slice(0, window.getComputedStyle(circle2).left.length - 2);
+            max_circ_value = 100;
+
+            input = val1.value;
+
+            console.log(input, max_, min_);
+            percy_ = (input - min_) * 100 / (max_ - min_);
+            console.log(percy_);
+            new_circ_loc = percy_ * 100 / max_circ_value;
+            circle.style.left = `${new_circ_loc}px`;
+
+
+            slide_.style.left = `${(new_circ_loc)}px`;
+            slide_.style.width = `${parseInt(circloc1) - (new_circ_loc)}px`;
+            console.log(circloc1, "loc1");
+        }
+
+
+        val2.oninput = function () { change_circ2(`circle ${nobname}`, nobs[nobname]['max value'], nobs[nobname]['min value']) }
+        function change_circ2(circid, max_, min_) {
+            console.log("@2")
+            circle = document.getElementById(circid);
+            circle2 = document.getElementById(`circle2 ${nobname}`);
+            val2 = document.getElementById(`val2 ${nobname}`);
+            slide_ = document.getElementById(`slide_${nobname}`);
+
+            circloc = window.getComputedStyle(circle).left.slice(0, window.getComputedStyle(circle).left.length - 2);
+            circloc2 = window.getComputedStyle(circle2).left.slice(0, window.getComputedStyle(circle2).left.length - 2);
+            max_circ_value = 100;
+            input = val2.value;
+
+            console.log(input, max_, min_);
+            percy_ = (input - min_) * 100 / (max_ - min_);
+            new_circ_loc = percy_ * 100 / max_circ_value;
+            circle.style.left = `${new_circ_loc}px`;
+            console.log(circloc2, `circle2 ${nobname}`)
+            slide_.style.width = `${new_circ_loc - parseInt(circloc2)}px`;
+        }
+
+    }
+    
+    inp = document.getElementById("search");
+    arrow_ = document.getElementById("arrow");
+    function searchfocus() {
+        clicklst = []
+        console.log("search_foucs!")
+        arrow_.style.left = "439px";
+        // arrow_.style.trans
+        clicklst.push("arrow");
+        console.log("clicklst");
+        inp.style.backgroundColor = "#202020";
+        inp.style.width = "480px";
+        inp.style.left = "1px";
+
+    }
+
+
+    line = document.getElementById('line');
+    tags_tofilter = []
+    arrow_.onclick = async function () {
+        searchfocus()
+        clicklst = []
+        clicklst.push("arrowf");
+        if (fil.style.height > "110px") {
+            fil.style.visibility = "hidden";
+            fil.style.height = "100px";
+            fil.innerHTML = '';
+            up_cont.style.top = "";
+            inp.style.borderBottom = "0.1px solid #292929";
+            line.style.visibility = "hidden";
+            
+            // line.style.top = "-31px";
+
+            arrow_.style.left = "432px";
+            inp.style.backgroundColor = "#111";
+            inp.style.width = "466px";
+            inp.style.left = "7px";
+            inp.style.borderBottom = "0.1px solid #292929";
+
+
+        } else {
+            line.style.visibility = "visible"
+            // line.style.top = "-266.5px"
+            inp.style.borderBottom = "none";
+            console.log("arrowz");
+            fil.style.visibility = "visible";
+            fil.style.height = "236.5px";
+            up_cont.style.top = "190px";
+            fil = document.getElementById("fil");
+            nobscont = document.createElement('div');
+            nobscont.id = "nobscont";
+            fil.appendChild(nobscont);
+            let tag_filter = document.createElement('div');
+            tag_filter.id = "tag_filter";
+            tag_filter.contentEditable = "false";
+            console.log(cont.children, "tag_filer Append_-1");
+            
+            // const features__ = await calldb();
+            // const features_ = features__[0];
+            console.log(features_, "fatur");
+            for (i = 0; i < 15; i++) {
+                console.log("tag_filer Append_0");
+                keyword = document.createElement('p');
+                keyword.innerHTML = features_[i]['name'];
+                keyword.setAttribute("class", "tagfil");
+                keyword.id = `tag ${features_[i]['name']}`;
+
+                keyword.onclick = function (ty) {
+                    keyword_ = document.getElementById(`tag ${ty['originalTarget']['innerHTML']}`)
+                    tag_tofilter = {"tag_type": "f", "content": ty['originalTarget']['innerHTML']}
+                    if (tags_tofilter.some(item => item["content"] === tag_tofilter['content'])) {
+                        console.log("includes");
+                        tags_tofilter.splice(tags_tofilter.indexOf(tag_tofilter), 1)
+                        keyword_.style.backgroundColor = "#1e1e1e";
+                        keyword_.style.color = "white";
+                    } else {
+                        console.log("not includes");
+                        keyword_.style.backgroundColor = "white";
+                        keyword_.style.color = "#1e1e1e";
+                        tags_tofilter.push(tag_tofilter);
+                        console.log(tags_tofilter.indexOf(tag_tofilter));
+
+                    }
+
+                    console.log(tags_tofilter);
+
+                }
+                console.log("tag_filer Append");
+                tag_filter.appendChild(keyword);
+            }
+
+
+
+            fil.appendChild(tag_filter);
+
+            for (i = 0; i < Object.keys(nobs).length; i++) {
+                nobscont.appendChild(return_nob(Object.keys(nobs)[i], nobs[Object.keys(nobs)[i]]));
+                // c1 = document.getElementById(`circle ${Object.keys(nobs)[i]}`)
+                // c2 = document.getElementById(`circle2 ${Object.keys(nobs)[i]}`)
+                // sl = document.getElementById(`slide_${Object.keys(nobs)[i]}`)
+                nob_motion(Object.keys(nobs)[i]);
+            }
+            nobscont.style.top = "0px";
+            tag_filter.style.top = "110px";
+            nobscont.style.opacity = "100%";
+            tag_filter.style.opacity = "100%";
+
+        }
+    }
+
+
+
+
+
+
+    inp = document.getElementById("search");
+
+    resy_ = <%-JSON.stringify(query_movies)%>
+    
+
+
+    async function search_handler() {
+        box = document.getElementById("box");
+        inp = document.getElementById("search");
+        op_cont = document.getElementById("op_cont");
+        op_cont.innerHTML = ''; 
+        await search_();
+    }
+
+    let results_;
+    let queries;
+
+    request_id = 0;
+    suggestion_lst = [];
+    let quer1;
+    let quer2;
+    async function search_() {
+        box = document.getElementById("box");
+        inp = document.getElementById("search");
+        op_cont = document.getElementById("op_cont");
+        op_cont.innerHTML = '';
+        mark = -1;
+
+        fil.style.height = "0px";
+        fil.style.visibility = "hidden";
+
+
+        if (inp.value.length > 0) {
+            
+            quer1 = `SELECT * FROM features WHERE name LIKE "%${inp.value}%" LIMIT 5;`;
+            // Search for features
+
+            quer2 = `SELECT * FROM movies WHERE name LIKE "%${inp.value}%"`;
+            // Search for movies
+
+            console.log('mlm', inp.value);
+
+
+            
+            if (tags_tofilter.length > 0) {
+                for (i = 0; i < tags_tofilter.length; i++) {
+                    if (tags_tofilter[0]["tag_type"] == 'g') {
+                        snipet = ` AND Genre LIKE '%"${tags_tofilter[0]["content"]}"%'`;
+                    } else {
+                        console.log(tags_tofilter, "to_filter");
+                        snipet = ` AND keywords LIKE '%"${tags_tofilter[0]["content"]}"%'`;
+                    }
+                    quer2 += snipet;
+                }
+            }
+
+            
+            nobkeys = Object.keys(nobvalues);
+            for (i = 0; i < nobkeys.length; i++) {
+                snipet = ` AND ${nobkeys[i]} BETWEEN ${nobvalues[nobkeys[i]]["min value"]} AND ${nobvalues[nobkeys[i]]["max value"]}`;
+                quer2 += snipet;
+                if (i == nobkeys.length - 1) {
+                    quer2 += ` ORDER BY imdb_votes DESC LIMIT 5`;
+                }
+            }
+
+            queries = [quer1, quer2, inp.value];
+            results_ = await calldb(queries, true, request_id);
+            op_cont.innerHTML = '';
+            suggestion_lst = []
+
+
+
+            coun = 0;
+            if ((results_[0].length > 0) || (results_[1].length > 0)) {
+                inp.style.borderBottom = "none";
+
+                if (results_[2].length>0) {
+                    // If matching genres, loop through genres
+                    for (x = 0; x < results_[2].length; x++) {
+                        coun = coun + 1
+                        option_item = document.createElement("a");
+                        option_item.setAttribute("class", "option");
+                        s_type = document.createElement("p");
+                        s_type.innerHTML = "Genre";
+                        s_type.setAttribute("class", "s_type_g");
+                        n = document.createElement('p');
+                        n.setAttribute("class", "option_n");
+                        n.innerHTML = results_[2][x];
+                        option_item.appendChild(n);
+                        option_item.appendChild(s_type);
+                        option_item.href = `/g/${results_[2][x]}`;
+
+                        op_cont.appendChild(option_item);
+
+                    }
+
+                }
+                
+                for (let iz = 0; iz < 2; iz++) {
+                coun = coun + 1
+                for (let x = 0; x < results_[iz].length; x++) {
+                    option_item = document.createElement("a");
+                    option_item.setAttribute("class", "option");
+                    s_type = document.createElement("p");
+
+                    vots = document.createElement('p');
+                    if (iz == 0) { // Create feature option
+                        thumb = await get_thumbnail(JSON.parse(results_[iz][x]['movies'])[1]);
+                        inpper = inp.value;
+                        option_item.href = `/f/${results_[iz][x]['name']}`;
+                        s_type.innerHTML = "Feature";
+                        s_type.setAttribute("class", "s_type_f");
+                        vots.innerHTML = results_[iz][x]['movie_count'];
+                        vots.setAttribute("class", "s_mcount");
+                    } else { // Create movie option
+                        thumb = await get_thumbnail(results_[iz][x]['id']);
+                        inpper = inp.value;
+                        option_item.href = `/m/${results_[iz][x]['my_index']}`;
+                        s_type.innerHTML = "Movie";
+                        s_type.setAttribute("class", "s_type_m");
+                        vots.innerHTML = results_[iz][x]['imdb_votes'];
+                        vots.setAttribute("class", "s_vots");
+                    }
+
+
+                    n = document.createElement('p');
+                    n.setAttribute("class", "option_n");
+                    n.innerHTML = results_[iz][x]['name'];
+                    t = document.createElement('div');
+                    t.innerHTML = `<img class="s_thumbnail", src=${thumb}>`
+
+
+                    
+                    vots_cont = document.createElement("div");
+                    vots_cont.setAttribute("class", "vots_cont");
+
+                    option_item.appendChild(t);
+                    option_item.appendChild(n);
+                    option_item.appendChild(s_type);
+                    vots_cont.appendChild(vots)
+                    option_item.appendChild(vots_cont)
+
+                    if (suggestion_lst.includes(option_item.href) == false) {
+                        op_cont.appendChild(option_item);
+                        suggestion_lst.push(option_item.href);
+                    }
+                    
+                }
+                }
+
+                
+                
+            } else {
+                op_cont.innerHTML = "Sorry. No matching enteries"
+            }
+
+
+            line.style.visibility = 'visible';
+            box.style.height = 'fit-content';
+            // box.style.paddingBottom = '2px';
+            box.style.backgroundColor = "#202020";
+        } else {
+            box.style.height = '0px';
+            op_cont.innerHTML = '';
+            line.style.visibility = 'hidden';
+
+        }
+    }
+
+
+
+
+
+    mark = -1;
+    form = document.getElementById("box");
+    insearchtagscont = document.createElement('div');
+    insearchtagscont.id = "insearchfilters";
+    form.appendChild(insearchtagscont);
+
+    /// Show movie results after pressing enter
+    let query_forpage = '';
+    let enter = false;
+    let movie_items_co = 0;
+    let filtered_query;
+    let open_fornew = false;
+
+    let condi_lst = []; 
+
+    inp.addEventListener("keydown", async function (event) {
+
+        // Select option from autocomplete using arrow keys 
+        if (event.key == "ArrowDown") {
+            mark = mark + 1;
+            if (mark > 0) {
+                op_cont.children[mark - 1].style.backgroundColor = "";
+            }
+            op_cont.children[mark].style.backgroundColor = "#232323";
+
+            if ((op_cont.children[mark].href.split('/')[3] == 'f') | (op_cont.children[mark].href.split('/')[3] == 'g')) {
+                search = document.getElementById("search");
+                current_padding = window.getComputedStyle(search).paddingLeft.slice(0, window.getComputedStyle(search).paddingLeft.length - 2);
+                tagtoadd = op_cont.children[mark].querySelector(".option_n");
+
+
+                if (op_cont.children[mark].href.split('/')[3] == 'f') {
+                    tag_type = 'f: ';
+                } else {
+                    tag_type = 'g: ';
+                } 
+
+                console.log(open_fornew);
+
+                if ((insearchtagscont.children.length < 1) || (open_fornew)) {
+                    filter_tag = document.createElement('p');
+                    filter_tag.id = `filter_tag`;
+                    filter_tag.innerHTML = tag_type + tagtoadd.innerHTML;
+                    insearchtagscont.appendChild(filter_tag);
+                    tags_tofilter.push({ "tag_type": tag_type[0], "content": tagtoadd.innerHTML });
+                    open_fornew = false;
+                } else {
+                    filter_tag = insearchtagscont.children[insearchtagscont.children.length-1];
+                    filter_tag.innerHTML = tag_type + tagtoadd.innerHTML;
+                    tags_tofilter[tags_tofilter.length-1] = { "tag_type": tag_type[0], "content": tagtoadd.innerHTML };
+                } 
+
+
+                search.style.paddingLeft = `${(parseInt(window.getComputedStyle(insearchtagscont).width.slice(0, window.getComputedStyle(insearchtagscont).width.length - 2))) + 35}px`
+            }
+
+        }
+
+
+
+        if (event.key == "ArrowUp") {
+            console.log("Arrow!!!!!")
+            mark = mark - 1;
+            // if (mark > op_cont.children.length) {
+            op_cont.children[mark + 1].style.backgroundColor = "";
+            // }
+            op_cont.children[mark].style.backgroundColor = "#232323";
+
+            tagtoadd = op_cont.children[mark].querySelector(".option_n");
+            if ((op_cont.children[mark].href.split('/')[3] == 'f') | (op_cont.children[mark].href.split('/')[3] == 'g')) {
+
+                if (op_cont.children[mark].href.split('/')[3] == 'f') {
+                    tag_type = 'f: ';
+                } else {
+                    tag_type = 'g: ';
+                }
+
+                if ((insearchtagscont.children.length < 1) || (open_fornew)) {
+                    filter_tag = document.createElement('p');
+                    filter_tag.id = `filter_tag`;
+                    filter_tag.innerHTML = tag_type + tagtoadd.innerHTML;
+                    insearchtagscont.appendChild(filter_tag);
+                    tags_tofilter.push({ "tag_type": tag_type[0], "content": tagtoadd.innerHTML });
+                    open_fornew = false;
+                } else {
+                    filter_tag = insearchtagscont.children[insearchtagscont.children.length-1];
+                    filter_tag.innerHTML = tag_type + tagtoadd.innerHTML;
+                    tags_tofilter[tags_tofilter.length-1] = { "tag_type": tag_type[0], "content": tagtoadd.innerHTML };
+                }
+
+                search.style.paddingLeft = `${(parseInt(window.getComputedStyle(filter_tag).width.slice(0, window.getComputedStyle(filter_tag).width.length - 2))) + 35}px`
+                console.log(tags_tofilter);
+            }
+        }
+
+        if (event.key == "ArrowRight") { 
+            open_fornew = true;
+        }
+
+
+
+
+        if (event.key === "Enter") {
+            enter = true;
+            event.preventDefault();
+            cont.innerHTML = '';
+
+            
+
+            quer1 = `SELECT * FROM features WHERE name LIKE "%${inp.value}%" LIMIT 5;`;
+            // Search for features
+
+            quer2 = `SELECT * FROM movies WHERE name LIKE "%${inp.value}%"`;
+            // Search for movies
+
+
+
+            console.log(tags_tofilter);
+            if (tags_tofilter.length > 0) {
+                for (i = 0; i < tags_tofilter.length; i++) {
+                    if (tags_tofilter[i]["tag_type"] == 'g') {
+                        snipet = ` AND Genre LIKE '%"${tags_tofilter[i]["content"]}"%'`;
+                    } else {
+                        snipet = ` AND keywords LIKE '%"${tags_tofilter[i]["content"]}"%'`;
+                    }
+                    quer2 += snipet;
+                }
+            }
+
+            
+
+            // Add nob, aka slider values to the query
+            nobkeys = Object.keys(nobvalues);
+            for (i = 0; i < nobkeys.length; i++) {
+                snipet = ` AND ${nobkeys[i]} BETWEEN ${nobvalues[nobkeys[i]]["min value"]} AND ${nobvalues[nobkeys[i]]["max value"]}`;
+                quer2 += snipet;
+                if (i == nobkeys.length - 1) {
+                    quer2 += ` ORDER BY imdb_votes DESC LIMIT 5`;
+                }
+            }
+
+            console.log('mlm', quer2);
+
+            let condition = document.createElement('p');
+            condition.innerHTML = "condition 1";
+            condition.setAttribute("class", "condition");
+            condition.id = 0
+            if (condi_lst.length>0) {
+                condition.id = condi_lst.length-1
+            } 
+            
+            
+            condi_cont = document.getElementById('condi_cont');
+            add_condi = document.createElement('div');
+            add_condi.innerHTML = "+";
+            add_condi.id = "add_condition";
+            condi_cont.appendChild(add_condi);
+            condi_cont.appendChild(condition);
+            condi_lst[0] = quer2;
+
+            condition.onclick = function(e) {
+                condi_popup = document.getElementById('condition_info');
+                // condi_popup.innerHTML = condi_lst[parseInt(condition.id)];
+                console.log(condi_lst[parseInt(condition.id)]);
+                condi_popup.style.visibility = `visible`;
+                condi_popup.style.top = `${e.clientY}px`;
+                condi_popup.style.left = `${e.clientX}px`;
+
+                
+            }
+
+
+
+            queries = [quer1, quer2, inp.value];
+            response = await fetch('/general_search', {
+            method: "POST",
+            headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ queries: queries })
+                });
+            results_ = await response.json();
+
+
+            for (xn = 0; xn < results_['movies'].length; xn++) {
+                movie = await createmovie(results_['movies'][xn], movie_items_co);
+
+                // console.log(xn, x, results_[1][xn], "ASDASDASD"); 
+                cont.appendChild(movie);
+                movie_items_co = movie_items_co + 1
+            }
+
+            for (xz = 0; xz < results_['features'].length; xz++) {
+                feature = await createfeature(results_['features'][xz], movie_items_co);
+
+                // console.log(xn, x, results_[1][xn], "ASDASDASD"); 
+                cont.appendChild(feature);
+                movie_items_co = movie_items_co + 1
+            }
+
+            for (xz = 0; xz < results_['lists'].length; xz++) {
+                list = await create_listitem(results_['lists'][xz], movie_items_co);
+
+                // console.log(xn, x, results_[1][xn], "ASDASDASD"); 
+                cont.appendChild(list);
+                movie_items_co = movie_items_co + 1
+            }
+
+        }
+
+        if (event.key === "Backspace") { 
+            if (inp.value == '') {
+                tags_tofilter = tags_tofilter.slice(0, tags_tofilter.length-1);
+                console.log(tags_tofilter);
+                insearchtagscont.removeChild(insearchtagscont.children[insearchtagscont.children.length-1])
+                search.style.paddingLeft = `${(parseInt(window.getComputedStyle(insearchtagscont).width.slice(0, window.getComputedStyle(insearchtagscont).width.length - 2))) + 35}px`
+            }
+            
+        }
+
+    });
+
+
+
+    amount = 15;
+    last_quer = '';
+    che = 0;
+    che_ = 0;
+    /// Show either more movies or features when reaching bottom of page, infinite scroll 
+    /// If user hasn't conducted any search, then scrolling down would load more features; elsewise, (if user have clicked enter and thus is on a results page) it'd load movies 
+    window.addEventListener("scroll", async function () {
+        let cont = document.getElementById("features_cont");
+        let b = win.scrollHeight - win.clientHeight;
+        if ((win.scrollTop >= b) && che == 0) {
+            console.log('SCROLLED DETECT')
+
+            console.log("HAPPE");
+
+            che = 1;
+
+            if (enter) { /// Adds more movies
+                items_ = await calldb(filtered_query + ` LIMIT ${amount}, ${15};`);
+                movies = items_[0];
+                c = 0
+                console.log(movies, "movies");
+                for (i = 0; i < movies.length; i++) {
+                    movie = await createmovie(movies[i], movie_items_co);
+                    cont.appendChild(movie);
+                    console.log(movie in cont.children, i, "movie")
+
+                    movie_items_co = movie_items_co + 1;
+                    c = i;
+                }
+                amount = amount + 15;
+                console.log(c);
+                if (c == 14) {
+                    che = 0;
+                }
+
+
+
+            } else { /// Adds more features 
+                items_ = await calldb(`SELECT * FROM features ORDER BY movie_count DESC` + ` LIMIT ${amount}, ${15};`);
+                features = items_[0];
+                c = 0
+                console.log(features, "features");
+                for (i = 0; i < features.length; i++) {
+                    feature = await createfeature(features[i]);
+                    cont.appendChild(feature);
+                    console.log(feature in cont.children, i, "feature")
+
+                    movie_items_co = movie_items_co + 1;
+                    c = i;
+                }
+                amount = amount + 15;
+                console.log(c);
+                if (c == 14) {
+                    che = 0;
+                }
+            }
+
+
+
+
+        }
+
+
+    })
+
+
+    const preview = create_element("preview", "preview1");
+    release_year = create_element("", "release_year_pr", "p");
+    descriptt = create_element("", "plot_pr", "p");
+    movie_name2 = create_element("", "movie_name2", "p");
+    votes = create_element("", "votes", "p");
+    score = create_element("", "score", "p");
+
+    name_and_year = create_element("", "name_and_year", "div");
+    name_and_year.appendChild(movie_name2);
+
+    generes = create_element("", "pgeneres", "div");
+
+
+    preview.appendChild(name_and_year);
+    preview.appendChild(votes);
+    preview.appendChild(score);
+    preview.appendChild(descriptt);
+    preview.appendChild(generes);
+    win.appendChild(preview);
+
+
+    // function show_results(a) {
+    //     if (a.key == "Enter") {
+    //         a.preventDeafult();
+
+    //         console.log("Enterim")
+    //     }
+
+    // }
+
+    win.onclick = function () {
+        box = document.getElementById("box");
+        box.style.height = '0px';
+        op_cont.innerHTML = '';
+        
+        clicklst.push("window");
+        console.log(clicklst);
+        if (clicklst.length < 2) {
+            if (fil.style.height < "110px") {
+                arrow_.style.left = "432px";
+                inp.style.backgroundColor = "#111";
+                inp.style.width = "466px";
+                inp.style.left = "7px";
+                inp.style.borderBottom = "0.1px solid #292929";
+            }
+            
+            // line.style.visibility = 'hidden';
+            // inp.style.borderBottomWidth = "0.1px";
+        }
+        clicklst = []
+
+        
+    }
+
+    async function get_thumbnail(movie_id) {
+        response = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb`, options);
+        ar = await response.json();
+        return `https://image.tmdb.org/t/p/w500/${ar['backdrop_path']}`;
+    }
+
+
+
+    async function createfeature(x) {
+        let a = document.createElement('a');
+        a.href = `/f/${x['name']}`;
+        a.setAttribute("class", "feature");
+        a.setAttribute("id", `feature ${x['name']}`);
+        let name = document.createElement('p');
+        let thumbnail = document.createElement('div');
+        let count = document.createElement('p');
+        thumbnail.setAttribute("class", "thumbnail_cont");
+        fetch(`https://api.themoviedb.org/3/movie/${JSON.parse(x['movies'])[1]}?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb`, options)
+            .then(res => res.json())
+            .then(res =>
+
+                thumbnail.innerHTML = `<img class="thumbnail", src=https://image.tmdb.org/t/p/w500/${res['backdrop_path']}>`
+            )
+            .catch(err => console.error(err, x['movies'][1]));
+
+        perc_info = document.createElement("p");
+        perc_info.setAttribute("class", "perc_info");
+        perc_info.id = `perc_info ${x['name']}`
+        perc_info.innerHTML = `Percent of movies possesing this feature of the database`
+
+        name.setAttribute("class", "feature_name");
+        count.setAttribute("class", "count")
+        feature_name = x['name']
+        name.innerHTML = feature_name;
+        count.innerHTML = x['movie_count'];
+        a.appendChild(name);
+        a.appendChild(perc_info);
+        a.appendChild(thumbnail);
+
+
+        response = await fetch('/useyx', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ A: "SELECT COUNT(*) FROM movies" })
+        });
+
+        total_movie_count = await response.json();
+
+
+        numbers_cont = document.createElement("div");
+        numbers_cont.setAttribute('class', "numbers_cont");
+
+        percent = x['movie_count'] * 100 / total_movie_count[0]["COUNT(*)"];
+        percenty = document.createElement("p");
+        percenty.setAttribute('class', "percenty");
+        percenty.innerHTML = `${percent}`.slice(0, 3) + "%";
+
+
+
+
+        percenty.onmouseover = function () {
+            timeoutid = setTimeout(() => {
+                percc = document.getElementById(`perc_info ${x['name']}`);
+                percc.style.visibility = "visible";
+
+            }, 900)
+
+        }
+
+        percenty.onmouseout = function () {
+            window.clearTimeout(timeoutid);
+            percc = document.getElementById(`perc_info ${x['name']}`);
+            percc.style.visibility = "hidden";
+        }
+
+        numbers_cont.appendChild(count);
+        numbers_cont.appendChild(percenty);
+
+
+        a.appendChild(numbers_cont);
+
+
+
+        return a;
+
+    }
+
+
+
+
+    async function createmovie(z, id, size) {
+        x = z['name']
+        movie = document.createElement("a");
+        movie.href = `/m/${z['my_index']}`;
+        movie_name = document.createElement('p');
+        movie_name.innerHTML = x
+        movie_name.setAttribute('class', 'movie_name')
+        if (size == "small") {
+            movie.setAttribute('class', 'movie')
+        } else {
+            movie.setAttribute('class', 'movie_big')
+        }
+        movie.id = id;
+        let thumbnail = document.createElement('div');
+        thumbnail.setAttribute("class", "thumbnail_cont");
+        minitype = document.createElement('div');
+        minitype.setAttribute("class", "minitype");
+        minitypecont = document.createElement('p');
+        minitypecont.setAttribute("class", "minitypecont");
+        minitypecont.innerHTML = "Movie";
+        // minitype.appendChild(minitypecont);
+
+        vcoun = document.createElement('p');
+        vcoun.setAttribute("class", "vcoun");
+        vcoun.innerHTML = z['imdb_votes'];
+
+        nameandratcont = document.createElement("div");
+        nameandratcont.setAttribute("class", "nameandratcont");
+        respone = await getconrate(z['imdb_id']);
+        contentr = document.createElement('div');
+        contentr.setAttribute("class", "contentr");
+        contentrt = document.createElement('p');
+        contentrt.setAttribute("class", "contentrt")
+        contentrt.innerHTML = respone;
+        contentr.appendChild(contentrt);
+        nameandratcont.appendChild(movie_name);
+        nameandratcont.appendChild(contentr);
+
+        movie.appendChild(nameandratcont)
+
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${x}`, options)
+            .then(res => res.json())
+            .then(res =>
+
+                thumbnail.innerHTML = `<img class="mthumbnail", src=https://image.tmdb.org/t/p/w500/${res['results'][0]['backdrop_path']}>`
+            )
+            .catch(err => console.error(err, x));
+
+
+
+
+        // movie.appendChild(movie_name);
+        movie.appendChild(thumbnail);
+        // movie.appendChild(minitype);
+        minifeatures = document.createElement('div');
+        minifeatures.setAttribute("class", "minifeatures");
+        for (let i = 0; i < 3; i++) {
+            minifeature = document.createElement("div");
+            minifeature.setAttribute("class", "minifeature");
+            console.log(z['keywords']);
+            minifeature.innerHTML = `<p class="minifeaturename">${JSON.parse(z['keywords'])[i]}</p>`
+            minifeatures.appendChild(minifeature);
+
+
+        }
+
+        more_features = document.createElement("div");
+        more_features.setAttribute("class", "minifeature");
+        more_features.innerHTML = `<p class="minifeaturename">+ ${JSON.parse(z['keywords']).length - 3}</p>`
+        more_features.onclick = function () {
+            e = create_element("minifeatureswindow")
+            up_cont.append(e);
+            for (i = 0; i < JSON.parse(z['keywords']).length; i++) {
+                minifeature = document.createElement("div");
+                minifeature.setAttribute("class", "minifeature");
+                minifeature.innerHTML = `<p class="minifeaturename">${JSON.parse(z['keywords'])[i]}</p>`
+                e.appendChild(minifeature);
+            }
+        }
+        minifeatures.appendChild(more_features);
+        movie.appendChild(vcoun);
+        movie.appendChild(minifeatures);
+
+
+        movie.onmousemove = function (e) {
+            preview1 = document.getElementById("preview1");
+            preview1.style.visibility = "visible";
+
+
+            movie_name2 = document.getElementById("movie_name2");
+            movie_name2.innerHTML = z['name'];
+
+
+
+            // response1 = await fetch(`https://www.omdbapi.com/?i=${z['imdb_id']}&apikey=f69b1da2`);
+            // descript = await response1.json();
+
+            descriptt = document.getElementById("plot_pr");
+            // release_year = document.getElementById("release_year_pr");
+            votes = document.getElementById("votes");
+            generes = document.getElementById("pgeneres");
+            descriptt.innerHTML = "";
+            // release_year.innerHTML = "";
+            votes.innerHTML = "";
+            generes.innerHTML = "";
+
+
+            descriptt.innerHTML = z['description'];
+            // release_year.innerHTML = z['release_year'];
+            votes.innerHTML = z['imdb_votes'];
+            score.innerHTML = z['imdb_avg_vote'];
+
+            genere_lst = JSON.parse(z['Genre'])
+            for (i = 0; i < genere_lst.length; i++) {
+                genre = document.createElement("p");
+                genre.setAttribute("class", "pgenre");
+                genre.innerHTML = genere_lst[i];
+                generes.appendChild(genre);
+            }
+
+
+            preview1.style.top = `${e.clientY + win.scrollTop}px`;
+            preview1.style.left = `${e.clientX}px`;
+
+            var root = document.querySelector(':root');
+            root.style.setProperty('--deg', `"${z['release_year']}"`);
+
+
+        }
+
+
+        return movie;
+
+
+    }
+
+
+
+    async function create_listitem(listobj) {
+        container = document.createElement("a");
+        container.setAttribute("class", "list_item");
+        container.href = `/l/${listobj['list_id']}`
+
+        list_name = document.createElement('p');
+        list_name.setAttribute("class", "list_name");
+        list_name.innerHTML = listobj['list_name'];
+
+        list_creator = document.createElement('p');
+        list_creator.setAttribute("class", "list_creator");
+        list_creator.innerHTML = listobj['username'];
+
+        movie_tmdb = await fetch(`https://api.themoviedb.org/3/movie/${listobj['thumbnail']}?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb`, options);
+        movie_tmdb_data = await movie_tmdb.json();
+        console.log(movie_tmdb_data);
+        thumbnail_path = `https://image.tmdb.org/t/p/w500/${movie_tmdb_data['backdrop_path']}`
+        container.innerHTML = `<img class="list_thumbnail", src=${thumbnail_path}>`;
+
+        container.appendChild(list_name);
+        container.appendChild(list_creator);
+        return container;
+
+
+    }
+
+
+
+
+
+    async function getconrate(movie) {
+        response = await fetch(`https://www.omdbapi.com/?i=${movie}&apikey=f69b1da2`);
+        ar = await response.json();
+
+        return ar['Rated'];
+    }
+
+    async function getfromomdb(movie) {
+        response = await fetch(`https://www.omdbapi.com/?i=${movie}&apikey=f69b1da2`);
+        ar = await response.json();
+
+        return ar;
+    }
+
+
+    function create_element(class_, name = '', type = 'div') {
+        new_element = document.createElement(type);
+        new_element.setAttribute("class", class_);
+        if (name.length > 1) {
+            new_element.setAttribute("id", name)
+        }
+        return new_element;
+    }
+
+    let features_ = [];
+    async function calldb(query = '', autocomplet = false, request_id='') {
+        response = await fetch('/usey', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ autocomplet: autocomplet, b: query, request_id: request_id })
+        });
+        data = await response.json();
+        
+        if (features_.length < 1) {
+            features_ = data[0];
+        }
+
+        if (query.length < 1) {
+            for (i = 0; i < data[0].length; i++) {
+                resy = await createfeature(data[0][i]);
+                cont.appendChild(resy);
+            }
+            if (data[1]) {
+                console.log("USER USH");
+                signup_button = document.getElementById("signup_button");
+                signup_button.innerHTML = "Hello, user"
+                user_options_win = document.getElementById("user_options");
+                signup_button.onclick = function() {
+                    user_options_win.style.visibility = "visible";
+                }
+
+                
+            }
+            return data;
+        } else {
+            return data;
+        }
+
+    }
+
+
+   
+
+    
+
+
+    async function authen(username, password_ = '', enter = false) {
+        response = await fetch('/signup', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ usernamex: username, password: password_, enter: enter })
+
+        });
+
+        rex = await response.json();
+        return rex;
+
+
+    }
+
+    async function login(username, password_) {
+        response = await fetch('/login', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ usernamex: username, password: password_ })
+
+        });
+
+        console.log("rexlog");
+
+        rex = await response.json();
+        return rex;
+
+    }
+
+
+    async function test() {
+        // console.log(await authen("user12XXchas", "123"));
+        // await login("user12Xchas", "123azaz"); 
+    }
+
+
+
+    async function checkforuser() {
+        username_box = document.getElementById("username");
+        password_box = document.getElementById("password");
+        console.log(await authen(username_box.value, password_box.value));
+    }
+
+    async function createaccount() {
+        console.log("acco");
+        username_box = document.getElementById("username");
+        password_box = document.getElementById("password");
+        console.log(await authen(username_box.value, password_box.value, true));
+    }
+
+
+    async function tologin() {
+        Signup_header = document.getElementById("Signup_header");
+        tologin_ = document.getElementById("tologin");
+        signup_excute = document.getElementById("signup_excute");
+
+
+        Signup_header.innerHTML = 'Login';
+        tologin_.innerHTML = 'Sign up';
+        signup_excute.innerHTML = 'Login';
+        signup_excute.onclick = function () { loginexec() };
+
+    }
+
+    async function loginexec() {
+        username_box = document.getElementById("username");
+        password_box = document.getElementById("password");
+
+        res = await login(username_box.value, password_box.value, true);
+        console.log(res);
+        if (res[0] == 'success') {
+            window.location.replace("/profile");
+        }
+    }
+
+     async function logout() {
+        console.log("LOGOUT");
+        response = await fetch('/logout', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ A: "Hi" })
+        });
+
+        rendered = await response.json();
+
+        console.log(rendered);
+
+        window.location.replace("/");
+    }
+
+
+
+
+    test();
+    console.log(resy_);
+
+
+    async function create_queryp() {
+        let condition = document.createElement('p');
+        condition.innerHTML = "condition 1";
+        condition.setAttribute("class", "condition");
+        condition.id = 0
+        if (condi_lst.length>0) {
+            condition.id = condi_lst.length-1
+        } 
+
+        condi_cont = document.getElementById('condi_cont');
+        add_condi = document.createElement('div');
+        add_condi.innerHTML = "+";
+        add_condi.id = "add_condition";
+        condi_cont.appendChild(add_condi);
+        condi_cont.appendChild(condition);
+        condi_lst[0] = resy_['conditions'][0];
+
+        
+        
+
+        condition.onclick = function(e) {
+            condi_popup = document.getElementById('condition_info');
+            // condi_popup.innerHTML = condi_lst[parseInt(condition.id)];
+            console.log(condi_lst[parseInt(condition.id)]);
+            
+            condi_tags = document.getElementById("condi_tags");
+            condi_tags.innerHTML = '';
+            innerconditag = document.createElement('p');
+            innerconditag.innerHTML = condi_lst[parseInt(condition.id)];
+            innerconditag.setAttribute("class", "innerconditag");
+            condi_tags.appendChild(innerconditag);
+
+            condi_popup.style.visibility = `visible`;
+            condi_popup.style.top = `${e.clientY}px`;
+            condi_popup.style.left = `${e.clientX}px`;
+            
+            
+        }
+
+
+
+        for (let i = 0; i<resy_['movies'].length; i++) {
+            console.log(i);
+            movie_item = await createmovie(resy_['movies'][i]);
+            console.log("await");
+            cont.append(movie_item);
+        }
+    }
+
+    create_queryp();
+    
+
+
+
+</script>

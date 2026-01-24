@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html id="page">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+</head>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+<body>
+
+    <div id="info_window">
+
+        <img id="x" src="/Images/Vector Union.svg" alt="" onclick="document.getElementById('info_window').style.visibility='hidden'">
+
+        <img id="backdrop" src="" alt="">
+
+
+        <h1 id="movie_name_infob">Movie name</h1>
+        <p id="movie_descript_infob">Movie name</p>
+
+        <div id="genreinfo_container"></div>
+
+
+        <div id="keywords_container"></div>
+
+    </div>
+
+
+    <div id="cont">
+
+
+        <p id="f_name"></p>
+
+        <div id="userlists_container">
+            <h2 id="lists_header">User lists</h2>
+
+        </div>
+
+
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <svg id="star" width="262" height="254" viewBox="0 0 262 254" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M129.394 8.9129L159.838 70.6732Q159.972 70.9443 160.138 71.1969Q160.304 71.4495 160.5 71.6797Q160.695 71.91 160.918 72.1145Q161.14 72.319 161.386 72.4945Q161.632 72.6701 161.898 72.8141Q162.164 72.9581 162.445 73.0683Q162.727 73.1786 163.019 73.2534Q163.312 73.3282 163.612 73.3665L233.426 82.2748Q233.599 82.2968 233.77 82.331Q233.94 82.3652 234.108 82.4114Q234.275 82.4576 234.439 82.5156Q234.603 82.5736 234.763 82.6431Q234.922 82.7125 235.076 82.7931Q235.231 82.8737 235.379 82.965Q235.527 83.0564 235.668 83.158Q235.809 83.2596 235.943 83.3709Q236.076 83.4823 236.202 83.6028Q236.327 83.7234 236.443 83.8525Q236.56 83.9817 236.667 84.1188Q236.774 84.2558 236.871 84.4002Q236.968 84.5445 237.055 84.6953Q237.141 84.8462 237.217 85.0028Q237.293 85.1594 237.357 85.321Q237.421 85.4826 237.474 85.6483Q237.527 85.814 237.568 85.9831Q237.609 86.1522 237.637 86.3237Q237.666 86.4952 237.683 86.6684Q237.699 86.8415 237.703 87.0154Q237.708 87.1893 237.7 87.363Q237.691 87.5367 237.671 87.7095Q237.651 87.8822 237.618 88.053Q237.585 88.2239 237.541 88.392Q237.496 88.5601 237.439 88.7246Q237.383 88.8891 237.315 89.0492Q237.247 89.2092 237.168 89.3641Q237.089 89.519 236.999 89.6678Q236.909 89.8167 236.808 89.9588Q236.708 90.1008 236.598 90.2355Q236.488 90.3701 236.368 90.4966Q236.249 90.623 236.121 90.7407L185.262 137.475Q185.032 137.686 184.831 137.924Q184.631 138.162 184.461 138.424Q184.292 138.686 184.158 138.967Q184.023 139.248 183.925 139.544Q183.828 139.84 183.768 140.146Q183.708 140.452 183.688 140.763Q183.668 141.074 183.687 141.385Q183.706 141.696 183.765 142.002L196.563 208.906Q196.595 209.075 196.616 209.246Q196.636 209.416 196.645 209.588Q196.653 209.759 196.649 209.931Q196.646 210.103 196.63 210.274Q196.614 210.445 196.587 210.614Q196.559 210.784 196.519 210.951Q196.48 211.118 196.429 211.282Q196.378 211.446 196.316 211.606Q196.253 211.767 196.18 211.922Q196.106 212.077 196.022 212.227Q195.938 212.377 195.843 212.52Q195.749 212.664 195.645 212.8Q195.54 212.937 195.427 213.065Q195.313 213.194 195.191 213.315Q195.068 213.436 194.938 213.547Q194.807 213.659 194.669 213.761Q194.531 213.864 194.387 213.956Q194.242 214.048 194.091 214.131Q193.94 214.213 193.784 214.284Q193.627 214.355 193.466 214.415Q193.306 214.475 193.141 214.524Q192.976 214.573 192.808 214.61Q192.641 214.647 192.471 214.672Q192.301 214.697 192.129 214.71Q191.958 214.724 191.786 214.725Q191.615 214.726 191.443 214.715Q191.272 214.704 191.101 214.682Q190.931 214.659 190.763 214.624Q190.595 214.589 190.429 214.543Q190.264 214.497 190.102 214.439Q189.94 214.381 189.783 214.312Q189.626 214.243 189.474 214.163L127.278 181.487Q127.016 181.349 126.738 181.244Q126.461 181.138 126.173 181.067Q125.885 180.996 125.591 180.961Q125.297 180.925 125 180.925Q124.703 180.925 124.409 180.961Q124.115 180.996 123.827 181.067Q123.539 181.138 123.262 181.244Q122.984 181.349 122.722 181.487L60.5263 214.163Q60.3742 214.243 60.2169 214.312Q60.0596 214.381 59.8979 214.439Q59.7361 214.497 59.5707 214.543Q59.4053 214.589 59.2371 214.624Q59.0688 214.659 58.8985 214.682Q58.7283 214.704 58.5568 214.715Q58.3854 214.726 58.2136 214.725Q58.0418 214.724 57.8705 214.71Q57.6993 214.697 57.5293 214.672Q57.3594 214.647 57.1917 214.61Q57.0239 214.573 56.8592 214.524Q56.6945 214.475 56.5335 214.415Q56.3726 214.355 56.2163 214.284Q56.06 214.212 55.9091 214.13Q55.7581 214.048 55.6133 213.956Q55.4685 213.864 55.3305 213.761Q55.1925 213.659 55.062 213.547Q54.9315 213.436 54.8092 213.315Q54.6869 213.194 54.5733 213.065Q54.4597 212.937 54.3554 212.8Q54.2511 212.664 54.1567 212.52Q54.0622 212.377 53.978 212.227Q53.8938 212.077 53.8204 211.922Q53.7469 211.767 53.6845 211.606Q53.622 211.446 53.571 211.282Q53.5199 211.118 53.4805 210.951Q53.4411 210.784 53.4134 210.614Q53.3858 210.445 53.3701 210.274Q53.3544 210.103 53.3508 209.931Q53.3471 209.759 53.3555 209.588Q53.3639 209.416 53.3842 209.246Q53.4046 209.075 53.4369 208.906L66.235 142.002Q66.2936 141.696 66.3129 141.385Q66.3322 141.074 66.3119 140.763Q66.2916 140.452 66.232 140.146Q66.1725 139.84 66.0746 139.544Q65.9768 139.248 65.8423 138.967Q65.7077 138.686 65.5386 138.424Q65.3695 138.162 65.1686 137.924Q64.9677 137.686 64.7382 137.475L13.8792 90.7407Q13.7511 90.623 13.6317 90.4966Q13.5123 90.3701 13.4021 90.2355Q13.292 90.1008 13.1917 89.9587Q13.0914 89.8167 13.0014 89.6678Q12.9115 89.519 12.8323 89.3641Q12.7531 89.2092 12.6851 89.0492Q12.6171 88.8891 12.5606 88.7246Q12.5041 88.5601 12.4594 88.392Q12.4147 88.2239 12.3821 88.0531Q12.3495 87.8822 12.329 87.7095Q12.3086 87.5368 12.3005 87.363Q12.2923 87.1893 12.2965 87.0154Q12.3007 86.8415 12.3173 86.6684Q12.3338 86.4952 12.3626 86.3237Q12.3913 86.1522 12.4322 85.9831Q12.473 85.814 12.5258 85.6483Q12.5785 85.4826 12.6429 85.321Q12.7073 85.1594 12.783 85.0028Q12.8586 84.8462 12.9452 84.6953Q13.0318 84.5445 13.1289 84.4002Q13.2259 84.2558 13.333 84.1188Q13.44 83.9817 13.5566 83.8525Q13.6731 83.7234 13.7984 83.6028Q13.9238 83.4823 14.0574 83.3709Q14.191 83.2596 14.3322 83.158Q14.4734 83.0564 14.6214 82.965Q14.7694 82.8737 14.9236 82.7931Q15.0777 82.7125 15.2372 82.6431Q15.3966 82.5736 15.5606 82.5156Q15.7246 82.4576 15.8923 82.4114Q16.0599 82.3652 16.2305 82.331Q16.401 82.2968 16.5735 82.2748L86.388 73.3665Q86.6878 73.3282 86.9806 73.2534Q87.2734 73.1786 87.5548 73.0683Q87.8362 72.9581 88.1019 72.8141Q88.3676 72.6701 88.6136 72.4945Q88.8596 72.319 89.0821 72.1145Q89.3047 71.91 89.5004 71.6797Q89.6961 71.4495 89.8621 71.1969Q90.028 70.9443 90.1616 70.6732L120.606 8.9129Q120.682 8.76005 120.768 8.61281Q120.853 8.46556 120.949 8.32464Q121.045 8.18371 121.15 8.04978Q121.256 7.91585 121.37 7.78957Q121.485 7.66329 121.607 7.54527Q121.73 7.42725 121.861 7.31805Q121.992 7.20886 122.13 7.10902Q122.268 7.00918 122.413 6.91917Q122.558 6.82917 122.708 6.74945Q122.859 6.66972 123.015 6.60065Q123.17 6.53159 123.331 6.47351Q123.491 6.41544 123.655 6.36864Q123.819 6.32184 123.985 6.28654Q124.152 6.25124 124.321 6.22761Q124.49 6.20398 124.66 6.19214Q124.83 6.1803 125 6.1803Q125.17 6.1803 125.34 6.19214Q125.51 6.20398 125.679 6.22761Q125.848 6.25124 126.015 6.28654Q126.181 6.32184 126.345 6.36864Q126.509 6.41544 126.669 6.47351Q126.83 6.53159 126.985 6.60065Q127.141 6.66972 127.292 6.74945Q127.442 6.82917 127.587 6.91917Q127.732 7.00918 127.87 7.10902Q128.008 7.20886 128.139 7.31805Q128.27 7.42725 128.393 7.54527Q128.515 7.66329 128.63 7.78957Q128.744 7.91585 128.85 8.04978Q128.955 8.18371 129.051 8.32464Q129.147 8.46556 129.232 8.61281Q129.318 8.76005 129.394 8.9129Z"
+                fill="#D7A51C" fill-rule="evenodd" transform="translate(6 2)" />
+        </svg>
+
+
+    </div>
+
+    <div id="add_touserlists">
+        <p id="newlst_button" onclick="addtonewlst()">+ Add to new list</p>
+    </div>
+
+
+
+
+</body>
+
+</html>
+
+<style type="text/css">
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,75,379;1,75,379&display=swap');
+
+    #cont {
+        width: 60vw;
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: center; */
+        top: -418px;
+        position: relative;
+        font-family: roboto;
+    }
+
+
+    body {
+        background-color: rgb(17, 17, 17);
+    }
+
+    #related_section_title {
+        position: relative;
+        color: white;
+        font-family: roboto;
+        top: -950px;
+        left: 164.5px;
+        width: fit-content;
+    }
+
+    #release_year_ {
+        position: relative;
+        top: 37.5px;
+        left: 139.5px;
+        width: fit-content;
+        color: #555;
+        background-color: #0d0d0d;
+        padding: 4.5px;
+        border-radius: 3px;
+        font-size: 23.5px;
+        height: fit-content;
+    }
+
+    #director_ {
+        position: relative;
+        color: #474747;
+        font-family: roboto;
+        font-size: 16.5px;
+        left: 480px;
+        top: -227px;
+        width: fit-content;
+    }
+
+    #score {
+        position: relative;
+        color: white;
+        top: 293px;
+        left: 484px;
+        font-size: 53px;
+    }
+
+    #star {
+        position: absolute;
+        width: 43px;
+        height: 242px;
+        border-radius: 5px;
+        left: 527px;
+        top: 716px;
+        height: fit-content;
+    }
+
+    .genre_container {
+        position: relative;
+        top: -202px;
+        display: flex;
+        left: 475px;
+    }
+
+    /* #features_cont { 
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 0;
+        position: relative;
+        top: 68px;
+        width: 1616.5px;
+
+    } */
+
+    /* .feature {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        height: 220px;
+        background-color: rgb(43, 43, 43);
+        border-radius: 3%;
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+        margin: 5px;
+    }  */
+
+    .features_cont_mov {
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 0;
+        position: relative;
+        top: -107.5px;
+        width: 90vw;
+        /* bottom: 184px; */
+        left: 19%;
+    }
+
+    /* .features_cont_mov {
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 0;
+        position: relative;
+        top: 184.5px;
+        width: 90vw;
+        bottom: 184px;
+        left: 58px;
+    } */
+
+    .feature {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+        /* justify-content: center; */
+        align-items: center;
+        width: 257.5px;
+        height: 180.5px;
+        background-color: rgb(36, 36, 36);
+        border-radius: 3%;
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+        margin: 5px;
+        text-decoration: none;
+
+    }
+
+    .feature_name {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+    }
+
+    .feature_name {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        position: relative;
+        top: 137px;
+        left: 10px;
+    }
+
+    /* .feature_name {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+    } */
+
+    .movie_item_name {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        /* position: relative; */
+        /* top: 137px; */
+        /* left: 10px; */
+        margin: 0px;
+        height: fit-content;
+    }
+
+    .movie_item_thumbnail {
+        width: 255.5px;
+        position: relative;
+        bottom: 27.5px;
+        left: 1.5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+
+    .movie_name {
+        font-family: roboto;
+        color: rgb(0, 0, 0);
+        margin: 0px;
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .minitype {
+        width: 21px;
+        height: 23px;
+        background-color: #534b4b;
+        position: relative;
+        top: -69px;
+        left: 214px;
+    }
+
+    /* .minitypecont {
+        position: relative;
+    } */
+
+    .contentr {
+        width: fit-content;
+        height: 18.5px;
+        background-color: #373737;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 5px;
+        left: 5.5px;
+    }
+
+    .contentrt {
+        font-family: roboto;
+        color: #7b7b7b;
+        font-size: 10px;
+    }
+
+    .movie {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100px;
+        height: 100px;
+        margin-top: -60px;
+        background-color: rgb(195, 195, 195);
+        border-radius: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* .movie_big {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 200px;
+        background-color: rgb(43, 43, 43);
+        border-radius: 3%;
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+        margin: 5px;
+    } */
+
+    .movie_big {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+        /* justify-content: center; */
+        align-items: center;
+        width: 258.5px;
+        height: 206px;
+        background-color: rgb(36, 36, 36);
+        border-radius: 3%;
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+        margin: 5px;
+        text-decoration: none;
+
+    }
+
+    .nameandratcont {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        top: 151px;
+        left: 10.5px;
+        height: fit-content;
+    }
+
+    .add {
+        position: absolute;
+        font-family: arial;
+        z-index: 3;
+        color: white;
+        font-size: 30px;
+        left: 223px;
+        top: 2px;
+        visibility: hidden;
+        /* background-color: red; */
+        width: 34.5px;
+        text-align: center;
+        border-radius: 27px;
+    }
+
+    .add:hover {
+        background-color: #4137374a;
+    }
+
+    .infob {
+        position: absolute;
+        left: 11px;
+        top: 10px;
+        visibility: hidden;
+    }
+
+    .info_icon:hover {
+        background-color: #4137374a;
+    }
+
+
+    .info_icon {
+        position: absolute;
+        width: 21px;
+        z-index: 3;
+        color: rgb(255, 255, 255);
+        border-radius: 30px;
+        padding: 3px;
+        top: -3px;
+    }
+
+
+
+   #info_window {
+        background-color: #070707;
+        width: 607px;
+        height: 546px;
+        position: fixed;
+        z-index: 3;
+        top: 68px;
+        left: 568px;
+        border-radius: 12px;
+        color: white;
+        font-family: roboto;
+        visibility: hidden;
+    }
+
+    #x {
+        position: absolute;
+        width: 21px;
+        left: 565px;
+        top: 22px;
+        z-index: 2;
+    }
+
+    #backdrop {
+        width: 604px;
+        top: 2px;
+        position: relative;
+        border-radius: 5px;
+        object-fit: cover;
+        height: 211px;
+    }
+
+    #genreinfo_container {
+        display: flex;
+        position: relative;
+        top: -34px;
+        left: 47px;
+    }
+
+    #keywords_container {
+        position: relative;
+        display: flex;
+        top: -29px;
+        left: 44px;
+        width: 493px;
+        flex-wrap: wrap;
+    }
+
+    .infokeyword_container {
+        width: fit-content;
+        height: 28px;
+        background-color: rgb(57, 57, 57);
+        margin: 1.5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 16px;
+        border-style: solid;
+        border-width: 1.2px;
+        border-color: rgb(66, 66, 66);
+    }
+
+
+    .infokeyword {
+        font-family: roboto;
+        color: white;
+        font-size: 10.5px;
+        display: flex;
+        /* align-content: center; */
+        /* justify-content: center; */
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    #movie_name_infob {
+        position: relative;
+        left: 44px;
+        top: -8px;
+    }
+
+    #movie_descript_infob {
+        position: relative;
+        left: 44px;
+        width: 498px;
+        top: -22px;
+    }
+
+    .vcoun {
+        position: relative;
+        text-decoration: none;
+        color: #111;
+        font-size: 11px;
+        font-family: roboto;
+        margin: 0px;
+        left: 208.5px;
+        top: -34px;
+        background-color: #469b6f;
+        height: fit-content;
+        padding: 3px;
+        border-radius: 3px;
+    }
+
+    .mid_movies_cont {
+        display: flex;
+        flex-wrap: wrap;
+        height: 200px;
+        width: 400px;
+    }
+
+    /* .movie_page_header {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 20px;
+    }  */
+    /* 
+    .movie_page_header {
+    color: rgb(255, 255, 255);
+    font-family: roboto;
+    font-size: 20px;
+    position: relative;
+    bottom: 349px;
+    left: 109px;
+} */
+
+    /* .movie_page_header {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 20px;
+        position: relative;
+        bottom: -30px;
+        left: 108px;
+        width: 462px;
+        margin: 0px;
+    } */
+
+    /* .movie_page_header {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 20px;
+        position: relative;
+        bottom: -54px;
+        left: 130px;
+        width: 462px;
+        margin: 0px;
+    }  */
+
+    .movie_page_header {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 36px;
+        position: relative;
+        bottom: -32px;
+        left: 122px;
+        width: 462px;
+        margin: 0px;
+        width: fit-content;
+    }
+
+    .movie_descrip {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        position: relative;
+        bottom: -116px;
+        left: 479.5px;
+        width: 627px;
+        top: -189px;
+    }
+
+
+
+    .genre {
+        color: white;
+        font-family: roboto;
+        margin-right: 6px;
+        background-color: #1e1e1e;
+        width: fit-content;
+        height: fit-content;
+        padding-left: 3px;
+        padding-right: 3px;
+        border-radius: 3px;
+        padding: 8.5px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #848484;
+        text-decoration: none;
+    }
+
+    /* .type_tag_cont {
+        background-color: #533636;
+        width: 94px;
+        border-radius: 5px;
+        height: 38px;
+        position: relative;
+        left: 140px;
+        top: 37.5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } */
+
+    .type_tag {
+        font-family: roboto;
+        color: #a46767;
+        font-size: 14px;
+        margin: 0px;
+        padding: 4.5px;
+        background-color: #533636;
+        height: fit-content;
+        border-radius: 3px;
+        position: relative;
+        left: 167px;
+        top: 42.5px;
+    }
+
+    .expand_button {
+        font-family: roboto;
+        color: white;
+    }
+
+    .feature_page_hea {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        position: absolute;
+        bottom: 809.5px;
+        font-size: 45px;
+        left: 130.5px;
+    }
+
+    #m_or_f_switch {
+        width: 100px;
+        height: 50px;
+        background-color: rgb(25, 25, 25);
+        position: fixed;
+        top: 12px;
+        left: 753px;
+        border-radius: 5px;
+    }
+
+    /* .thumbnail {
+        width: 300px;
+    } */
+    .thumbnail {
+        width: 255.5px;
+        position: relative;
+        bottom: 54.5px;
+        left: 1.5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    #feature_movies_cont {
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 0;
+        position: relative;
+        top: 68px;
+
+    }
+
+    .minifeature {
+        width: fit-content;
+        height: 21px;
+        background-color: rgb(57, 57, 57);
+        margin: 3.5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 16px;
+        border-style: solid;
+        border-width: 1.2px;
+        border-color: rgb(66, 66, 66);
+    }
+
+    .minifeaturename {
+        font-family: roboto;
+        color: white;
+        font-size: 10.5px;
+        display: flex;
+        /* align-content: center; */
+        /* justify-content: center; */
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .minifeatures {
+        display: flex;
+        flex-wrap: wrap;
+        position: absolute;
+        top: 175.5px;
+        width: 300.5px;
+    }
+
+    .more_minis {
+        position: relative;
+        top: -33px;
+        left: 136px;
+        background-color: #353535;
+        font-size: 12px;
+        height: 23px;
+        width: 41px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: roboto;
+        color: white;
+        border-radius: 30px;
+    }
+
+    .minifeatureswindow {
+        background-color: #151515;
+        width: 427px;
+        height: 211px;
+        position: relative;
+        top: -681px;
+        left: 489px;
+        border-radius: 30px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .preview {
+        background-color: #151515;
+        width: 225.5px;
+        height: 211px;
+        position: absolute;
+        top: -681px;
+        left: 489px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #name_and_year {
+        display: flex;
+        position: relative;
+        flex-wrap: wrap;
+        top: 11px;
+        left: 13.5px;
+        height: fit-content;
+    }
+
+    #movie_name2 {
+        color: white;
+        font-family: roboto;
+        position: relative;
+        /* left: 16px; */
+        /* top: -9px; */
+        font-size: 19px;
+        margin: 0px;
+        height: fit-content;
+    }
+
+
+    #scorep {
+        position: relative;
+        width: fit-content;
+        font-family: roboto;
+        color: #f2c100;
+        font-size: 12px;
+        top: -1.5px;
+        left: 63.5px;
+        margin: 0px;
+        height: 30px;
+        height: 18px;
+        width: fit-content;
+    }
+
+    :root {
+        --deg: "asdasd";
+        --quo: '"';
+    }
+
+    #movie_name2::after {
+        content: var(--deg);
+        width: fit-content;
+        height: 14px;
+        position: relative;
+        background-color: #353535;
+        /* display: block; */
+        font-size: 10px;
+        left: 7px;
+        top: -2px;
+        color: #171717;
+        border-radius: 14.5px;
+        padding: 3px;
+    }
+
+    #plot_pr {
+        color: white;
+        font-family: roboto;
+        font-size: 12px;
+        width: 206px;
+        position: relative;
+        left: 9px;
+        top: 1px;
+        margin: 0px;
+        height: fit-content;
+    }
+
+    #release_year_pr {
+        color: #121212;
+        font-family: roboto;
+        position: relative;
+        left: 9px;
+        top: 0px;
+        font-size: 11px;
+        background-color: #2c2c2c;
+        padding: 5px;
+        border-radius: 10px;
+        margin: 0px;
+        height: fit-content;
+    }
+
+    #votes {
+        position: relative;
+        text-decoration: none;
+        color: #111;
+        font-size: 11px;
+        font-family: roboto;
+        margin: 0px;
+        left: 10px;
+        top: 7.5%;
+        background-color: #469b6f;
+        height: fit-content;
+        padding: 3px;
+        border-radius: 3px;
+        width: fit-content;
+    }
+
+
+    .count {
+        font-family: roboto;
+        color: #111;
+        position: relative;
+        bottom: 69px;
+        left: 214px;
+        font-size: 11.5px;
+        background-color: white;
+        padding: 4px;
+        border-radius: 5px;
+    }
+
+
+    #keynames {
+        position: relative;
+        left: 65.5px;
+        display: flex;
+        flex-wrap: wrap;
+        width: 1700px;
+        top: 258px;
+        height: 43.5px;
+    }
+
+    #related {
+        position: relative;
+        top: 429.5px;
+        left: 144.5px;
+        display: flex;
+        flex-wrap: wrap;
+        width: 1622.5px;
+    }
+
+
+    .keyname {
+        position: relative;
+        width: 177px;
+        margin: 6.5px;
+        margin-left: -1px;
+        color: #aeaeae;
+        padding: 7px;
+        background-color: #1c1c1c;
+        width: fit-content;
+        border-radius: 6.5px;
+    }
+
+    /* #related {
+        position: relative;
+        top: 369px;
+        left: 144.5px;
+    }  */
+
+    .name_and_type {
+        position: relative;
+        display: flex;
+        top: -164.5px;
+        height: 76px;
+        width: 583.5px;
+        /* background-color: #111; */
+        left: 355.5px;
+    }
+
+
+
+    .percenty {
+        position: relative;
+        /* top: 2.5px; */
+        left: -3.5px;
+        color: white;
+        font-family: roboto;
+        background-color: #353535;
+        padding: 3px;
+        font-size: 11px;
+        border-radius: 3px;
+        margin: 0px;
+        margin-right: 5px;
+        height: fit-content;
+    }
+
+    .numbers_cont {
+        display: flex;
+        position: relative;
+        left: 220.5px;
+        top: -55px;
+        flex-direction: row-reverse;
+        width: 30px;
+    }
+
+    .count {
+        font-family: roboto;
+        color: #111;
+        position: relative;
+        bottom: 2px;
+        left: -2.5px;
+        font-size: 11.5px;
+        background-color: white;
+        padding: 4px;
+        border-radius: 5px;
+        margin-left: 3.5px;
+        margin: 0px;
+        height: fit-content;
+    }
+
+    .poster_container {
+        position: relative;
+    }
+
+    .poster {
+        position: relative;
+        width: 297px;
+        left: 148px;
+        top: 23px;
+        border-radius: 8px;
+    }
+
+    #userlists_container {
+        position: relative;
+        width: 288px;
+        left: 125%;
+        top: 424px;
+        /* background-color: #131313; */
+        height: 413px;
+        font-family: roboto;
+    }
+
+    #lists_header {
+        position: relative;
+        left: 20px;
+        color: #fff9ee;
+        top: 11px;
+        font-size: 40px;
+    }
+
+
+    /* .list_item {
+        position: relative;
+        left: 14.5px;
+        background-color: #1e1e1e;
+        width: 270.5px;
+        height: 181px;
+        border-radius: 2px;
+        margin-bottom: 11px;
+    } */
+
+
+    .list_item {
+        position: relative;
+        left: 14.5px;
+        background-color: #1e1e1e;
+        width: 248px;
+        height: 168.5px;
+        border-radius: 2px;
+        margin-bottom: 11px;
+        display: block;
+    }
+
+    .list_thumbnail {
+        position: relative;
+        width: 242px;
+        left: 3.5px;
+        top: 2.5px;
+    }
+
+    .list_name {
+        position: relative;
+        top: -14px;
+        left: 7px;
+        font-family: roboto;
+        color: white;
+    }
+
+    .list_creator {
+        position: relative;
+        top: -47px;
+        left: 204px;
+        font-family: roboto;
+        color: black;
+        width: fit-content;
+        background-color: white;
+        padding: 3px;
+        font-size: 11px;
+        border-radius: 3px;
+    }
+
+    #related_movies_title {
+        color: white;
+        position: relative;
+        top: -101px;
+        font-size: 35px;
+        font-family: roboto;
+    }
+
+    #pgeneres {
+        display: flex;
+        height: fit-content;
+        width: fit-content;
+        top: 10px;
+        position: relative;
+        left: 5px;
+
+    }
+
+    .pgenre {
+        position: relative;
+        margin: 0px;
+        margin-left: 3px;
+        background-color: #b9c8ce;
+        padding: 3px;
+        font-size: 12px;
+        border-radius: 4px;
+        font-family: roboto;
+    }
+
+    #add_touserlists {
+        position: absolute;
+        width: 120.5px;
+        height: 112px;
+        background-color: rgb(26, 26, 26);
+        z-index: 2;
+        visibility: hidden;
+        border-radius: 4.5px;
+        font-family: roboto;
+    }
+
+
+    #signup_button_pop {
+        position: relative;
+        left: 38px;
+        color: #040404;
+        background-color: white;
+        width: fit-content;
+        padding: 4px;
+        border-radius: 3px;
+        margin: 0px;
+        top: 12px;
+        font-size: 18px;
+    }
+
+    #already_member {
+        color: white;
+        font-size: 12px;
+        position: relative;
+        top: 9px;
+        left: 10px;
+    }
+
+
+</style>
+<script>
+
+    const options = { method: 'GET', headers: { "Authorization": "Bearer ACCESS_TOKEN" } };
+    const page = document.getElementById("page");
+
+
+    async function getconrate(movie) {
+        response = await fetch(`https://www.omdbapi.com/?i=${movie}&apikey=f69b1da2`);
+        ar = await response.json();
+
+        return ar['Rated'];
+    }
+
+
+
+
+    async function createmovie(z, id, size) {
+        x = z['name']
+        movie = document.createElement("a");
+        // movie.href = `/m/${z['index']}`;
+        movie_name = document.createElement('p');
+        movie_name.innerHTML = x
+        movie_name.setAttribute('class', 'movie_item_name');
+        movie_name.id = `movie_name ${id}`
+
+        if (size == "small") {
+            movie.setAttribute('class', 'movie')
+        } else {
+            movie.setAttribute('class', 'movie_big')
+        }
+        movie.id = id;
+
+        addt = document.createElement('div');
+        addt.setAttribute("class", "add");
+        addt.id = `add ${id}`;
+        addt.innerHTML = "+";
+        addt.onmousedown = async function (e) {
+            console.log(user_, "user");
+            add_selector_popup = document.getElementById("add_touserlists");
+            preview1 = document.getElementById("preview1");
+            if (user_) {
+                console.log("add clicked");
+
+                add_todefault = true;
+                timeoutId = await setTimeout(() => {
+                    console.log("timed");
+                    add_todefault = false;
+
+                    preview1.style.visibility = "hidden";
+                    add_selector_popup.style.visibility = "visible";
+                    add_selector_popup.style.top = `${e.clientY + page.scrollTop}px`
+                    add_selector_popup.style.left = `${e.clientX - 120}px`
+
+                    movie_to_add = z['id'];
+
+
+                }, 1000);
+            } else {
+                console.log("elsewise");
+                preview1.style.visibility = "hidden";
+                add_selector_popup.style.visibility = "visible";
+                add_selector_popup.style.top = `${e.clientY + page.scrollTop}px`
+                add_selector_popup.style.left = `${e.clientX - 143}px`;
+
+                add_selector_popup.style.width = "143px";
+                add_selector_popup.style.height = "79px"
+
+                add_selector_popup.innerHTML = `<p id='signup_button_pop' onclick="document.getElementById('signup_window').style.visibility='visible'">Sign up</p>`;
+                already_mem = document.createElement("p");
+                already_mem.id = "already_member"
+                already_mem.innerHTML = "Already member? Sign in"
+                add_selector_popup.appendChild(already_mem);
+            }
+
+
+        }
+
+        addt.onmouseup = function () {
+            // if (add_todefault) {
+            //     console.log("added to defeault");
+            //     calluserstable(z['index']);
+            // }
+            window.clearTimeout(timeoutId);
+        }
+
+
+        infob = document.createElement('div');
+        infob.setAttribute("class", "infob");
+        infob.id = `infob ${id}`;
+        infob.innerHTML = `<img class="info_icon" src="/Images/Oval0.svg" />`
+
+        let thumbnail = document.createElement('a');
+        thumbnail.setAttribute("class", "thumbnail_cont");
+        thumbnail.id = `thumbnail ${id}`;
+        thumbnail.href = `/m/${z['my_index']}`;
+        backdrop = document.getElementById("backdrop"); 
+
+
+         fetch(`https://api.themoviedb.org/3/movie/${z['id']}?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb`, options)
+            .then(res => res.json())
+            .then(res => {
+                 thumbnail.innerHTML = `<img class="movie_item_thumbnail", id=${z['id']} src=https://image.tmdb.org/t/p/w500/${res['backdrop_path']}>`
+
+            }
+
+                
+            )
+            .catch(err => console.error(err, x));
+
+
+            
+        infob.onclick = async function (e) { 
+            window_ = document.getElementById("info_window");
+
+            window_.style.visibility = 'visible';
+
+            thumbnail_ = document.getElementById(z['id'])
+            backdrop.src = thumbnail_.src;
+            console.log("info", z['name'], thumbnail_.src);
+
+            moviename_infob = document.getElementById("movie_name_infob")
+            moviename_infob.innerHTML = z['name']; 
+
+            moviedescript_infob = document.getElementById("movie_descript_infob")
+            moviedescript_infob.innerHTML = z['description']; 
+
+            genreinfo_container = document.getElementById("genreinfo_container"); 
+            genreinfo_container.innerHTML = ''; 
+
+
+
+            keywords_container = document.getElementById("keywords_container"); 
+            keywords_container.innerHTML = '';
+
+
+    
+            for (i=0; i<JSON.parse(z['keywords']).length; i++) {
+
+                
+                
+                keyword_container = document.createElement('div');
+                keyword_container.setAttribute("class", "infokeyword_container");
+
+                keyword = document.createElement('p');
+                keyword.setAttribute("class", "infokeyword");
+                keyword.innerHTML = JSON.parse(z['keywords'])[i];
+
+                keyword_container.appendChild(keyword);
+                keywords_container.appendChild(keyword_container);
+
+                if (JSON.parse(resy['keywords']).includes(JSON.parse(z['keywords'])[i])) {
+                    console.log(JSON.parse(z['keywords'])[i])
+                    keyword_container.style.backgroundColor = 'white';
+                    keyword.style.color = 'black';
+                }
+
+            }
+
+            genre_lst = JSON.parse(z['Genre'])
+            console.log(genere_lst, "glst")
+            for (i=0; i<genre_lst.length; i++) {
+
+                genre = document.createElement("p");
+                genre.setAttribute("class", "genre");
+                genre.innerHTML = genere_lst[i];
+                genreinfo_container.appendChild(genre);
+
+                 if (JSON.parse(resy['Genre']).includes(genre_lst[i])) { 
+                    genre.style.backgroundColor = 'white';
+                    genre.style.color = 'black';
+                 }
+
+                
+                
+                
+                
+
+            }
+        }
+
+
+        
+        
+        minitype = document.createElement('div');
+        minitype.setAttribute("class", "minitype");
+        minitypecont = document.createElement('p');
+        minitypecont.setAttribute("class", "minitypecont");
+        minitypecont.innerHTML = "Movie";
+        // minitype.appendChild(minitypecont);
+
+        vcoun = document.createElement('p');
+        vcoun.setAttribute("class", "vcoun");
+        vcoun.innerHTML = z['imdb_votes'];
+
+        nameandratcont = document.createElement("div");
+        nameandratcont.setAttribute("class", "nameandratcont");
+        respone = await getconrate(z['imdb_id']);
+        contentr = document.createElement('div');
+        contentr.setAttribute("class", "contentr");
+        contentrt = document.createElement('p');
+        contentrt.setAttribute("class", "contentrt")
+        contentrt.innerHTML = respone;
+        contentr.appendChild(contentrt);
+        nameandratcont.appendChild(movie_name);
+        nameandratcont.appendChild(contentr);
+
+        movie.appendChild(nameandratcont)
+
+        
+        movie.appendChild(addt);
+        movie.appendChild(infob);
+        movie.appendChild(thumbnail);
+        minifeatures = document.createElement('div');
+        minifeatures.setAttribute("class", "minifeatures");
+        for (let i = 0; i < 3; i++) {
+            minifeature = document.createElement("div");
+            minifeature.setAttribute("class", "minifeature");
+            console.log('THAT', z);
+            try {
+                minifeature.innerHTML = `<p class="minifeaturename">${JSON.parse(z['keywords'])[i]}</p>`
+            } catch {
+                console.log('fart');
+            }
+            minifeatures.appendChild(minifeature);
+
+
+        }
+
+        more_features = document.createElement("div");
+        more_features.setAttribute("class", "minifeature");
+        more_features.innerHTML = `<p class="minifeaturename">+ ${JSON.parse(z['keywords']).length - 3}</p>`
+        more_features.onclick = function () {
+            e = create_element("minifeatureswindow")
+            up_cont.append(e);
+            for (i = 0; i < JSON.parse(z['keywords']).length; i++) {
+                minifeature = document.createElement("div");
+                minifeature.setAttribute("class", "minifeature");
+                minifeature.innerHTML = `<p class="minifeaturename">${JSON.parse(z['keywords'])[i]}</p>`
+                e.appendChild(minifeature);
+            }
+        }
+        minifeatures.appendChild(more_features);
+        movie.appendChild(vcoun);
+        movie.appendChild(minifeatures);
+
+
+
+
+        nam = z['name']
+
+
+
+        // // Show info preview box when hovering on movie item 
+        movie.onmousemove = function (e) {
+            // calldb("get_moviepreview", movie_name);
+
+
+            preview1 = document.getElementById("preview1");
+            preview1 = document.getElementById("preview1");
+            preview1.style.visibility = "visible";
+
+            add_ = document.getElementById(`add ${id}`);
+            infob = document.getElementById(`infob ${id}`);
+            add_.style.visibility = "visible";
+            infob.style.visibility = "visible";
+
+
+            movie_name2 = document.getElementById("movie_name2");
+            movie_name2.innerHTML = z['name'];
+
+
+            descriptt = document.getElementById("plot_pr");
+            votes = document.getElementById("votes");
+            generes = document.getElementById("pgeneres");
+            descriptt.innerHTML = "";
+            release_year.innerHTML = "";
+            votes.innerHTML = "";
+            generes.innerHTML = "";
+
+
+            descriptt.innerHTML = z['description'];
+            votes.innerHTML = z['imdb_votes'];
+            scorep.innerHTML = z['imdb_avg_vote'];
+
+            genere_lst = JSON.parse(z['Genre'])
+            for (i = 0; i < genere_lst.length; i++) {
+                genre = document.createElement("p");
+                genre.setAttribute("class", "pgenre");
+                genre.innerHTML = genere_lst[i];
+                generes.appendChild(genre);
+            }
+
+
+            preview1.style.top = `${e.clientY + page.scrollTop}px`;
+            preview1.style.left = `${e.clientX}px`;
+
+            var root = document.querySelector(':root');
+            root.style.setProperty('--deg', `"${z['release_year']}"`);
+
+
+        }
+        movie.onmouseout = function (e) {
+            add_ = document.getElementById(`add ${id}`);
+            add_.style.visibility = "hidden";
+            infob.style.visibility = "hidden";
+        }
+
+
+
+        return movie;
+
+
+    }
+
+    async function createfeature(x) {
+        let a = document.createElement('a');
+        a.href = `/f/${x['name']}`;
+        a.setAttribute("class", "feature");
+        a.setAttribute("id", `feature ${x}`);
+        let name = document.createElement('p');
+        let thumbnail = document.createElement('div');
+        let count = document.createElement('p');
+        thumbnail.setAttribute("class", "thumbnail_cont");
+        fetch(`https://api.themoviedb.org/3/movie/${JSON.parse(x['movies'])[1]}?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb`, options)
+            .then(res => res.json())
+            .then(res =>
+
+                thumbnail.innerHTML = `<img class="thumbnail", src=https://image.tmdb.org/t/p/w500/${res['backdrop_path']}>`
+            )
+            .catch(err => console.error(err, x['movies'][1]));
+
+        name.setAttribute("class", "feature_name");
+        count.setAttribute("class", "count")
+        feature_name = x['name']
+        name.innerHTML = feature_name;
+        count.innerHTML = x['movie_count'];
+        a.appendChild(name);
+        a.appendChild(thumbnail);
+
+
+        response = await fetch('/useyx', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ A: "SELECT COUNT(*) FROM movies" })
+        });
+
+        total_movie_count = await response.json();
+
+
+        numbers_cont = document.createElement("div");
+        numbers_cont.setAttribute('class', "numbers_cont");
+
+        percent = x['movie_count'] * 100 / total_movie_count[0]["COUNT(*)"];
+        percenty = document.createElement("p");
+        percenty.setAttribute('class', "percenty");
+        percenty.innerHTML = `${percent}`.slice(0, 3) + "%";
+
+        numbers_cont.appendChild(count);
+        numbers_cont.appendChild(percenty);
+
+
+        a.appendChild(numbers_cont);
+
+
+
+        return a;
+
+    }
+
+
+
+    resy = <%-JSON.stringify(movie) %>
+    lists = <%-JSON.stringify(lists) %>
+    user_ = <%-JSON.stringify(user) %>
+
+
+
+    console.log(resy);
+
+
+    async function calldb(query = '', autocomplet = false) {
+        response = await fetch('/usey', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ a: autocomplet, b: query })
+        });
+        data = await response.json();
+
+        if (query.length < 1) {
+            for (i = 0; i < 9; i++) {
+                resy = await createfeature(data[i]);
+                cont.appendChild(resy);
+            }
+        } else {
+            return data;
+        }
+    }
+
+  
+
+    up_cont = document.getElementById("cont");
+
+
+   
+
+    async function show_related(movieob) {
+        movie_votes = movieob['imdb_votes']
+        movie_genre = JSON.parse(movieob['Genre'])
+        related_query = `SELECT * FROM movies WHERE imdb_votes BETWEEN ${movie_votes - (0.12 * movie_votes)} AND ${movie_votes + (0.12 * movie_votes)} AND Genre LIKE '%"${movie_genre[0]}"%' ORDER BY imdb_votes DESC;`;
+
+        related_movies = await calldb(related_query);
+        return related_movies;
+    }
+
+    async function show_related2() {
+        related_movies_ = JSON.parse(resy['related_movies'])
+        l = ''
+        for (let i = 0; i < 20; i++) {
+            l = l + `"${related_movies_[i]}"` + ", "
+        }
+        related_query = `SELECT * FROM movies WHERE my_index IN (${l.slice(0, l.length - 2)}) limit 20;`;
+        console.log(related_query, "QQQQQQQQQQQQQQQQQQ");
+        related_movies = await calldb(related_query);
+        reordered_related = []
+        for (i = 0; i < related_movies[0].length; i++) {
+            for (x = 0; x < related_movies[0].length; x++) {
+                if (related_movies_[i] == related_movies[0][x]['my_index']) {
+                    reordered_related.push(related_movies[0][x]);
+                }
+            }
+        }
+        return reordered_related;
+    }
+
+
+    
+
+    async function create_listitem(listobj) {
+        container = document.createElement("a");
+        container.setAttribute("class", "list_item");
+        container.href = `/l/${listobj['list_id']}`
+
+        list_name = document.createElement('p');
+        list_name.setAttribute("class", "list_name");
+        list_name.innerHTML = listobj['list_name'];
+
+        list_creator = document.createElement('p');
+        list_creator.setAttribute("class", "list_creator");
+        list_creator.innerHTML = listobj['username'];
+
+        movie_tmdb = await fetch(`https://api.themoviedb.org/3/movie/${listobj['thumbnail']}?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb`, options);
+        movie_tmdb_data = await movie_tmdb.json();
+        console.log(movie_tmdb_data);
+        thumbnail_path = `https://image.tmdb.org/t/p/w500/${movie_tmdb_data['backdrop_path']}`
+        container.innerHTML = `<img class="list_thumbnail", src=${thumbnail_path}>`;
+
+        container.appendChild(list_name);
+        container.appendChild(list_creator);
+        return container;
+
+
+    }
+
+
+
+    async function createmoviepage(movieob) {
+        // up_cont.innerHTML = '';
+
+        const preview = create_element("preview", "preview1");
+        release_year = create_element("", "release_year_pr", "p");
+        descriptt = create_element("", "plot_pr", "p");
+        movie_name2 = create_element("", "movie_name2", "p");
+        votes = create_element("", "votes", "p");
+        scorep = create_element("", "scorep", "p");
+
+        name_and_year = create_element("", "name_and_year", "div");
+        name_and_year.appendChild(movie_name2);
+
+        generes = create_element("", "pgeneres", "div");
+
+
+        preview.appendChild(name_and_year);
+        preview.appendChild(votes);
+        preview.appendChild(scorep);
+        preview.appendChild(descriptt);
+        preview.appendChild(generes);
+        up_cont.appendChild(preview);
+
+
+        movie_page_header = document.createElement('p');
+        movie_page_header.innerHTML = movieob['name'];
+        movie_page_header.setAttribute('class', 'movie_page_header');
+
+        type = document.createElement('p');
+        type.setAttribute('class', 'type_tag');
+        type.innerHTML = 'Movie';
+        type_cont = document.createElement('div');
+        // type_cont.setAttribute("class", "type_tag_cont");
+        // type_cont.appendChild(type);
+
+        release_year_ = document.createElement('div');
+        release_year_.setAttribute("id", "release_year_");
+        release_year_.innerHTML = movieob['release_year'];
+
+        director_ = document.createElement('div');
+        director_.setAttribute("id", "director_");
+        director_.innerHTML = movieob['director'];
+
+        score = document.createElement('div');
+        score.id = "score";
+        score.innerHTML = movieob['imdb_avg_vote'];
+
+
+
+        movie_tmdb_data = await fetch(`https://api.themoviedb.org/3/movie/${movieob['id']}?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb`, options);
+        t2 = await movie_tmdb_data.json();
+        poster_path = `https://image.tmdb.org/t/p/w500/${t2['poster_path']}`
+
+        poster = document.createElement('div');
+        poster.setAttribute("class", "poster_container");
+        poster.innerHTML = `<img class="poster", src=${poster_path}>`;
+
+
+        movie_descrip = document.createElement('p');
+        movie_descrip.setAttribute('class', 'movie_descrip');
+        // movie_descrip.innerHTML = "Lorem ipsum is extrodinary. "; 
+        omdb_response = await getfromomdb(movieob['imdb_id']);
+        movie_descrip.innerHTML = movieob['description'];
+
+        name_and_type = document.createElement("div");
+        name_and_type.setAttribute("class", "name_and_type");
+        up_cont.appendChild(score);
+        up_cont.appendChild(poster);
+        name_and_type.appendChild(movie_page_header);
+        name_and_type.appendChild(release_year_);
+        name_and_type.appendChild(type);
+        up_cont.appendChild(name_and_type);
+        up_cont.appendChild(director_);
+
+
+        // up_cont.appendChild(type_cont);
+        cont = document.createElement('div');
+        cont.setAttribute("class", "features_cont_mov");
+        // up_cont.appendChild(movie_page_header);
+        up_cont.appendChild(movie_descrip);
+        genere_lst = JSON.parse(movieob['Genre']);
+        genre_container = document.createElement('div');
+        genre_container.setAttribute("class", "genre_container");
+        for (i = 0; i < genere_lst.length; i++) {
+            genre = document.createElement('a');
+            genre.setAttribute("class", "genre")
+            genre.innerHTML = genere_lst[i];
+            genre.href = `/g/${genere_lst[i]}`;
+            genre_container.appendChild(genre);
+        }
+        up_cont.appendChild(genre_container);
+
+
+        l = ''
+        for (let i = 0; i < JSON.parse(movieob['keywords']).length; i++) {
+            l = l + `"${JSON.parse(movieob['keywords'])[i]}"` + ", "
+        }
+
+        query = `SELECT * FROM features
+        WHERE name IN (${l.slice(0, l.length - 2)}) limit 20;`
+
+        rowlstt = await calldb(query);
+        for (let i = 0; i < rowlstt[0].length; i++) {
+            f = await createfeature(rowlstt[0][i]);
+            cont.appendChild(f);
+        }
+        up_cont.appendChild(cont);
+
+
+
+
+        moviekeynames = JSON.parse(movieob['keywords']);
+
+
+        if (lists.length > 0) {
+            userlists_container = document.getElementById("userlists_container");
+            for (i = 0; i < 2; i++) {
+                user_list = await create_listitem(lists[i]);
+                console.log(user_list);
+                userlists_container.appendChild(user_list);
+            }
+        }
+
+
+
+
+        related = await show_related2();
+        console.log(related, "related")
+        related_cont = document.createElement("div");
+        related_cont.id = "related";
+        related_cont.innerHTML = `<p id="related_movies_title">Related movies</p>`
+
+        for (i = 0; i < 15; i++) {
+            movie_ele = await createmovie(related[i], related[i]['level_0']);
+            related_cont.appendChild(movie_ele);
+        }
+
+
+        // up_cont.appendChild(userlists_container);
+        up_cont.appendChild(related_cont);
+
+    }
+
+    function create_element(class_, name = '', type = 'div') {
+        new_element = document.createElement(type);
+        new_element.setAttribute("class", class_);
+        if (name.length > 1) {
+            new_element.setAttribute("id", name)
+        }
+        return new_element;
+    }
+
+
+
+
+
+    // function return_related_(rela_query) {
+    //     related_movies = await calldb(rela_query);
+
+    // }
+
+    async function getfromomdb(movie) {
+        response = await fetch(`https://www.omdbapi.com/?i=${movie}&apikey=f69b1da2`);
+        ar = await response.json();
+
+        return ar;
+    }
+
+
+    createmoviepage(resy);
+</script>

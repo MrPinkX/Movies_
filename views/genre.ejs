@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html id="page">
+<head>
+	<!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,75,345;1,75,345&display=swap" rel="stylesheet"> -->
+</head>
+<body>
+
+    <h1 id="genre_header"></h1>
+    <p id="type"></p>
+    <a id="explore">explore genre > </a>
+
+<div id="cont">
+    <p>Hi</p>
+
+     <p></p>
+    <!-- <h1>Feature</h1>
+
+    <div id="add_touserlists">
+        <p id="newlst_button" onclick="addtonewlst()">+ Add to new list</p>
+    </div>
+
+
+<p id="f_name"></p> -->
+
+</div>
+
+</body>
+</html>
+
+<style type="text/css">
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,75,379;1,75,379&display=swap');
+
+    #cont {
+        width: 94vw;
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: center; */
+        display: flex;
+        flex-wrap: wrap;
+        /* width: 573px; */
+        left: 95px;
+        position: relative;
+        top: 93px;
+    }
+
+    #genre_header {
+        color: white;
+        position: relative;
+        left: 142px;
+        width: fit-content;
+        top: 54px;
+        font-size: 66px;
+    } 
+
+    #type {
+        color: #575757;
+        position: relative;
+        top: -43px;
+        left: 413px;
+        width: fit-content;
+        background-color: #090909;
+        padding: 11px;
+        margin: 0px;
+        border-radius: 5px;
+        /* font-size: 13px; */
+    } 
+
+   #explore {
+        color: rgb(116, 116, 116);
+        width: fit-content;
+        position: relative;
+        left: 147px;
+        top: -28px;
+        margin: 0px;
+    }
+
+    body {
+        background-color: rgb(17, 17, 17);
+        font-family: 'Roboto', sans-serif;
+        font-weight: 100;
+    }
+
+    /* #features_cont { 
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 0;
+        position: relative;
+        top: 68px;
+        width: 1616.5px;
+
+    } */
+
+    /* .feature {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        height: 220px;
+        background-color: rgb(43, 43, 43);
+        border-radius: 3%;
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+        margin: 5px;
+    }  */
+
+    .type_tag_cont {
+        background-color: #28334d;
+        width: 111.5px;
+        border-radius: 5px;
+        height: 38px;
+        position: relative;
+        left: 22.5px;
+        top: 11.5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* top: 3px; */
+    }
+
+    .type_tag {
+        font-family: roboto;
+        color: #6790a4;
+        font-size: 30px;
+        margin: 0px;
+    }
+
+    .feature_page_hea {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        /* position: absolute; */
+        bottom: 809.5px;
+        font-size: 45px;
+        left: 207.5px;
+        margin: 0px;
+    }
+
+    #feature_moviecount {
+        position: relative;
+        color: black;
+        margin: 0px;
+        width: fit-content;
+        top: 99px;
+        left: 201px;
+        font-size: 27px;
+        background-color: white;
+        padding: 10px;
+        border-radius: 5px;
+        /* height: 35px; */
+    }
+
+    #features_cont {
+        display: grid;
+        flex-wrap: wrap;
+        z-index: 0;
+        position: relative;
+        top: 31.5px;
+        width: 77.5vw;
+        /* bottom: 184px; */
+        left: 177.5px;
+    }
+
+
+
+    /* #features_cont {
+        display: grid;
+        flex-wrap: wrap;
+        z-index: 0;
+        position: relative;
+        top: 61.5px;
+        width: 77.5vw;
+        left: 177.5px;
+    } */
+
+    .features_cont_mov {
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 0;
+        position: relative;
+        top: 444px;
+        width: 90vw;
+        /* bottom: 184px; */
+        left: 58px;
+    }
+
+    .feature {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+        /* justify-content: center; */
+        align-items: center;
+        width: 257.5px;
+        height: 180.5px;
+        background-color: rgb(36, 36, 36);
+        border-radius: 3%;
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+        margin: 5px;
+        text-decoration: none;
+
+    }
+
+    .feature_name {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+    }
+
+    .feature_name {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        /* position: relative; */
+        /* top: 137px; */
+        /* left: 10px; */
+        margin: 0px;
+        height: fit-content;
+    }
+
+
+    
+    .movie_name {
+        font-family: roboto;
+        color: rgb(0, 0, 0);
+        margin: 0px;
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .minitype {
+        width: 21px;
+        height: 23px;
+        background-color: #534b4b;
+        position: relative;
+        top: -69px;
+        left: 214px;
+    }
+
+    /* .minitypecont {
+        position: relative;
+    } */
+
+   
+
+    
+
+
+    
+
+
+    
+
+    .more_minis {
+        position: relative;
+        top: -33px;
+        left: 136px;
+        background-color: #353535;
+        font-size: 12px;
+        height: 23px;
+        width: 41px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: roboto;
+        color: white;
+        border-radius: 30px;
+    }
+
+    .minifeatureswindow {
+        background-color: #151515;
+        width: 427px;
+        height: 211px;
+        position: relative;
+        top: -681px;
+        left: 489px;
+        border-radius: 30px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .movie {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100px;
+        height: 100px;
+        margin-top: -60px;
+        background-color: rgb(195, 195, 195);
+        border-radius: 100%;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+
+    }
+
+    .movie_big {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+        /* justify-content: center; */
+        align-items: center;
+        width: 258.5px;
+        height: 206px;
+        background-color: rgb(36, 36, 36);
+        border-radius: 3%;
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+        margin: 5px;
+        text-decoration: none;
+
+    }
+
+    .nameandratcont {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        top: 151px;
+        left: 10.5px;
+        height: fit-content;
+    }
+
+    .add {
+        position: absolute;
+        font-family: arial;
+        z-index: 3;
+        color: white;
+        font-size: 30px;
+        left: 223px;
+        top: 2px;
+        visibility: hidden;
+        /* background-color: red; */
+        width: 34.5px;
+        text-align: center;
+        border-radius: 27px;
+    } 
+
+    .add:hover {
+        background-color: #4137374a;
+    } 
+
+
+    #newlst_button {
+        color: white;
+    }
+
+   
+
+
+    .thumbnail {
+        width: 255.5px;
+        position: relative;
+        bottom: 27.5px;
+        left: 1.5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    } 
+
+
+    .vcoun {
+        position: relative;
+        text-decoration: none;
+        color: #111;
+        font-size: 11px;
+        font-family: roboto;
+        margin: 0px;
+        left: 208.5px;
+        top: -34px;
+        background-color: #469b6f;
+        height: fit-content;
+        padding: 3px;
+        border-radius: 3px;
+    }
+
+    .minifeature {
+        width: fit-content;
+        height: 21px;
+        background-color: rgb(57, 57, 57);
+        margin: 3.5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 16px;
+        border-style: solid;
+        border-width: 1.2px;
+        border-color: rgb(66, 66, 66);
+    }
+
+    .minifeaturename {
+        font-family: roboto;
+        color: white;
+        font-size: 10.5px;
+        display: flex;
+        /* align-content: center; */
+        /* justify-content: center; */
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .minifeatures {
+        display: flex;
+        flex-wrap: wrap;
+        position: absolute;
+        top: 175.5px;
+        width: 300.5px;
+    }
+
+    .mid_movies_cont {
+        display: flex;
+        flex-wrap: wrap;
+        height: 200px;
+        width: 400px;
+    }
+
+     .contentr {
+        width: fit-content;
+        height: 18.5px;
+        background-color: #373737;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 5px;
+        left: 5.5px;
+    }
+
+    .contentrt {
+        font-family: roboto;
+        color: #7b7b7b;
+        font-size: 10px;
+    }
+
+    /* .movie_page_header {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 20px;
+    }  */
+    /* 
+    .movie_page_header {
+    color: rgb(255, 255, 255);
+    font-family: roboto;
+    font-size: 20px;
+    position: relative;
+    bottom: 349px;
+    left: 109px;
+} */
+
+    /* .movie_page_header {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 20px;
+        position: relative;
+        bottom: -30px;
+        left: 108px;
+        width: 462px;
+        margin: 0px;
+    } */
+
+    /* .movie_page_header {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 20px;
+        position: relative;
+        bottom: -54px;
+        left: 130px;
+        width: 462px;
+        margin: 0px;
+    }  */
+
+    .movie_page_header {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 36px;
+        position: relative;
+        bottom: -32px;
+        left: 130px;
+        width: 462px;
+        margin: 0px;
+    }
+
+    .movie_descrip {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        position: relative;
+        bottom: -23.5px;
+        left: 130px;
+        width: 627px;
+    }
+
+    .genre_container {
+        position: relative;
+        top: 26.5px;
+        display: flex;
+        left: 126px;
+    }
+
+    .genre {
+        color: white;
+        font-family: roboto;
+        margin-right: 6px;
+        background-color: #1e1e1e;
+        width: fit-content;
+        height: fit-content;
+        padding-left: 3px;
+        padding-right: 3px;
+        border-radius: 32.5px;
+        padding: 8.5px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #848484;
+    }
+
+    .expand_button {
+        font-family: roboto;
+        color: white;
+    }
+
+    #m_or_f_switch {
+        width: 100px;
+        height: 50px;
+        background-color: rgb(25, 25, 25);
+        position: fixed;
+        top: 12px;
+        left: 753px;
+        border-radius: 5px;
+    }
+
+    /* .thumbnail {
+        width: 300px;
+    } */
+    
+
+    /* #feature_movies_cont {
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 0;
+        position: relative;
+        top: 68px;
+
+    } */
+
+    
+
+    
+
+    .preview {
+        background-color: #151515;
+        width: 225.5px;
+        height: 211px;
+        position: absolute;
+        top: -681px;
+        left: 489px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #name_and_year {
+        display: flex;
+        position: relative;
+        flex-wrap: wrap;
+        top: 11px;
+        left: 13.5px;
+        height: fit-content;
+    }
+
+    #movie_name2 {
+        color: white;
+        font-family: roboto;
+        position: relative;
+        /* left: 16px; */
+        /* top: -9px; */
+        font-size: 19px;
+        margin: 0px;
+        height: fit-content;
+    } 
+
+
+    #score {
+        position: relative;
+        width: fit-content;
+        font-family: roboto;
+        color: #f2c100;
+        font-size: 12px;
+        top: -1.5px;
+        left: 63.5px;
+        margin: 0px;
+        height: 30px;
+        height: 18px;
+        width: fit-content;
+    }
+
+    :root {
+        --deg: "asdasd";
+        --quo: '"';
+    }
+
+    #movie_name2::after {
+        content: var(--deg);
+        width: fit-content;
+        height: 14px;
+        position: relative;
+        background-color: #353535;
+        /* display: block; */
+        font-size: 10px;
+        left: 7px;
+        top: -2px;
+        color: #171717;
+        border-radius: 14.5px;
+        padding: 3px;
+    }
+
+    #plot_pr {
+        color: white;
+        font-family: roboto;
+        font-size: 12px;
+        width: 206px;
+        position: relative;
+        left: 9px;
+        top: 1px;
+        margin: 0px;
+        height: fit-content;
+    }
+
+    #release_year_pr {
+        color: #121212;
+        font-family: roboto;
+        position: relative;
+        left: 9px;
+        top: 0px;
+        font-size: 11px;
+        background-color: #2c2c2c;
+        padding: 5px;
+        border-radius: 10px;
+        margin: 0px;
+        height: fit-content;
+    }
+
+    #votes {
+        position: relative;
+        text-decoration: none;
+        color: #111;
+        font-size: 11px;
+        font-family: roboto;
+        margin: 0px;
+        left: 10px;
+        top: 7.5%;
+        background-color: #469b6f;
+        height: fit-content;
+        padding: 3px;
+        border-radius: 3px;
+        width: fit-content;
+    }
+
+
+    element {
+        display: flex;
+        /* flex-wrap: wrap; */
+        position: relative;
+        top: 10px;
+        width: fit-content;
+        height: 20px;
+    }
+
+    #pgeneres {
+        display: flex;
+        height: fit-content;
+        width: fit-content;
+        top: 10px;
+        position: relative;
+        left: 5px;
+
+    }
+
+    .pgenre {
+        position: relative;
+        margin: 0px;
+        margin-left: 3px;
+        background-color: #b9c8ce;
+        padding: 3px;
+        font-size: 12px;
+        border-radius: 4px;
+        font-family: roboto;
+    }
+
+    .upsoca_cont {
+        position: relative;
+        margin-top: 79.5px;
+    }
+
+   .assoca_cont {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+
+    .assoca_name {
+        position: relative;
+        color: white;
+        left: 20px;
+        margin-bottom: 0px;
+    }
+
+    .more {
+        position: relative;
+        top: -11.5px;
+        left: 1252.5px;
+        color: white;
+        text-decoration: none;
+    }
+
+    .name_and_type {
+        position: absolute;
+        display: flex;
+        top: 46.5px;
+        height: 76px;
+        width: 496.5px;
+        left: 205px;
+    } 
+
+
+    #add_touserlists {
+        position: absolute;
+        width: 120.5px;
+        height: 112px;
+        background-color: rgb(26, 26, 26);
+        z-index: 2;
+        visibility: hidden;
+        border-radius: 4.5px;
+    } 
+
+</style>
+
+<script>
+    const options = { method: 'GET', headers: { "Authorization": "Bearer ACCESS_TOKEN" } };
+
+
+    resy_ = <%-JSON.stringify(genre_movies)%>
+    resy = resy_[Object.keys(resy_)[0]];
+
+    console.log(resy);
+
+    
+    async function createmovie(z, id, size) {
+
+
+        x = z['name']
+        movie = document.createElement("a");
+        // movie.href = `/m/${z['index']}`;
+        movie_name = document.createElement('p');
+        movie_name.innerHTML = x
+        movie_name.setAttribute('class', 'feature_name')
+        movie_name.id = `movie_name ${id}`
+
+        if (size == "small") {
+            movie.setAttribute('class', 'movie')
+        } else {
+            movie.setAttribute('class', 'movie_big')
+        }
+        movie.id = id;
+        
+
+
+    
+
+        let thumbnail = document.createElement('a');
+        thumbnail.setAttribute("class", "thumbnail_cont");
+        thumbnail.id = `thumbnail ${id}`;
+        thumbnail.href = `/m/${z['my_index']}`
+        minitype = document.createElement('div');
+        minitype.setAttribute("class", "minitype");
+        minitypecont = document.createElement('p');
+        minitypecont.setAttribute("class", "minitypecont");
+        minitypecont.innerHTML = "Movie";
+        // minitype.appendChild(minitypecont);
+
+        vcoun = document.createElement('p');
+        vcoun.setAttribute("class", "vcoun");
+        vcoun.innerHTML = z['imdb_votes'];
+
+        nameandratcont = document.createElement("div");
+        nameandratcont.setAttribute("class", "nameandratcont");
+        respone = await getconrate(z['imdb_id']);
+        contentr = document.createElement('div');
+        contentr.setAttribute("class", "contentr");
+        contentrt = document.createElement('p');
+        contentrt.setAttribute("class", "contentrt")
+        contentrt.innerHTML = respone;
+        contentr.appendChild(contentrt);
+        nameandratcont.appendChild(movie_name);
+        nameandratcont.appendChild(contentr);
+        
+        movie.appendChild(nameandratcont);
+
+        fetch(`https://api.themoviedb.org/3/movie/${z['id']}?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb`, options)
+            .then(res => res.json())
+            .then(res =>
+
+                thumbnail.innerHTML = `<img class="thumbnail", id=${z['id']} src=https://image.tmdb.org/t/p/w500/${res['backdrop_path']}>`
+            )
+            .catch(err => console.error(err, x));
+
+
+
+
+        movie.appendChild(thumbnail);
+        minifeatures = document.createElement('div');
+        minifeatures.setAttribute("class", "minifeatures");
+        for (let i = 0; i < 3; i++) {
+            minifeature = document.createElement("div");
+            minifeature.setAttribute("class", "minifeature");
+            minifeature.innerHTML = `<p class="minifeaturename">${JSON.parse(z['keywords'])[i]}</p>`
+            minifeatures.appendChild(minifeature);
+
+
+        }
+
+        more_features = document.createElement("div");
+        more_features.setAttribute("class", "minifeature");
+        more_features.innerHTML = `<p class="minifeaturename">+ ${JSON.parse(z['keywords']).length - 3}</p>`
+        more_features.onclick = function () {
+            e = create_element("minifeatureswindow")
+            up_cont.append(e);
+            for (i = 0; i < JSON.parse(z['keywords']).length; i++) {
+                minifeature = document.createElement("div");
+                minifeature.setAttribute("class", "minifeature");
+                minifeature.innerHTML = `<p class="minifeaturename">${JSON.parse(z['keywords'])[i]}</p>`
+                e.appendChild(minifeature);
+            }
+        }
+        minifeatures.appendChild(more_features);
+        movie.appendChild(vcoun);
+        movie.appendChild(minifeatures);
+        
+
+
+
+        nam = z['name']
+
+
+
+        addt = document.createElement('div');
+        movie.appendChild(addt);
+
+        addt.setAttribute("class", "add");
+        addt.id = `add ${id}`;
+        addt.innerHTML = "+";
+        addt.onmousedown = async function(e) {
+            add_selector_popup = document.getElementById("add_touserlists");
+            preview1 = document.getElementById("preview1");
+            if (user_) {
+                console.log("add clicked");
+            
+                add_todefault = true;
+                timeoutId = await setTimeout(() => {
+                console.log("timed");
+                add_todefault = false;
+
+                preview1.style.visibility = "hidden";
+                add_selector_popup.style.visibility = "visible";
+                add_selector_popup.style.top = `${e.clientY + page.scrollTop}px`
+                add_selector_popup.style.left = `${e.clientX-120}px`
+                
+                movie_to_add = z['id'];
+                
+                
+                }, 1000);
+            } else {
+                preview1.style.visibility = "hidden";
+                add_selector_popup.style.visibility = "visible";
+                add_selector_popup.style.top = `${e.clientY + page.scrollTop}px`
+                add_selector_popup.style.left = `${e.clientX-120}px`;
+
+                add_selector_popup.innerHTML = "Sign in required";
+            }
+            
+
+            
+        }
+        
+        addt.onmouseup = function() {
+            if (add_todefault) {
+                console.log("added to defeault");
+                calluserstable(z['index']);
+            }
+            window.clearTimeout(timeoutId);
+        } 
+        
+
+
+        // // Show info preview box when hovering on movie item 
+        movie.onmousemove = async function (e) {
+            // calldb("get_moviepreview", movie_name);
+
+            
+            
+            // console.log(movie);
+            if (e['originalTarget']['className'] == "thumbnail") {
+                // console.log(e['originalTarget'], e['originalTarget'].id);
+                metadata = movie_dataset[e['originalTarget'].id];
+
+            }
+        
+
+            preview1 = document.getElementById("preview1");
+            preview1 = document.getElementById("preview1");
+            preview1.style.visibility = "visible";
+
+            add_ = document.getElementById(`add ${id}`);
+            add_.style.visibility = "visible";
+
+
+            movie_name2 = document.getElementById("movie_name2");
+            movie_name2.innerHTML = z['name'];
+
+            
+            descriptt = document.getElementById("plot_pr");
+            votes = document.getElementById("votes");
+            generes = document.getElementById("pgeneres");
+            descriptt.innerHTML = "";
+            release_year.innerHTML = "";
+            votes.innerHTML = "";
+            generes.innerHTML = "";
+
+
+            descriptt.innerHTML = z['description'];
+            votes.innerHTML = z['imdb_votes'];
+            score.innerHTML = z['imdb_avg_vote'];
+
+            genere_lst = JSON.parse(z['Genre'])
+            for (i=0; i<genere_lst.length; i++) {
+                genre = document.createElement("p");
+                genre.setAttribute("class", "pgenre");
+                genre.innerHTML = genere_lst[i];
+                generes.appendChild(genre);
+            }
+
+            
+            preview1.style.top = `${e.clientY + page.scrollTop}px`;
+            preview1.style.left = `${e.clientX}px`;
+
+            var root = document.querySelector(':root');
+            root.style.setProperty('--deg', `"${z['release_year']}"`);
+
+
+        } 
+        movie.onmouseout = function (e) { 
+            add_ = document.getElementById(`add ${id}`);
+            add_.style.visibility = "hidden";
+        }
+
+        
+
+        return movie;
+
+
+    }
+
+     async function getconrate(movie) {
+        response = await fetch(`https://www.omdbapi.com/?i=${movie}&apikey=f69b1da2`);
+        ar = await response.json();
+
+        return ar['Rated'];
+    }
+    
+    async function create_genrepage() {
+        genre_header = document.getElementById("genre_header");
+        genre_header.innerHTML = Object.keys(resy_)[0]
+
+        type = document.getElementById("type");
+        type.innerHTML = 'Genre';
+
+        explore = document.getElementById("explore");
+        explore.href = `/s/genre:${Object.keys(resy_)[0]};`
+
+        container = document.getElementById("cont");
+        for (i=0; i<resy.length; i++) {
+            movie = await createmovie(resy[i]);
+            container.appendChild(movie);
+        }
+    }
+
+    create_genrepage();
+    
+    
+</script>

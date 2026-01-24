@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1 id="header">Profile</h1>
+
+
+    <div id="moviescont">
+        <p id="contitle">Movies</p>
+    </div>
+    
+</body>
+
+
+<style>
+    body {
+        background-color: rgb(18, 18, 18);
+    }
+
+    #header {
+        color: white;
+        font-family: roboto;
+        position: relative;
+        left: 147.5px;
+        font-size: 61.5px;
+        width: fit-content;
+    }
+
+    #moviescont {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        top: 226px;
+        left: 30px;
+        width: fit-content;
+    } 
+
+    
+    #contitle {  
+        position: relative;
+        top: -90px;
+        left: 120px;
+        font-family: roboto;
+        color: white;
+        font-size: 30px;
+    }
+
+    
+    .movie {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100px;
+        height: 100px;
+        margin-top: -60px;
+        background-color: rgb(195, 195, 195);
+        border-radius: 100%;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+
+    }
+
+    .feature_name {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+    }
+
+    .feature_name {
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        /* position: relative; */
+        /* top: 137px; */
+        /* left: 10px; */
+        margin: 0px;
+        height: fit-content;
+    }
+
+    .movie_big {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 5px;
+        /* justify-content: center; */
+        align-items: center;
+        width: 258.5px;
+        height: 206px;
+        background-color: rgb(36, 36, 36);
+        border-radius: 3%;
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+        margin: 5px;
+        text-decoration: none;
+
+    }
+
+    .nameandratcont {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        top: 151px;
+        left: 10.5px;
+        height: fit-content;
+    }
+
+    .add {
+        position: absolute;
+        font-family: arial;
+        z-index: 3;
+        color: white;
+        font-size: 30px;
+        left: 223px;
+        top: 2px;
+        visibility: hidden;
+        /* background-color: red; */
+        width: 34.5px;
+        text-align: center;
+        border-radius: 27px;
+    } 
+
+    .add:hover {
+        background-color: #4137374a;
+    }
+
+   
+
+
+    .thumbnail {
+        width: 255.5px;
+        position: relative;
+        bottom: 27.5px;
+        left: 1.5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    } 
+
+
+    .vcoun {
+        position: relative;
+        text-decoration: none;
+        color: #111;
+        font-size: 11px;
+        font-family: roboto;
+        margin: 0px;
+        left: 208.5px;
+        top: -34px;
+        background-color: #469b6f;
+        height: fit-content;
+        padding: 3px;
+        border-radius: 3px;
+    }
+
+    .minifeature {
+        width: fit-content;
+        height: 21px;
+        background-color: rgb(57, 57, 57);
+        margin: 3.5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 16px;
+        border-style: solid;
+        border-width: 1.2px;
+        border-color: rgb(66, 66, 66);
+    }
+
+    .minifeaturename {
+        font-family: roboto;
+        color: white;
+        font-size: 10.5px;
+        display: flex;
+        /* align-content: center; */
+        /* justify-content: center; */
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .minifeatures {
+        display: flex;
+        flex-wrap: wrap;
+        position: absolute;
+        top: 175.5px;
+        width: 300.5px;
+    }
+
+    .mid_movies_cont {
+        display: flex;
+        flex-wrap: wrap;
+        height: 200px;
+        width: 400px;
+    }
+
+     .contentr {
+        width: fit-content;
+        height: 18.5px;
+        background-color: #373737;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 5px;
+        left: 5.5px;
+    }
+
+    .contentrt {
+        font-family: roboto;
+        color: #7b7b7b;
+        font-size: 10px;
+    }
+
+</style>
+
+
+<script>
+    const options = { method: 'GET', headers: { "Authorization": "Bearer ACCESS_TOKEN" } };
+
+    
+    async function createmovie(z, id, size) {
+        x = z['name']
+        movie = document.createElement("a");
+        // movie.href = `/m/${z['index']}`;
+        movie_name = document.createElement('p');
+        movie_name.innerHTML = x
+        movie_name.setAttribute('class', 'feature_name')
+        if (size == "small") {
+            movie.setAttribute('class', 'movie')
+        } else {
+            movie.setAttribute('class', 'movie_big')
+        }
+        movie.id = id;
+        
+        addt = document.createElement('div');
+        addt.setAttribute("class", "add");
+        addt.id = `add ${id}`;
+        addt.innerHTML = "+";
+        addt.onclick = function() {
+            calluserstable(z['index']);
+        }
+
+
+
+
+        let thumbnail = document.createElement('a');
+        thumbnail.setAttribute("class", "thumbnail_cont");
+        thumbnail.href = `/m/${z['index']}`
+        minitype = document.createElement('div');
+        minitype.setAttribute("class", "minitype");
+        minitypecont = document.createElement('p');
+        minitypecont.setAttribute("class", "minitypecont");
+        minitypecont.innerHTML = "Movie";
+        // minitype.appendChild(minitypecont);
+
+        vcoun = document.createElement('p');
+        vcoun.setAttribute("class", "vcoun");
+        vcoun.innerHTML = z['imdb_votes'];
+
+        nameandratcont = document.createElement("div");
+        nameandratcont.setAttribute("class", "nameandratcont");
+        respone = await getconrate(z['imdb_id']);
+        contentr = document.createElement('div');
+        contentr.setAttribute("class", "contentr");
+        contentrt = document.createElement('p');
+        contentrt.setAttribute("class", "contentrt")
+        contentrt.innerHTML = respone;
+        contentr.appendChild(contentrt);
+        nameandratcont.appendChild(movie_name);
+        nameandratcont.appendChild(contentr);
+        
+        movie.appendChild(nameandratcont)
+
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${x}`, options)
+            .then(res => res.json())
+            .then(res =>
+
+                thumbnail.innerHTML = `<img class="thumbnail", src=https://image.tmdb.org/t/p/w500/${res['results'][0]['backdrop_path']}>`
+            )
+            .catch(err => console.error(err, x));
+
+
+
+
+        // movie.appendChild(movie_name);
+        movie.appendChild(addt);
+        movie.appendChild(thumbnail);
+        // movie.appendChild(minitype);
+        minifeatures = document.createElement('div');
+        minifeatures.setAttribute("class", "minifeatures");
+        for (let i = 0; i < 3; i++) {
+            minifeature = document.createElement("div");
+            minifeature.setAttribute("class", "minifeature");
+            minifeature.innerHTML = `<p class="minifeaturename">${JSON.parse(z['keywords'])[i]}</p>`
+            minifeatures.appendChild(minifeature);
+
+
+        }
+
+        more_features = document.createElement("div");
+        more_features.setAttribute("class", "minifeature");
+        more_features.innerHTML = `<p class="minifeaturename">+ ${JSON.parse(z['keywords']).length - 3}</p>`
+        more_features.onclick = function () {
+            e = create_element("minifeatureswindow")
+            up_cont.append(e);
+            for (i = 0; i < JSON.parse(z['keywords']).length; i++) {
+                minifeature = document.createElement("div");
+                minifeature.setAttribute("class", "minifeature");
+                minifeature.innerHTML = `<p class="minifeaturename">${JSON.parse(z['keywords'])[i]}</p>`
+                e.appendChild(minifeature);
+            }
+        }
+        minifeatures.appendChild(more_features);
+        movie.appendChild(vcoun);
+        movie.appendChild(minifeatures);
+        
+
+
+
+       nam = z['name']
+
+
+        movie.onmousemove = function (e) {
+            preview1 = document.getElementById("preview1");
+            preview1 = document.getElementById("preview1");
+            preview1.style.visibility = "visible";
+
+
+            add_ = document.getElementById(`add ${id}`);
+            add_.style.visibility = "visible";
+
+
+            movie_name2 = document.getElementById("movie_name2");
+            movie_name2.innerHTML = z['name'];
+
+            
+            descriptt = document.getElementById("plot_pr");
+            votes = document.getElementById("votes");
+            generes = document.getElementById("pgeneres");
+            descriptt.innerHTML = "";
+            release_year.innerHTML = "";
+            votes.innerHTML = "";
+            generes.innerHTML = "";
+
+
+            descriptt.innerHTML = z['description'];
+            votes.innerHTML = z['imdb_votes'];
+            score.innerHTML = z['imdb_avg_vote'];
+
+            genere_lst = JSON.parse(z['Genre'])
+            for (i=0; i<genere_lst.length; i++) {
+                genre = document.createElement("p");
+                genre.setAttribute("class", "pgenre");
+                genre.innerHTML = genere_lst[i];
+                generes.appendChild(genre);
+            }
+
+            
+            preview1.style.top = `${e.clientY + page.scrollTop}px`;
+            preview1.style.left = `${e.clientX}px`;
+
+            var root = document.querySelector(':root');
+            root.style.setProperty('--deg', `"${z['release_year']}"`);
+
+
+        } 
+        movie.onmouseout = function (e) { 
+            add_ = document.getElementById(`add ${id}`);
+            add_.style.visibility = "hidden";
+        }
+        return movie;
+    }
+    async function getconrate(movie) {
+        response = await fetch(`https://www.omdbapi.com/?i=${movie}&apikey=f69b1da2`);
+        ar = await response.json();
+
+        return ar['Rated'];
+    }
+
+
+    moviescont = document.getElementById("moviescont");
+    movies = <%- JSON.stringify(datat) %>
+    username = <%- JSON.stringify(username) %>
+    header = document.getElementById("header");
+
+    header.innerHTML = username;
+
+    console.log("somethingzasdfoj");
+    (async () => {
+        for (i=0; i<movies.length; i++) {
+            movie = await createmovie(movies[i]);
+            moviescont.append(movie);
+        } 
+    })()
+    
+</script>
+</html>
