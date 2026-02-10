@@ -1949,31 +1949,10 @@
                 inp.style.borderBottom = "none";
 
 
-                if (results_[2].length > 0) {
-                    // If matching genres, loop through genres, append to autocomplete box
-                    for (x = 0; x < results_[2].length; x++) {
-                        coun = coun + 1
-                        option_item = document.createElement("a");
-                        option_item.setAttribute("class", "option");
-                        s_type = document.createElement("p");
-                        s_type.innerHTML = "Genre";
-                        s_type.setAttribute("class", "s_type_g");
-                        n = document.createElement('p');
-                        n.setAttribute("class", "option_n");
-                        n.innerHTML = results_[2][x];
-                        option_item.appendChild(n);
-                        option_item.appendChild(s_type);
-                        option_item.href = `/g/${results_[2][x]}`;
-
-                        op_cont.appendChild(option_item);
-
-                    }
-
-                }
 
 
                 // Loop thorugh result lst, append to autocomplete tebox 
-                for (let iz = 0; iz < 2; iz++) {
+                for (let iz = 1; iz >= 0; iz--) {
                     coun = coun + 1
                     for (let x = 0; x < results_[iz].length; x++) {
                         option_item = document.createElement("a");
@@ -2023,6 +2002,31 @@
                         }
 
                     }
+                }
+
+
+                
+                if (results_[2].length > 0) {
+                    console.log("genre")
+                    // If matching genres, loop through genres, append to autocomplete box
+                    for (x = 0; x < results_[2].length; x++) {
+                        coun = coun + 1
+                        option_item = document.createElement("a");
+                        option_item.setAttribute("class", "option");
+                        s_type = document.createElement("p");
+                        s_type.innerHTML = "Genre";
+                        s_type.setAttribute("class", "s_type_g");
+                        n = document.createElement('p');
+                        n.setAttribute("class", "option_n");
+                        n.innerHTML = results_[2][x];
+                        option_item.appendChild(n);
+                        option_item.appendChild(s_type);
+                        option_item.href = `/g/${results_[2][x]}`;
+
+                        op_cont.appendChild(option_item);
+
+                    }
+
                 }
 
 
@@ -2215,7 +2219,7 @@
                 snipet = ` AND ${nobkeys[i]} BETWEEN ${nobvalues[nobkeys[i]]["min value"]} AND ${nobvalues[nobkeys[i]]["max value"]}`;
                 quer2 += snipet;
                 if (i == nobkeys.length - 1) {
-                    quer2 += ` ORDER BY imdb_votes DESC LIMIT 5`;
+                    quer_genre = quer2 + ` ORDER BY imdb_votes DESC LIMIT 5`;
                 }
             }
 
@@ -2309,7 +2313,7 @@
 
 
 
-            queries = [quer1, quer2, inp.value];
+            queries = [quer1, quer_genre, inp.value];
             response = await fetch('/general_search', {
                 method: "POST",
                 headers: {
@@ -2442,20 +2446,30 @@
     /// Show either more movies or features when reaching bottom of page, infinite scroll 
     /// If user hasn't conducted any search, then scrolling down would load more features; elsewise, (if user have clicked enter and thus is on a results page) it'd load movies 
     window.addEventListener("scroll", async function () {
+        console.log("scrolling ..")
         let cont = document.getElementById("features_cont");
         let b = win.scrollHeight - win.clientHeight;
+        console.log(che)
         if ((win.scrollTop >= b) && che == 0) {
             console.log('SCROLLED DETECT')
 
             console.log("HAPPE");
 
-            che = 1;
 
             if (enter) { /// Adds more movies
-                items_ = await calldb(filtered_query + ` LIMIT ${amount}, ${15};`);
-                movies = items_[0];
+                updated_query = quer2 + ` ORDER BY imdb_votes DESC LIMIT ${amount}, ${15};`
+                queries = [quer1, updated_query, inp.value];
+                response = await fetch('/general_search', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ queries: queries })
+                    });
+                items_ = await response.json();
+                movies = items_['movies'];
                 c = 0
-                console.log(movies, "movies");
+                console.log(items_, "movies");
                 for (i = 0; i < movies.length; i++) {
                     movie = await createmovie(movies[i], movie_items_co);
                     cont.appendChild(movie);
@@ -2841,6 +2855,8 @@
 
     let features_ = [];
     async function calldb(query = '', autocomplet = false, request_id = '') {
+        console.log("change scrol top");
+        win.scrollTop = "0spx";
         response = await fetch('/usey', {
             method: "POST",
             headers: {

@@ -31,8 +31,10 @@
     <div id="cont">
 
 
-        <p id="f_name"></p>
+        <!-- <p id="f_name"></p> -->
 
+        
+        <p id="adult_rating"></p>
         <div id="userlists_container">
             <h2 id="lists_header">User lists</h2>
 
@@ -72,6 +74,16 @@
         top: -418px;
         position: relative;
         font-family: roboto;
+        left: -52px;
+    }
+
+    #adult_rating {
+        position: relative;
+        top: 780px;
+        color: white;
+        /* background-color: red; */
+        left: 611px;
+        width: fit-content;
     }
 
 
@@ -170,7 +182,7 @@
         top: -107.5px;
         width: 90vw;
         /* bottom: 184px; */
-        left: 19%;
+        left: 10%;
     }
 
     /* .features_cont_mov {
@@ -835,10 +847,10 @@
     #related {
         position: relative;
         top: 429.5px;
-        left: 144.5px;
+        left: 45.5px;
         display: flex;
         flex-wrap: wrap;
-        width: 1622.5px;
+        width: 1397.5px;
     }
 
 
@@ -998,6 +1010,8 @@
         top: -101px;
         font-size: 35px;
         font-family: roboto;
+        height: fit-content;
+        margin: 0px;
     }
 
     #pgeneres {
@@ -1253,6 +1267,7 @@
         nameandratcont = document.createElement("div");
         nameandratcont.setAttribute("class", "nameandratcont");
         respone = await getconrate(z['imdb_id']);
+        console.log(respone)
         contentr = document.createElement('div');
         contentr.setAttribute("class", "contentr");
         contentrt = document.createElement('p');
@@ -1598,6 +1613,10 @@
         name_and_type.appendChild(type);
         up_cont.appendChild(name_and_type);
         up_cont.appendChild(director_);
+
+        adult_rating = await getconrate(movieob['imdb_id'])
+        adult_rating_e = document.getElementById("adult_rating");
+        adult_rating_e.innerHTML = adult_rating;
 
 
         // up_cont.appendChild(type_cont);

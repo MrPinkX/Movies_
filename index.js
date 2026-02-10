@@ -226,7 +226,8 @@ app.post('/usey', jsonParser, async (request, response) => {
 
           
           console.log('list state', lstr.length);
-
+          
+          console.log(query1, "query1");
           autocomplet_features = await db2.all(query1);
 
           if (lstr.length == 0) {
