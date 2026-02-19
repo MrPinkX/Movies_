@@ -195,7 +195,6 @@ app.post('/usey', jsonParser, async (request, response) => {
     } else {
       query = `SELECT * FROM features ORDER BY movie_count DESC limit 15;`;
     }
-    // response.send([request.body["b"] + "zi"]);
 
     lstr = []
 
@@ -207,11 +206,9 @@ app.post('/usey', jsonParser, async (request, response) => {
     else {
       if (request.body["autocomplet"]) {
         if (request.body["b"].length > 1) {
-          console.log('completetete');
           query1 = request.body["b"][0];
           query2 = request.body["b"][1];
           lstr = []
-          console.log("excute", query1, lstr);
 
           
           filtered_genres = []
@@ -219,15 +216,10 @@ app.post('/usey', jsonParser, async (request, response) => {
           for (i=0; i<genres.length; i++) {
             if (genres[i].toLowerCase().includes(request.body["b"][2])) {
               filtered_genres.push(genres[i])
-            }
+            } 
           }
-          console.log(lstr.length, 'genre') 
-
-
           
-          console.log('list state', lstr.length);
           
-          console.log(query1, "query1");
           autocomplet_features = await db2.all(query1);
 
           if (lstr.length == 0) {
@@ -244,10 +236,6 @@ app.post('/usey', jsonParser, async (request, response) => {
             console.log(lstr.length, 'should be < 2'); 
             lstr.push(filtered_genres); 
           }
-
-          console.log("mmmo")
-          console.log(lstr.length, 'movies') 
-
 
           // if (lstr.length<5){
             response.send(lstr);
@@ -271,7 +259,6 @@ app.post('/usey', jsonParser, async (request, response) => {
           } 
 
           autocomplet_features = autocomplet_features.map((feature) => {return feature['name']});
-          console.log(autocomplet_features);
           response.send([autocomplet_features, autocomplet_genres]);
         }
         
@@ -294,7 +281,6 @@ app.post('/usey', jsonParser, async (request, response) => {
         })
       }
     }
-
 
 
     async function send_associated_categories(f_name, amount) {
@@ -321,6 +307,18 @@ app.post('/usey', jsonParser, async (request, response) => {
 
 
   })
+
+
+  app.post('/user_check', jsonParser, async (request, response) => { 
+    try {
+      user = jwt.verify(request.cookies.toky, "shhhhh");
+      console.log("user detec");
+      response.send(["user"]);
+    } catch {
+      response.send(["none"]);
+    }
+  })
+
 
 app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname, "visual.html"));
@@ -495,7 +493,6 @@ app.post('/singlemovie', jsonParser, async (request, response) => {
 
 app.post('/general_search', jsonParser, async (request, response) => {
   
-  console.log('in_general');
   console.log(request.body['queries']);
 
   features_query = request.body["queries"][0];
@@ -508,6 +505,7 @@ app.post('/general_search', jsonParser, async (request, response) => {
     filename: 'farter_2.db',
     driver: sqlite3.Database
   }) 
+
 
   features = await db2.all(features_query);
   movies = await db2.all(movies_query); 
@@ -531,6 +529,8 @@ app.post('/general_search', jsonParser, async (request, response) => {
 // Users stuff 
 app.post(`/userdata`, jsonParser, async (req, res) => {
   let moviename = req.body["moviename"];
+  let timestamp = req.body["time"];
+  console.log("That")
   
   let user;
   try { 
@@ -546,7 +546,16 @@ app.post(`/userdata`, jsonParser, async (req, res) => {
           driver: sqlite3.Database
         }) 
 
-    
+    if (req.body["history"]) {
+      console.log("Added to history");
+
+      db2.exec(`INSERT INTO users_data
+              VALUES ("${user["username"]}", "none", "${moviename}", ${timestamp}) `);
+      }
+
+    else {
+
+      
     if (req.body['list_']) {
       console.log('list!!!!!!', moviename);
       
@@ -564,11 +573,11 @@ app.post(`/userdata`, jsonParser, async (req, res) => {
       
     } else {
       db2.exec(`INSERT INTO users_data
-              VALUES ("${user["username"]}", "${moviename}"); `);
+              VALUES ("${user["username"]}", "${moviename}", "none", "none");`);
       console.log("added to default list");
 
     }
-
+  }
     console.log("movie saved");
     res.send(["Movie saved"]);
   } else {
@@ -577,8 +586,117 @@ app.post(`/userdata`, jsonParser, async (req, res) => {
   }
   
 
+}) 
+
+
+function filtering_data_to_query() {
+  movies_query = `SELECT * FROM movies WHERE name LIKE "%${filtering_data["query"]}%" `;
+  if (filtering_data["features"]) {
+    for (let i=0; i<filtering_data["features"].length; i++) {
+      movies_query += ` AND keywords LIKE '%"${filtering_data["features"][i]}"%'`
+    }
+  } 
+  if (filtering_data["genres"]) {
+    for (let i=0; i<filtering_data["genres"].length; i++) {
+      movies_query += ` AND Genre LIKE '%"${filtering_data["genres"][i]}"%'`
+    }
+  } 
+  nobkeys = Object.keys(filtering_data).slice(-3);
+  console.log(nobkeys);
+  for (i = 0; i < nobkeys.length; i++) {
+    snipet = ` AND ${nobkeys[i]} BETWEEN ${filtering_data[nobkeys[i]]["min"]} AND ${filtering_data[nobkeys[i]]["max"]}`;
+    movies_query += snipet;
+    if (i == nobkeys.length - 1) {
+        movies_query += ` ORDER BY imdb_votes DESC`;
+    }
+  }
+
+  return movies_query;
+}
+
+
+let filtering_data;
+let amount = 0;
+app.post(`/general_search_`, jsonParser, async (req, res) => {
+  filtering_data = req.body["search_data_"]; 
+  console.log(filtering_data);
+
+  amount = 0;
+
+  movies_query = `SELECT * FROM movies WHERE name LIKE "%${filtering_data["query"]}%" `;
+  if (filtering_data["features"]) {
+    console.log("adding feature");
+    for (let i=0; i<filtering_data["features"].length; i++) {
+      movies_query += ` AND keywords LIKE '%"${filtering_data["features"][i]}"%'`
+    }
+  } 
+  if (filtering_data["genres"]) {
+    for (let i=0; i<filtering_data["genres"].length; i++) {
+      movies_query += ` AND Genre LIKE '%"${filtering_data["genres"][i]}"%'`
+    }
+  } 
+  nobkeys = Object.keys(filtering_data).slice(-3);
+  console.log(nobkeys);
+  for (i = 0; i < nobkeys.length; i++) {
+    snipet = ` AND ${nobkeys[i]} BETWEEN ${filtering_data[nobkeys[i]]["min"]} AND ${filtering_data[nobkeys[i]]["max"]}`;
+    movies_query += snipet;
+    if (i == nobkeys.length - 1) {
+        movies_query += ` ORDER BY imdb_votes DESC LIMIT 5`;
+    }
+  }
+
+  features_query = `SELECT * FROM features WHERE name LIKE "%${filtering_data["query"]}%" LIMIT 5;`;
+  lists_query = `SELECT * FROM users_lists WHERE list_name LIKE '%${filtering_data["query"]}%'; `
+
+
+  const db2 = await open({
+    filename: 'farter_2.db',
+    driver: sqlite3.Database
+  }) 
+
+  features = await db2.all(features_query);
+  movies = await db2.all(movies_query); 
+  lists = await db2.all(lists_query);
+  genres_ = []
+  for (i=0; i<genres.length; i++) {
+    if (genres[i].toLowerCase().includes(filtering_data["query"])) {
+      genres_.push(genres[i])
+    } 
+  }
+
+  console.log(movies_query);
+
+  res.send({movies: movies, features: features, lists: lists, genres_});
+  
 })
 
+
+app.post(`/scroll`, jsonParser, async (req, res) => {
+  console.log(filtering_data)
+    if (req.body["enter"]) {
+      amount = amount + 5;
+      console.log("sending more");
+      
+      const db2 = await open({
+        filename: 'farter_2.db',
+        driver: sqlite3.Database
+      }) 
+
+
+      movies_query = filtering_data_to_query(filtering_data);
+      movies_query = movies_query + ` LIMIT ${amount}, ${5}`
+      movies = await db2.all(movies_query);
+
+      console.log(movies_query);
+
+      res.send({movies: movies})
+
+
+    }
+
+
+
+})
 
 
 
@@ -599,6 +717,7 @@ app.post(`/signup`, jsonParser, async (req, res) => {
     
     const username = req.body["usernamex"];
     const password = req.body["password"];
+    console.log("password", password)
     
     // const user = { name:username, password:hashed };
     const db2 = await open({
@@ -609,6 +728,7 @@ app.post(`/signup`, jsonParser, async (req, res) => {
     
     console.log((await db2.all(`SELECT * FROM users WHERE username LIKE "${username}"`)))
     if ((await db2.all(`SELECT * FROM users WHERE username LIKE "${username}"`)).length < 1) {
+      console
 
       if (password.length < 8) {
         res.send(["Password too short"]);
