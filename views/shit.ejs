@@ -7,6 +7,20 @@
 </head>
 <body>
 
+                <a href="/">
+                    <img id="logo" src="/Images/a4.png" alt="" href="/">
+                </a>
+                 <form id="box">
+        <div id="arrow">^</div>
+        <input id="search" type="text" placeholder="search" oninput="search_handler()" onclick="searchfocus()"
+            autocomplete="off">
+        <div id="fil"></div>
+        <div id="line"></div>
+        <div id="op_cont"></div>
+    </form>
+
+
+
     <div id="info_window">
 
         <img id="x" src="/Images/Vector Union.svg" alt="" onclick="document.getElementById('info_window').style.visibility='hidden'">
@@ -45,6 +59,7 @@
 
 <div id="cont">
     <!-- <h1>Feature</h1> -->
+     <a id="explore_condition" href="/">Explore condition ></a>
     <p id="feature_moviecount"><%-movie_count%></p>
 
     <div id="add_touserlists">
@@ -194,10 +209,12 @@
     }
 
     #cont {
-    width: 60vw;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
+        width: 60vw;
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: center; */
+        position: relative;
+        top: 30px;
     }
 
     body {
@@ -232,6 +249,50 @@
         margin: 5px;
     }  */
 
+
+   #search {
+        position: relative;
+        background-color: #171717;
+        /* border: none; */
+        border-radius: 5px;
+        width: 100%;
+        height: 48.5px;
+        outline: none;
+        box-sizing: border-box;
+        padding-left: 14px;
+        color: rgb(137, 137, 137);
+        caret-color: #4d4d4d;
+        z-index: 1;
+        top: -37px;
+        border-style: solid;
+        border-width: 0.1px;
+        /* height: 8px; */
+        border-color: #292929;
+        left: 7px;
+        transition: width 0.5s, left 0.5s;
+    }
+
+
+    #box {
+        position: absolute;
+        left: 35%;
+        width: 31%;
+        top: 41px;
+        box-sizing: border-box;
+        border-radius: 4.5px;
+        z-index: 2;
+    }
+
+    
+    #logo {
+        width: 147px;
+        /* height: 30px; */
+        position: absolute;
+        top: -25px;
+        left: 90%;
+    }
+
+
     .type_tag_cont {
         background-color: #28334d;
         width: 111.5px;
@@ -261,6 +322,14 @@
         font-size: 45px;
         left: 207.5px;
         margin: 0px;
+    } 
+
+    #explore_condition {
+        font-family: roboto;
+        color: white;
+        position: relative;
+        left: 198px;
+        top: 56px;
     }
 
     #feature_moviecount {
@@ -268,8 +337,8 @@
         color: black;
         margin: 0px;
         width: fit-content;
-        top: 99px;
-        left: 201px;
+        top: -16px;
+        left: 475px;
         font-size: 27px;
         background-color: white;
         padding: 10px;
@@ -282,7 +351,7 @@
         flex-wrap: wrap;
         z-index: 0;
         position: relative;
-        top: 31.5px;
+        top: -68.5px;
         width: 77.5vw;
         /* bottom: 184px; */
         left: 177.5px;
@@ -963,19 +1032,19 @@
     .more {
         position: relative;
         top: -11.5px;
-        left: 1252.5px;
+        left: 84%;
         color: white;
         text-decoration: none;
     }
 
-    .name_and_type {
+   .name_and_type {
         position: absolute;
         display: flex;
-        top: 46.5px;
-        height: 76px;
-        width: 496.5px;
-        left: 205px;
-    } 
+        top: -0.5px;
+        height: fit-content;
+        width: fit-content;
+        left: 193px;
+    }
 
 
     #add_touserlists {
@@ -1048,6 +1117,24 @@
         padding: 3px;
         font-size: 11px;
         border-radius: 3px;
+    } 
+
+    .asso_tag {
+        background-color: #151617;
+        width: fit-content;
+        height: fit-content;
+        margin-left: 24px;
+        color: #575757;
+        border-radius: 4px;
+        padding: 11px;
+    }
+
+   #asso_tags {
+        display: flex;
+        /* margin: 3; */
+        left: 165px;
+        position: relative;
+        top: 4px;
     }
 
 
@@ -1087,6 +1174,8 @@
         movie_name.innerHTML = x
         movie_name.setAttribute('class', 'movie_item_name');
         movie_name.id = `movie_name ${id}`
+
+        
 
         if (size == "small") {
             movie.setAttribute('class', 'movie')
@@ -1141,10 +1230,10 @@
         }
 
         addt.onmouseup = function () {
-            // if (add_todefault) {
-            //     console.log("added to defeault");
-            //     calluserstable(z['index']);
-            // }
+            if (add_todefault) {
+                console.log("added to defeault");
+                calluserstable(z['index']);
+            }
             window.clearTimeout(timeoutId);
         }
 
@@ -1413,11 +1502,22 @@
         });
         data = await response.json();
 
+        console.log("data", data)
+        if (data[1]) {
+            console.log(data);
+            signup_button = document.getElementById("signup_button");
+            signup_button.innerHTML = "Hello, user"
+            user_options_win = document.getElementById("user_options");
+            signup_button.onclick = function () {
+                user_options_win.style.visibility = "visible";
+            }}
+
         if (query.length < 1) {
             for (i = 0; i < 9; i++) {
                 resy = await createfeature(data[i]);
                 cont.appendChild(resy);
             }
+            
         } else {
             return data;
         }
@@ -1452,6 +1552,24 @@
     movie_count_ = <%-JSON.stringify(movie_count)%>
 
     console.log(movie_count_)
+    console.log(ress);
+    
+    function create_aso_shortcut(assoca_name) {
+        sq = document.createElement("p");
+        sq.setAttribute("class", "asso_tag");
+        sq.innerHTML = `${assoca_name} >`
+
+        return sq
+    } 
+
+    asso_tags = document.createElement("div")
+    asso_tags.id = "asso_tags"
+
+    for (i=1; i<Object.keys(ress).length; i++) {
+        asso_tags.append(create_aso_shortcut(Object.keys(ress)[i]))
+    }
+
+    up_cont.appendChild(asso_tags);
 
     
     // res = resy.slice(1, -1);
@@ -1680,7 +1798,7 @@
         res = await login(username_box.value, password_box.value, true);
         console.log(res);
         if (res[0] == 'success') {
-            window.location.replace("/profile");
+            window.location.replace(window.location);
         }
     }
 
@@ -1698,8 +1816,32 @@
 
         console.log(rendered);
 
-        window.location.replace("/");
+        window.location.replace(window.location);
     }
+
+
+    async function check_for_user() {
+        response = await fetch('/user_check', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ user_check: "?" })
+        });
+        data = await response.json();
+
+        console.log(data, "dada");
+        if (data[0] == "user") {
+                console.log(data);
+                signup_button = document.getElementById("signup_button");
+                signup_button.innerHTML = "Hello, user"
+                user_options_win = document.getElementById("user_options");
+                signup_button.onclick = function () {
+                    user_options_win.style.visibility = "visible";
+                }}
+    }
+
+    check_for_user();
 
 
     
