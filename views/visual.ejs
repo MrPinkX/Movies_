@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> -->
 </head>
 
 <body>
@@ -31,10 +31,7 @@
     </div>
 
 
-    <div id="logo_search_container">
-         <!-- <h1 id="header">The Moviebase</h1> -->
-        <img id="logo" src="/Images/a4.png" alt="">
-
+    <h1 id="header">The Moviebase</h1>
     <!-- <div id="box-container"> -->
     <form id="box">
         <div id="arrow">^</div>
@@ -45,22 +42,15 @@
         <div id="op_cont"></div>
     </form>
 
-    </div>
-   
-
-
     <div id="condition_info">
-        <input id="conditioninfo_search" type="text" placeholder="search" oninput="condition_popsearch()">
+        <input id="conditioninfo_search" type="text" placeholder="search">
         <div id="conditioninfo_line"></div>
         <div id="condi_tags"></div>
-        <div id="autocomplet_box_c"></div>
-
-        <p id="apply" onclick="send_conditions()">Apply</p>
     </div>
 
     <div id="condi_cont">
+        
     </div>
-
 
 
 
@@ -80,22 +70,6 @@
 
 
 <style>
-
-    #logo_search_container {
-        width: 100px;
-        position: relative;
-        top: -116px;
-        left: 37%;
-    }
-
-     #logo {
-        width: 329px;
-        /* height: 30px; */
-        position: relative;
-        top: 57px;
-        left: 34%;
-    }
-
     #signup_button {
         position: relative;
         padding: 7px;
@@ -122,7 +96,7 @@
         visibility: hidden;
         top: 203.5px;
         z-index: 3;
-        left: 30%;
+        left: 600.5px;
         border-radius: 5.5px;
         display: flex;
         justify-content: center;
@@ -197,7 +171,7 @@
         left: 262.5px;
         color: white;
         font-family: roboto;
-    }
+    } 
 
 
     #user_options {
@@ -236,7 +210,7 @@
 
     #header {
         position: absolute;
-        left: 101px;
+        left: 769px;
         font-family: roboto;
         color: white;
         width: 295px;
@@ -254,14 +228,12 @@
 
     #box {
         position: absolute;
-        left: -33%;
+        left: 664px;
         width: 482px;
         top: 329px;
         box-sizing: border-box;
         border-radius: 4.5px;
         z-index: 2;
-        /* opacity: 89%; */
-        backdrop-filter: blur(31.9px);
     }
 
     #search {
@@ -505,7 +477,7 @@
         flex-wrap: wrap;
         z-index: 0;
         position: relative;
-        top: 27.5px;
+        top: 405.5px;
         width: 90vw;
         /* bottom: 184px; */
         left: 97px;
@@ -1321,7 +1293,7 @@
 
 
 
-    #lists_header {
+     #lists_header {
         position: relative;
         left: 20px;
         color: #fff9ee;
@@ -1378,11 +1350,11 @@
         padding: 3px;
         font-size: 11px;
         border-radius: 3px;
-    }
+    } 
 
     #condi_cont {
         position: relative;
-        top: -22px;
+        top: 365px;
         width: fit-content;
         left: 182px;
     }
@@ -1423,7 +1395,7 @@
         border-width: 1px;
         /* border-style: ; */
         border-color: #333;
-    }
+    } 
 
 
     #condition_info {
@@ -1462,40 +1434,21 @@
         height: 0.5px;
         top: 17px;
         left: 8px;
-    }
+    } 
 
 
     .innerconditag {
         position: relative;
         left: 15px;
-        top: 29px;
+        top: 12px;
         color: black;
         background-color: white;
         width: fit-content;
         padding: 3px;
         border-radius: 3px;
-        margin: 0;
-        margin-right: 5px;
-    }
-
-    #autocomplet_box_c {
-        background-color: black;
-        position: relative;
-        top: -199px;
-        border-radius: 3px;
     }
 
 
-    #condi_tags {
-        display: flex;
-        position: relative;
-    }
-
-    #apply {
-        position: absolute;
-        top: 72px;
-        left: 372px;
-    }
 </style>
 
 <script>
@@ -1580,7 +1533,7 @@
     let circloc2 = 0;
     let nobyname;
 
-    nobvalues = { "release_year": { "max value": 2025, "min value": 1950 }, "imdb_avg_vote": { "max value": 10, "min value": 0 }, "imdb_votes": { "max value": 2000000, "min value": 0 } };
+    nobvalues = { "release_year": { "max value": 2025, "min value": 1950 }, "vote_average": { "max value": 10, "min value": 0 }, "imdb_votes": { "max value": 2000000, "min value": 0 } };
     function nob_motion(nobname) {
         circle = document.getElementById(`circle ${nobname}`);
         circle2 = document.getElementById(`circle2 ${nobname}`);
@@ -1762,7 +1715,7 @@
         }
 
     }
-
+    
     inp = document.getElementById("search");
     arrow_ = document.getElementById("arrow");
     function searchfocus() {
@@ -1780,10 +1733,7 @@
 
 
     line = document.getElementById('line');
-
     tags_tofilter = []
-    search_data = {}
-
     arrow_.onclick = async function () {
         searchfocus()
         clicklst = []
@@ -1795,7 +1745,7 @@
             up_cont.style.top = "";
             inp.style.borderBottom = "0.1px solid #292929";
             line.style.visibility = "hidden";
-
+            
             // line.style.top = "-31px";
 
             arrow_.style.left = "432px";
@@ -1821,11 +1771,12 @@
             tag_filter.id = "tag_filter";
             tag_filter.contentEditable = "false";
             console.log(cont.children, "tag_filer Append_-1");
-
+            
             // const features__ = await calldb();
             // const features_ = features__[0];
             console.log(features_, "fatur");
             for (i = 0; i < 15; i++) {
+                console.log("tag_filer Append_0");
                 keyword = document.createElement('p');
                 keyword.innerHTML = features_[i]['name'];
                 keyword.setAttribute("class", "tagfil");
@@ -1833,12 +1784,14 @@
 
                 keyword.onclick = function (ty) {
                     keyword_ = document.getElementById(`tag ${ty['originalTarget']['innerHTML']}`)
-                    tag_tofilter = { "tag_type": "f", "content": ty['originalTarget']['innerHTML'] }
+                    tag_tofilter = {"tag_type": "f", "content": ty['originalTarget']['innerHTML']}
                     if (tags_tofilter.some(item => item["content"] === tag_tofilter['content'])) {
+                        console.log("includes");
                         tags_tofilter.splice(tags_tofilter.indexOf(tag_tofilter), 1)
                         keyword_.style.backgroundColor = "#1e1e1e";
                         keyword_.style.color = "white";
                     } else {
+                        console.log("not includes");
                         keyword_.style.backgroundColor = "white";
                         keyword_.style.color = "#1e1e1e";
                         tags_tofilter.push(tag_tofilter);
@@ -1879,15 +1832,15 @@
 
     inp = document.getElementById("search");
 
-
-
+    resy_ = <%-JSON.stringify(query_movies)%>
+    
 
 
     async function search_handler() {
         box = document.getElementById("box");
         inp = document.getElementById("search");
         op_cont = document.getElementById("op_cont");
-        op_cont.innerHTML = '';
+        op_cont.innerHTML = ''; 
         await search_();
     }
 
@@ -1898,10 +1851,7 @@
     suggestion_lst = [];
     let quer1;
     let quer2;
-
     async function search_() {
-        console.log("Enter:", enter);
-
         box = document.getElementById("box");
         inp = document.getElementById("search");
         op_cont = document.getElementById("op_cont");
@@ -1913,181 +1863,145 @@
 
 
         if (inp.value.length > 0) {
+            
+            quer1 = `SELECT * FROM features WHERE name LIKE "%${inp.value}%" LIMIT 5;`;
+            // Search for features
 
-            search_data['query'] = inp.value;
-            search_data["genres"] = []
-            search_data["features"] = []
+            quer2 = `SELECT * FROM movies WHERE name LIKE "%${inp.value}%"`;
+            // Search for movies
+
+            console.log('mlm', inp.value);
+
+
+            
             if (tags_tofilter.length > 0) {
                 for (i = 0; i < tags_tofilter.length; i++) {
-                    if (tags_tofilter[i]["tag_type"] == 'g') {
-                        search_data["genres"].push(tags_tofilter[i]["content"])
+                    if (tags_tofilter[0]["tag_type"] == 'g') {
+                        snipet = ` AND Genre LIKE '%"${tags_tofilter[0]["content"]}"%'`;
                     } else {
-                        search_data["features"].push(tags_tofilter[i]["content"])
+                        console.log(tags_tofilter, "to_filter");
+                        snipet = ` AND keywords LIKE '%"${tags_tofilter[0]["content"]}"%'`;
                     }
+                    quer2 += snipet;
                 }
             }
-        
 
+            
             nobkeys = Object.keys(nobvalues);
             for (i = 0; i < nobkeys.length; i++) {
-                min_max = {}
-                min_max["min"] = nobvalues[nobkeys[i]]["min value"]
-                min_max["max"] = nobvalues[nobkeys[i]]["max value"]
-                search_data[nobkeys[i]] = min_max
+                snipet = ` AND ${nobkeys[i]} BETWEEN ${nobvalues[nobkeys[i]]["min value"]} AND ${nobvalues[nobkeys[i]]["max value"]}`;
+                quer2 += snipet;
+                if (i == nobkeys.length - 1) {
+                    quer2 += ` ORDER BY imdb_votes DESC LIMIT 5`;
+                }
             }
 
-            response = await fetch('/general_search_', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ search_data_: search_data })
-            });
-            results__ = await response.json();
-
+            queries = [quer1, quer2, inp.value];
+            results_ = await calldb(queries, true, request_id);
             op_cont.innerHTML = '';
             suggestion_lst = []
 
 
 
             coun = 0;
+            if ((results_[0].length > 0) || (results_[1].length > 0)) {
+                inp.style.borderBottom = "none";
 
+                if (results_[2].length>0) {
+                    // If matching genres, loop through genres
+                    for (x = 0; x < results_[2].length; x++) {
+                        coun = coun + 1
+                        option_item = document.createElement("a");
+                        option_item.setAttribute("class", "option");
+                        s_type = document.createElement("p");
+                        s_type.innerHTML = "Genre";
+                        s_type.setAttribute("class", "s_type_g");
+                        n = document.createElement('p');
+                        n.setAttribute("class", "option_n");
+                        n.innerHTML = results_[2][x];
+                        option_item.appendChild(n);
+                        option_item.appendChild(s_type);
+                        option_item.href = `/g/${results_[2][x]}`;
 
-            async function create_autocompleteoption(type, content) {
-                option_item = document.createElement("a");
-                option_item.setAttribute("class", "option");
-                s_type = document.createElement("p");
-                vots = document.createElement('p');
-                if (type=='feature') {
-                    console.log(JSON.parse(content['movies'])[1], "themovies");
-                    thumb = await get_thumbnail(JSON.parse(content['movies'])[1]);
-                    inpper = inp.value;
-                    option_item.href = `/f/${content['name']}`;
-                    s_type.innerHTML = "Feature";
-                    s_type.setAttribute("class", "s_type_f");
-                    vots.innerHTML = content['movie_count'];
-                    vots.setAttribute("class", "s_mcount");
-                }  
-                if (type=="movie") { // Create movie option
-                            thumb = await get_thumbnail(content['id']);
-                            inpper = inp.value;
-                            option_item.href = `/m/${content['my_index']}`;
-                            s_type.innerHTML = "Movie";
-                            s_type.setAttribute("class", "s_type_m");
-                            vots.innerHTML = content['imdb_votes'];
-                            vots.setAttribute("class", "s_vots");
-                        }
-
-                n = document.createElement('p');
-                n.setAttribute("class", "option_n");
-                n.innerHTML = content['name'];
-                t = document.createElement('div');
-                t.innerHTML = `<img class="s_thumbnail", src=${thumb}>`
-
-                vots_cont = document.createElement("div");
-                vots_cont.setAttribute("class", "vots_cont");
-
-                option_item.appendChild(t);
-                option_item.appendChild(n);
-                option_item.appendChild(s_type);
-                vots_cont.appendChild(vots)
-                option_item.appendChild(vots_cont)
-
-                return option_item;
-            }
-
-
-
-
-
-            if (enter==false) {
-                // Add movie options
-                for (let x = 0; x < results__["movies"].length; x++) { 
-                    option = await create_autocompleteoption("movie", results__["movies"][x])
-                    if (suggestion_lst.includes(option.href) == false) {
-                                op_cont.appendChild(option);
-                                suggestion_lst.push(option.href);
-                            }
-                } 
-
-                // Add feature options
-                for (let x = 0; x < results__["features"].length; x++) { 
-                    option = await create_autocompleteoption("feature", results__["features"][x]);
-                    console.log("add feature")
-                    if (suggestion_lst.includes(option.href) == false) {
-                                op_cont.appendChild(option);
-                                suggestion_lst.push(option.href);
-                                console.log("added")
-                            }
-                } 
-
-
-                if ((results__['movies'].length > 0) || (results__["features"].length > 0)) {
-                    inp.style.borderBottom = "none";
-
-                    if (results__["genres_"].length > 0) {
-                        // If matching genres, loop through genres, append to autocomplete box
-                        for (x = 0; x < results__["genres_"].length; x++) {
-                            coun = coun + 1
-                            option_item = document.createElement("a");
-                            option_item.setAttribute("class", "option");
-                            s_type = document.createElement("p");
-                            s_type.innerHTML = "Genre";
-                            s_type.setAttribute("class", "s_type_g");
-                            n = document.createElement('p');
-                            n.setAttribute("class", "option_n");
-                            n.innerHTML = results__["genres_"][x];
-                            option_item.appendChild(n);
-                            option_item.appendChild(s_type);
-                            option_item.href = `/g/${results__["genres_"][x]}`;
-
-                            op_cont.appendChild(option_item);
-
-                        }
+                        op_cont.appendChild(option_item);
 
                     }
 
+                }
+                
+                for (let iz = 0; iz < 2; iz++) {
+                coun = coun + 1
+                for (let x = 0; x < results_[iz].length; x++) {
+                    option_item = document.createElement("a");
+                    option_item.setAttribute("class", "option");
+                    s_type = document.createElement("p");
+
+                    vots = document.createElement('p');
+                    if (iz == 0) { // Create feature option
+                        thumb = await get_thumbnail(JSON.parse(results_[iz][x]['movies'])[1]);
+                        inpper = inp.value;
+                        option_item.href = `/f/${results_[iz][x]['name']}`;
+                        s_type.innerHTML = "Feature";
+                        s_type.setAttribute("class", "s_type_f");
+                        vots.innerHTML = results_[iz][x]['movie_count'];
+                        vots.setAttribute("class", "s_mcount");
+                    } else { // Create movie option
+                        thumb = await get_thumbnail(results_[iz][x]['id']);
+                        inpper = inp.value;
+                        option_item.href = `/m/${results_[iz][x]['my_index']}`;
+                        s_type.innerHTML = "Movie";
+                        s_type.setAttribute("class", "s_type_m");
+                        vots.innerHTML = results_[iz][x]['imdb_votes'];
+                        vots.setAttribute("class", "s_vots");
+                    }
 
 
-                } else {
-                    op_cont.innerHTML = "Sorry. No matching enteries"
+                    n = document.createElement('p');
+                    n.setAttribute("class", "option_n");
+                    n.innerHTML = results_[iz][x]['name'];
+                    t = document.createElement('div');
+                    t.innerHTML = `<img class="s_thumbnail", src=${thumb}>`
+
+
+                    
+                    vots_cont = document.createElement("div");
+                    vots_cont.setAttribute("class", "vots_cont");
+
+                    option_item.appendChild(t);
+                    option_item.appendChild(n);
+                    option_item.appendChild(s_type);
+                    vots_cont.appendChild(vots)
+                    option_item.appendChild(vots_cont)
+
+                    if (suggestion_lst.includes(option_item.href) == false) {
+                        op_cont.appendChild(option_item);
+                        suggestion_lst.push(option_item.href);
+                    }
+                    
+                }
                 }
 
-
-                line.style.visibility = 'visible';
-                box.style.height = 'fit-content';
-                // box.style.paddingBottom = '2px';
-                box.style.backgroundColor = "rgba(34, 33, 33, 0.83)";
+                
+                
             } else {
-                parse_searchresults(results__);
-            } 
-            
-            
-            
-            
-        } else {
-                box.style.height = '0px';
-                op_cont.innerHTML = '';
-                line.style.visibility = 'hidden';
+                op_cont.innerHTML = "Sorry. No matching enteries"
             }
-     }
 
 
-        
-    
+            line.style.visibility = 'visible';
+            box.style.height = 'fit-content';
+            // box.style.paddingBottom = '2px';
+            box.style.backgroundColor = "#202020";
+        } else {
+            box.style.height = '0px';
+            op_cont.innerHTML = '';
+            line.style.visibility = 'hidden';
 
-
-
-    async function parse_searchresults(results_) {
-        cont.innerHTML = '';
-        for (xn = 0; xn < results_['movies'].length; xn++) {
-            movie = await createmovie(results_['movies'][xn], movie_items_co);
-
-            cont.appendChild(movie);
-            movie_items_co = movie_items_co + 1
         }
-
     }
+
+
+
 
 
     mark = -1;
@@ -2096,15 +2010,14 @@
     insearchtagscont.id = "insearchfilters";
     form.appendChild(insearchtagscont);
 
-
+    /// Show movie results after pressing enter
     let query_forpage = '';
     let enter = false;
     let movie_items_co = 0;
     let filtered_query;
     let open_fornew = false;
 
-    let condi_lst = [];
-    let selected_condi;
+    let condi_lst = []; 
 
     inp.addEventListener("keydown", async function (event) {
 
@@ -2126,7 +2039,7 @@
                     tag_type = 'f: ';
                 } else {
                     tag_type = 'g: ';
-                }
+                } 
 
                 console.log(open_fornew);
 
@@ -2138,10 +2051,10 @@
                     tags_tofilter.push({ "tag_type": tag_type[0], "content": tagtoadd.innerHTML });
                     open_fornew = false;
                 } else {
-                    filter_tag = insearchtagscont.children[insearchtagscont.children.length - 1];
+                    filter_tag = insearchtagscont.children[insearchtagscont.children.length-1];
                     filter_tag.innerHTML = tag_type + tagtoadd.innerHTML;
-                    tags_tofilter[tags_tofilter.length - 1] = { "tag_type": tag_type[0], "content": tagtoadd.innerHTML };
-                }
+                    tags_tofilter[tags_tofilter.length-1] = { "tag_type": tag_type[0], "content": tagtoadd.innerHTML };
+                } 
 
 
                 search.style.paddingLeft = `${(parseInt(window.getComputedStyle(insearchtagscont).width.slice(0, window.getComputedStyle(insearchtagscont).width.length - 2))) + 35}px`
@@ -2176,9 +2089,9 @@
                     tags_tofilter.push({ "tag_type": tag_type[0], "content": tagtoadd.innerHTML });
                     open_fornew = false;
                 } else {
-                    filter_tag = insearchtagscont.children[insearchtagscont.children.length - 1];
+                    filter_tag = insearchtagscont.children[insearchtagscont.children.length-1];
                     filter_tag.innerHTML = tag_type + tagtoadd.innerHTML;
-                    tags_tofilter[tags_tofilter.length - 1] = { "tag_type": tag_type[0], "content": tagtoadd.innerHTML };
+                    tags_tofilter[tags_tofilter.length-1] = { "tag_type": tag_type[0], "content": tagtoadd.innerHTML };
                 }
 
                 search.style.paddingLeft = `${(parseInt(window.getComputedStyle(filter_tag).width.slice(0, window.getComputedStyle(filter_tag).width.length - 2))) + 35}px`
@@ -2186,164 +2099,132 @@
             }
         }
 
-        if (event.key == "ArrowRight") {
+        if (event.key == "ArrowRight") { 
             open_fornew = true;
         }
 
 
 
-        /// Show actual search results after pressing enter
-        if ((event.key === "Enter")) {
-            
+
+        if (event.key === "Enter") {
             enter = true;
             event.preventDefault();
             cont.innerHTML = '';
-            condi_lst = [];
+
+            
+
+            quer1 = `SELECT * FROM features WHERE name LIKE "%${inp.value}%" LIMIT 5;`;
+            // Search for features
+
+            quer2 = `SELECT * FROM movies WHERE name LIKE "%${inp.value}%"`;
+            // Search for movies
 
 
 
-           
-            search_data['query'] = inp.value;
-            search_data["genres"] = []
-            search_data["features"] = []
+            console.log(tags_tofilter);
             if (tags_tofilter.length > 0) {
                 for (i = 0; i < tags_tofilter.length; i++) {
                     if (tags_tofilter[i]["tag_type"] == 'g') {
-                        search_data["genres"].push(tags_tofilter[i]["content"])
+                        snipet = ` AND Genre LIKE '%"${tags_tofilter[i]["content"]}"%'`;
                     } else {
-                        search_data["features"].push(tags_tofilter[i]["content"])
+                        snipet = ` AND keywords LIKE '%"${tags_tofilter[i]["content"]}"%'`;
                     }
+                    quer2 += snipet;
                 }
             }
 
+            
 
+            // Add nob, aka slider values to the query
             nobkeys = Object.keys(nobvalues);
             for (i = 0; i < nobkeys.length; i++) {
-                min_max = {}
-                min_max["min"] = nobvalues[nobkeys[i]]["min value"]
-                min_max["max"] = nobvalues[nobkeys[i]]["max value"]
-                search_data[nobkeys[i]] = min_max
+                snipet = ` AND ${nobkeys[i]} BETWEEN ${nobvalues[nobkeys[i]]["min value"]} AND ${nobvalues[nobkeys[i]]["max value"]}`;
+                quer2 += snipet;
+                if (i == nobkeys.length - 1) {
+                    quer2 += ` ORDER BY imdb_votes DESC LIMIT 5`;
+                }
             }
 
-            response = await fetch('/general_search_', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ search_data_: search_data })
-            });
-            results__ = await response.json();
+            console.log('mlm', quer2);
 
-            parse_searchresults(results__);
+            let condition = document.createElement('p');
+            condition.innerHTML = "condition 1";
+            condition.setAttribute("class", "condition");
+            condition.id = 0
+            if (condi_lst.length>0) {
+                condition.id = condi_lst.length-1
+            } 
+            
+            
+            condi_cont = document.getElementById('condi_cont');
+            add_condi = document.createElement('div');
+            add_condi.innerHTML = "+";
+            add_condi.id = "add_condition";
+            condi_cont.appendChild(add_condi);
+            condi_cont.appendChild(condition);
+            condi_lst[0] = quer2;
+
+            condition.onclick = function(e) {
+                condi_popup = document.getElementById('condition_info');
+                // condi_popup.innerHTML = condi_lst[parseInt(condition.id)];
+                console.log(condi_lst[parseInt(condition.id)]);
+                condi_popup.style.visibility = `visible`;
+                condi_popup.style.top = `${e.clientY}px`;
+                condi_popup.style.left = `${e.clientX}px`;
+
+                
+            }
+
+
+
+            queries = [quer1, quer2, inp.value];
+            response = await fetch('/general_search', {
+            method: "POST",
+            headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ queries: queries })
+                });
+            results_ = await response.json();
+
+
+            for (xn = 0; xn < results_['movies'].length; xn++) {
+                movie = await createmovie(results_['movies'][xn], movie_items_co);
+
+                // console.log(xn, x, results_[1][xn], "ASDASDASD"); 
+                cont.appendChild(movie);
+                movie_items_co = movie_items_co + 1
+            }
+
+            for (xz = 0; xz < results_['features'].length; xz++) {
+                feature = await createfeature(results_['features'][xz], movie_items_co);
+
+                // console.log(xn, x, results_[1][xn], "ASDASDASD"); 
+                cont.appendChild(feature);
+                movie_items_co = movie_items_co + 1
+            }
+
+            for (xz = 0; xz < results_['lists'].length; xz++) {
+                list = await create_listitem(results_['lists'][xz], movie_items_co);
+
+                // console.log(xn, x, results_[1][xn], "ASDASDASD"); 
+                cont.appendChild(list);
+                movie_items_co = movie_items_co + 1
+            }
+
         }
 
-        if (event.key === "Backspace") {
+        if (event.key === "Backspace") { 
             if (inp.value == '') {
-                tags_tofilter = tags_tofilter.slice(0, tags_tofilter.length - 1);
+                tags_tofilter = tags_tofilter.slice(0, tags_tofilter.length-1);
                 console.log(tags_tofilter);
-                insearchtagscont.removeChild(insearchtagscont.children[insearchtagscont.children.length - 1])
+                insearchtagscont.removeChild(insearchtagscont.children[insearchtagscont.children.length-1])
                 search.style.paddingLeft = `${(parseInt(window.getComputedStyle(insearchtagscont).width.slice(0, window.getComputedStyle(insearchtagscont).width.length - 2))) + 35}px`
             }
-
+            
         }
 
     });
-
-
-
-
-
-    async function condition_popsearch() {
-        condi_popup = document.getElementById("condition_info");
-        console.log(selected_condi, 'selec_condi');
-
-
-        let autocomplet_box = document.getElementById('autocomplet_box_c');
-        autocomplet_box.style.visibility = 'visible';
-
-        let box = document.getElementById('conditioninfo_search');
-        console.log(box.value, box, autocomplet_box);
-        let queries = [box.value];
-
-        let autocomplete_options = await calldb(queries, true, request_id);
-        autocomplet_box.innerHTML = '';
-        console.log(autocomplete_options);
-        for (let i = 0; i < autocomplete_options.length; i++) {
-
-            for (let n = 0; n < autocomplete_options[i].length; n++) {
-                console.log("s")
-                autocomplete_option = document.createElement('p');
-
-                autocomplete_option.innerHTML = autocomplete_options[i][n];
-                autocomplet_box.append(autocomplete_option);
-
-                if (i == 0) {
-                    autocomplete_option.id = `f${autocomplete_options[i][n]}`;
-                } else {
-                    autocomplete_option.id = `g${autocomplete_options[i][n]}`;
-                }
-
-                autocomplete_option.onclick = function (e) {
-                    autocomplet_box.style.visibility = 'hidden';
-                    console.log(selected_condi);
-                    innerconditag = document.createElement('p');
-                    innerconditag.innerHTML = e.target.innerHTML;
-                    innerconditag.setAttribute("class", "innerconditag");
-                    condi_tags.appendChild(innerconditag);
-                    condi_lst[selected_condi].push({ "tag_type": e.target.id.slice(0, 1), "content": e.target.innerHTML });
-                    console.log(condi_lst);
-                }
-
-            }
-
-        }
-
-
-
-    }
-
-
-    async function send_conditions() {
-
-        quer1 = `SELECT * FROM features WHERE name LIKE "%%" LIMIT 5;`;
-        quer2 = `SELECT * FROM movies WHERE name LIKE "%%"`
-
-        for (let i = 0; i < condi_lst.length; i++) {
-            console.log(condi_lst[i], condi_lst, i);
-            for (n = 0; n < condi_lst[i].length; n++) {
-                if (condi_lst[i][n]["tag_type"] == 'g') {
-                    snipet = ` AND Genre LIKE '%"${condi_lst[i][n]["content"]}"%'`;
-                } else {
-                    snipet = ` AND keywords LIKE '%"${condi_lst[i][n]["content"]}"%'`;
-                }
-                quer2 += snipet;
-            }
-        }
-
-        nobkeys = Object.keys(nobvalues);
-        for (i = 0; i < nobkeys.length; i++) {
-            snipet = ` AND ${nobkeys[i]} BETWEEN ${nobvalues[nobkeys[i]]["min value"]} AND ${nobvalues[nobkeys[i]]["max value"]}`;
-            quer2 += snipet;
-            if (i == nobkeys.length - 1) {
-                quer2 += ` ORDER BY imdb_votes DESC LIMIT 5`;
-            }
-        }
-        console.log(quer2);
-
-        queries = [quer1, quer2, inp.value];
-        response = await fetch('/general_search', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ queries: queries })
-        });
-        results__ = await response.json();
-        console.log(results__);
-
-        parse_searchresults(results__);
-
-    }
 
 
 
@@ -2351,89 +2232,58 @@
     last_quer = '';
     che = 0;
     che_ = 0;
-    let shown_movies = []
     /// Show either more movies or features when reaching bottom of page, infinite scroll 
     /// If user hasn't conducted any search, then scrolling down would load more features; elsewise, (if user have clicked enter and thus is on a results page) it'd load movies 
     window.addEventListener("scroll", async function () {
         let cont = document.getElementById("features_cont");
         let b = win.scrollHeight - win.clientHeight;
-        console.log(che)
         if ((win.scrollTop >= b) && che == 0) {
             console.log('SCROLLED DETECT')
 
+            console.log("HAPPE");
 
-            response = await fetch('/scroll', {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ enter: true })
-                    });
+            che = 1;
 
-            res = await response.json();
-            new_movies = res['movies'];
-            console.log(new_movies)
+            if (enter) { /// Adds more movies
+                items_ = await calldb(filtered_query + ` LIMIT ${amount}, ${15};`);
+                movies = items_[0];
+                c = 0
+                console.log(movies, "movies");
+                for (i = 0; i < movies.length; i++) {
+                    movie = await createmovie(movies[i], movie_items_co);
+                    cont.appendChild(movie);
+                    console.log(movie in cont.children, i, "movie")
 
-             for (i = 0; i < new_movies.length; i++) { 
-                movie = await createmovie(new_movies[i], movie_items_co);
-                cont.appendChild(movie);
-
-             }
-
-
-        //     if (enter) { /// Adds more movies
-        //         updated_query = quer2 + ` ORDER BY imdb_votes DESC LIMIT ${amount}, ${15};`
-        //         queries = [quer1, updated_query, inp.value];
-        //         response = await fetch('/general_search', {
-        //             method: "POST",
-        //             headers: {
-        //                 "Content-Type": "application/json"
-        //             },
-        //             body: JSON.stringify({ queries: queries })
-        //             });
-        //         items_ = await response.json();
-        //         movies = items_['movies'];
-        //         c = 0
-        //         console.log(items_, "movies");
-        //         for (i = 0; i < movies.length; i++) {
-        //             if (shown_movies.includes(movies[i]['my_index']) == false) {
-        //                 movie = await createmovie(movies[i], movie_items_co);
-        //                 shown_movies.push(movies[i]['my_index'])
-
-        //                 cont.appendChild(movie);
-        //                 console.log(shown_movies.includes(movies[i]['my_index']), i, "movie", shown_movies)
-
-        //                 movie_items_co = movie_items_co + 1;
-        //                 c = i;
-        //             }   
-        //         }
-        //         amount = amount + 15;
-        //         console.log(c);
-        //         if (c == 14) {
-        //             che = 0;
-        //         }
+                    movie_items_co = movie_items_co + 1;
+                    c = i;
+                }
+                amount = amount + 15;
+                console.log(c);
+                if (c == 14) {
+                    che = 0;
+                }
 
 
 
-        //     } else { /// Adds more features 
-        //         items_ = await calldb(`SELECT * FROM features ORDER BY movie_count DESC` + ` LIMIT ${amount}, ${15};`);
-        //         features = items_[0];
-        //         c = 0
-        //         console.log(features, "features");
-        //         for (i = 0; i < features.length; i++) {
-        //             feature = await createfeature(features[i]);
-        //             cont.appendChild(feature);
-        //             console.log(feature in cont.children, i, "feature")
+            } else { /// Adds more features 
+                items_ = await calldb(`SELECT * FROM features ORDER BY movie_count DESC` + ` LIMIT ${amount}, ${15};`);
+                features = items_[0];
+                c = 0
+                console.log(features, "features");
+                for (i = 0; i < features.length; i++) {
+                    feature = await createfeature(features[i]);
+                    cont.appendChild(feature);
+                    console.log(feature in cont.children, i, "feature")
 
-        //             movie_items_co = movie_items_co + 1;
-        //             c = i;
-        //         }
-        //         amount = amount + 15;
-        //         console.log(c);
-        //         if (c == 14) {
-        //             che = 0;
-        //         }
-        //     }
+                    movie_items_co = movie_items_co + 1;
+                    c = i;
+                }
+                amount = amount + 15;
+                console.log(c);
+                if (c == 14) {
+                    che = 0;
+                }
+            }
 
 
 
@@ -2478,10 +2328,10 @@
         box = document.getElementById("box");
         box.style.height = '0px';
         op_cont.innerHTML = '';
-
+        
         clicklst.push("window");
+        console.log(clicklst);
         if (clicklst.length < 2) {
-            condi_popup.style.visibility = 'hidden';
             if (fil.style.height < "110px") {
                 arrow_.style.left = "432px";
                 inp.style.backgroundColor = "#111";
@@ -2489,13 +2339,13 @@
                 inp.style.left = "7px";
                 inp.style.borderBottom = "0.1px solid #292929";
             }
-
+            
             // line.style.visibility = 'hidden';
             // inp.style.borderBottomWidth = "0.1px";
         }
         clicklst = []
 
-
+        
     }
 
     async function get_thumbnail(movie_id) {
@@ -2602,7 +2452,7 @@
         } else {
             movie.setAttribute('class', 'movie_big')
         }
-        movie.id = z['my_index'];
+        movie.id = id;
         let thumbnail = document.createElement('div');
         thumbnail.setAttribute("class", "thumbnail_cont");
         minitype = document.createElement('div');
@@ -2646,16 +2496,15 @@
         // movie.appendChild(minitype);
         minifeatures = document.createElement('div');
         minifeatures.setAttribute("class", "minifeatures");
-        if (z['keywords']) {
-            for (let i = 0; i < 3; i++) {
-                minifeature = document.createElement("div");
-                minifeature.setAttribute("class", "minifeature");
-                console.log(z['keywords']);
-                minifeature.innerHTML = `<p class="minifeaturename">${JSON.parse(z['keywords'])[i]}</p>`
-                minifeatures.appendChild(minifeature);
-            }
-        
-        
+        for (let i = 0; i < 3; i++) {
+            minifeature = document.createElement("div");
+            minifeature.setAttribute("class", "minifeature");
+            console.log(z['keywords']);
+            minifeature.innerHTML = `<p class="minifeaturename">${JSON.parse(z['keywords'])[i]}</p>`
+            minifeatures.appendChild(minifeature);
+
+
+        }
 
         more_features = document.createElement("div");
         more_features.setAttribute("class", "minifeature");
@@ -2673,7 +2522,7 @@
         minifeatures.appendChild(more_features);
         movie.appendChild(vcoun);
         movie.appendChild(minifeatures);
-    }
+
 
         movie.onmousemove = function (e) {
             preview1 = document.getElementById("preview1");
@@ -2784,9 +2633,7 @@
     }
 
     let features_ = [];
-    async function calldb(query = '', autocomplet = false, request_id = '') {
-        console.log("change scrol top");
-        win.scrollTop = "0spx";
+    async function calldb(query = '', autocomplet = false, request_id='') {
         response = await fetch('/usey', {
             method: "POST",
             headers: {
@@ -2795,7 +2642,7 @@
             body: JSON.stringify({ autocomplet: autocomplet, b: query, request_id: request_id })
         });
         data = await response.json();
-
+        
         if (features_.length < 1) {
             features_ = data[0];
         }
@@ -2806,15 +2653,15 @@
                 cont.appendChild(resy);
             }
             if (data[1]) {
-                console.log(data);
+                console.log("USER USH");
                 signup_button = document.getElementById("signup_button");
                 signup_button.innerHTML = "Hello, user"
                 user_options_win = document.getElementById("user_options");
-                signup_button.onclick = function () {
+                signup_button.onclick = function() {
                     user_options_win.style.visibility = "visible";
                 }
 
-
+                
             }
             return data;
         } else {
@@ -2824,9 +2671,9 @@
     }
 
 
+   
 
-
-
+    
 
 
     async function authen(username, password_ = '', enter = false) {
@@ -2883,10 +2730,8 @@
         console.log(await authen(username_box.value, password_box.value, true));
     }
 
-    
-    let login_ = false;
+
     async function tologin() {
-        login_ = true;
         Signup_header = document.getElementById("Signup_header");
         tologin_ = document.getElementById("tologin");
         signup_excute = document.getElementById("signup_excute");
@@ -2906,11 +2751,11 @@
         res = await login(username_box.value, password_box.value, true);
         console.log(res);
         if (res[0] == 'success') {
-            window.location.replace("/");
+            window.location.replace("/profile");
         }
     }
 
-    async function logout() {
+     async function logout() {
         console.log("LOGOUT");
         response = await fetch('/logout', {
             method: "POST",
@@ -2931,8 +2776,60 @@
 
 
     test();
+    console.log(resy_);
 
-    calldb();
+
+    async function create_queryp() {
+        let condition = document.createElement('p');
+        condition.innerHTML = "condition 1";
+        condition.setAttribute("class", "condition");
+        condition.id = 0
+        if (condi_lst.length>0) {
+            condition.id = condi_lst.length-1
+        } 
+
+        condi_cont = document.getElementById('condi_cont');
+        add_condi = document.createElement('div');
+        add_condi.innerHTML = "+";
+        add_condi.id = "add_condition";
+        condi_cont.appendChild(add_condi);
+        condi_cont.appendChild(condition);
+        condi_lst[0] = resy_['conditions'][0];
+
+        
+        
+
+        condition.onclick = function(e) {
+            condi_popup = document.getElementById('condition_info');
+            // condi_popup.innerHTML = condi_lst[parseInt(condition.id)];
+            console.log(condi_lst[parseInt(condition.id)]);
+            
+            condi_tags = document.getElementById("condi_tags");
+            condi_tags.innerHTML = '';
+            innerconditag = document.createElement('p');
+            innerconditag.innerHTML = condi_lst[parseInt(condition.id)];
+            innerconditag.setAttribute("class", "innerconditag");
+            condi_tags.appendChild(innerconditag);
+
+            condi_popup.style.visibility = `visible`;
+            condi_popup.style.top = `${e.clientY}px`;
+            condi_popup.style.left = `${e.clientX}px`;
+            
+            
+        }
+
+
+
+        for (let i = 0; i<resy_['movies'].length; i++) {
+            console.log(i);
+            movie_item = await createmovie(resy_['movies'][i]);
+            console.log("await");
+            cont.append(movie_item);
+        }
+    }
+
+    create_queryp();
+    
 
 
 
