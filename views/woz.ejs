@@ -10,13 +10,52 @@
 
 <body>
 
+    <a href="/">
+                    <img id="logo" src="/Images/a4.png" alt="" href="/">
+                </a>
+
+
+    
+    <p id="signup_button" onclick="document.getElementById('signup_window').style.visibility='visible'">Sign up</p>
+    <div id="user_options">
+        <a class="user_option" id="profile_button" href="/profile">Profile</a>
+        <p class="user_option" id="logout_button" onclick="logout()">Logout</p>
+    </div>
+    <div id="signup_window">
+        <p id="Signup_header">Sign up</p>
+
+        <form id="login_form" action="">
+            <input class="login_input" id="username" type="text" oninput="checkforuser()">
+            <input class="login_input" id="password" type="text" oninput="checkforuser()">
+        </form>
+        <button id="signup_excute" type="submit" onclick="createaccount()">Create account</button>
+
+        <p id="tologin" onclick="tologin()">Log in</p>
+
+    </div>
+
+    
+
+
+     <form id="box">
+        <!-- <div id="arrow">^</div> -->
+        <input id="search" type="text" placeholder="search" oninput="search_()" onclick="searchfocus()"
+            autocomplete="off">
+        <div id="fil"></div>
+        <div id="line"></div>
+        <div id="op_cont"></div>
+    </form>
+
+
+            <!-- <img id="logo" src="/Images/a4.png" alt=""> -->
+
     <div id="info_window">
 
         <img id="x" src="/Images/Vector Union.svg" alt="" onclick="document.getElementById('info_window').style.visibility='hidden'">
 
         <img id="backdrop" src="" alt="">
 
-
+        
         <h1 id="movie_name_infob">Movie name</h1>
         <p id="movie_descript_infob">Movie name</p>
 
@@ -59,22 +98,212 @@
 
 
 
-</body>
+
+
+</body> 
+
+
 
 </html>
 
 <style type="text/css">
     @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,75,379;1,75,379&display=swap');
+    
+
+    
+
+    #signup_button {
+        position: relative;
+        padding: 7px;
+        color: white;
+        font-family: roboto;
+        font-size: 18px;
+        background-color: #090909;
+        width: fit-content;
+        margin: 0px;
+        border-radius: 2px;
+        left: 3.5px;
+        top: 8.5px;
+    }
+
+    #signup_button:hover {
+        background-color: #353535;
+    }
+
+    #signup_window {
+        position: absolute;
+        width: 574px;
+        height: 444.5px;
+        background-color: #090909;
+        visibility: hidden;
+        top: 203.5px;
+        z-index: 3;
+        left: 600.5px;
+        border-radius: 5.5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #Signup_header {
+        position: absolute;
+        font-size: 76.5px;
+        font-family: roboto;
+        color: white;
+        top: 33px;
+        /* left: 156px; */
+        margin: 0px;
+    }
+
+    #login_form {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: 288.5px;
+        height: fit-content;
+        top: -14.5px;
+    }
+
+    .login_input {
+        background-color: #090909;
+        outline: none;
+        border-radius: 5.5px;
+        width: 523.5px;
+        height: 30px;
+        color: white;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #232323;
+    }
+
+    #username {
+        position: relative;
+    }
+
+    #password {
+        position: relative;
+        margin-top: 10px;
+    }
+
+    #signup_excute {
+        padding: 9.5px;
+        color: rgb(255, 255, 255);
+        font-family: roboto;
+        font-size: 18px;
+        background-color: #101010;
+        width: fit-content;
+        margin: 0px;
+        border-radius: 5.5px;
+        position: absolute;
+        top: 279px;
+        outline: none;
+        border-width: -0.5px;
+        border-style: none;
+        /* border-width: 0.5px; */
+        /* border-color: #272727; */
+    }
+
+    #signup_excute:hover {
+        background-color: #1e1e1e;
+    }
+
+    #tologin {
+        position: absolute;
+        top: 331.5px;
+        left: 262.5px;
+        color: white;
+        font-family: roboto;
+    } 
+
+
+    
+    #user_options {
+        background-color: #0b0b0b;
+        color: white;
+        width: 129px;
+        height: 61px;
+        font-family: roboto;
+        position: relative;
+        top: 14px;
+        left: 3px;
+        border-radius: 5px;
+        visibility: hidden;
+    }
+
+    .user_option {
+        margin: 0px;
+        left: 11px;
+        position: relative;
+        margin-top: 8px;
+        top: 7px;
+        text-decoration: none;
+        color: white;
+    }
+
+
+    #line {
+        background-color: #3e3e3e;
+        width: 443px;
+        height: 0.7px;
+        position: absolute;
+        left: 12.5px;
+        top: 32px;
+        visibility: hidden;
+        z-index: 5;
+        transition: none;
+    }
+
+    #box {
+        position: absolute;
+        left: 38%;
+        width: 469px;
+        top: 41px;
+        box-sizing: border-box;
+        border-radius: 4.5px;
+        z-index: 2;
+    }
+
+   #search {
+        position: relative;
+        background-color: #171717;
+        /* border: none; */
+        border-radius: 5px;
+        width: 468px;
+        height: 48.5px;
+        outline: none;
+        box-sizing: border-box;
+        padding-left: 14px;
+        color: rgb(137, 137, 137);
+        caret-color: #4d4d4d;
+        z-index: 1;
+        top: -13px;
+        border-style: solid;
+        border-width: 0.1px;
+        /* height: 8px; */
+        border-color: #292929;
+        left: 1px;
+        transition: width 0.5s, left 0.5s;
+    }
+
+    
+    #logo {
+        width: 147px;
+        /* height: 30px; */
+        position: absolute;
+        top: -25px;
+        left: 90%;
+    }
 
     #cont {
         width: 60vw;
         /* display: flex; */
         /* align-items: center; */
         /* justify-content: center; */
-        top: -418px;
+        top: -389px;
         position: relative;
         font-family: roboto;
         left: -52px;
+        height: 30px;
     }
 
     #adult_rating {
@@ -179,10 +408,10 @@
         flex-wrap: wrap;
         z-index: 0;
         position: relative;
-        top: -107.5px;
-        width: 90vw;
+        top: -240.5px;
+        width: 130%;
         /* bottom: 184px; */
-        left: 10%;
+        left: 18%;
     }
 
     /* .features_cont_mov {
@@ -214,18 +443,9 @@
 
     }
 
-    .feature_name {
-        color: rgb(255, 255, 255);
-        font-family: roboto;
-    }
+   
 
-    .feature_name {
-        color: rgb(255, 255, 255);
-        font-family: roboto;
-        position: relative;
-        top: 137px;
-        left: 10px;
-    }
+    
 
     /* .feature_name {
         color: rgb(255, 255, 255);
@@ -845,13 +1065,13 @@
     }
 
     #related {
-        position: relative;
-        top: 429.5px;
-        left: 45.5px;
-        display: flex;
-        flex-wrap: wrap;
-        width: 1397.5px;
-    }
+	position: relative;
+	top: 74.5px;
+	left: 113.5px;
+	display: flex;
+	flex-wrap: wrap;
+	width: 151%;
+}
 
 
     .keyname {
@@ -1012,6 +1232,7 @@
         font-family: roboto;
         height: fit-content;
         margin: 0px;
+        left: 6%;
     }
 
     #pgeneres {
@@ -1068,6 +1289,158 @@
         left: 10px;
     }
 
+  #op_cont {
+        display: grid;
+        flex-wrap: wrap;
+        width: auto;
+        position: relative;
+        left: 14px;
+        top: -12.5px;
+        font-family: roboto;
+        color: white;
+        font-size: 15px;
+        margin-bottom: -19.5px;
+    }
+
+    .option {
+        color: white;
+        font-family: roboto;
+        text-decoration: none;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 13.5px;
+    }
+
+    
+    .option_n {
+        position: relative;
+        left: 11.5px;
+        margin: 0px;
+        top: 1px;
+    }
+
+
+    .s_thumbnail {
+        position: relative;
+        width: 57px;
+        top: -9px;
+        border-radius: 7.5px;
+    }
+
+    #autocomplet_box_c {
+        background-color: black;
+        position: relative;
+        top: -199px;
+        border-radius: 3px;
+    }
+
+    
+    .s_type_f {
+        position: relative;
+        left: 19.5px;
+        margin: 0px;
+        /* left: 35px; */
+        background-color: #2c2c2c;
+        padding: 7px;
+        border-radius: 6.5px;
+        font-size: 12px;
+        width: fit-content;
+        height: 17px;
+        top: -4px;
+        color: #7d8d9b;
+    }
+
+    .s_type_m {
+        position: relative;
+        left: 19.5px;
+        margin: 0px;
+        /* left: 35px; */
+        background-color: #2c2c2c;
+        padding: 7px;
+        border-radius: 6.5px;
+        font-size: 12px;
+        width: fit-content;
+        height: 17px;
+        top: -4px;
+        color: #805f5f;
+    }
+
+     .s_vots {
+        /* position: relative; */
+        text-decoration: none;
+        color: #111;
+        font-size: 11px;
+        font-family: roboto;
+        margin: 0px;
+        left: 10px;
+        top: 7.5%;
+        background-color: #469b6f;
+        height: fit-content;
+        padding: 3px;
+        border-radius: 3px;
+        width: fit-content;
+    }
+
+    .s_mcount {
+        font-family: roboto;
+        color: #111;
+        /* position: relative; */
+        bottom: 2px;
+        /* left: 214px; */
+        font-size: 11.5px;
+        background-color: white;
+        padding: 4px;
+        border-radius: 5px;
+        margin-left: 3.5px;
+        margin: 0px;
+        height: fit-content;
+    }
+
+    .vots_cont {
+        position: absolute;
+        direction: rtl;
+        left: 378.5px;
+        width: 58.5px;
+        display: flex;
+    }
+
+
+    .feature_name {
+        background-color: #151617;
+        width: fit-content;
+        height: fit-content;
+        /* margin-left: 8px; */
+        color: #575757;
+        border-radius: 4px;
+        padding: 11px;
+        margin: 3px;
+        top: 30px;
+        position: relative;
+        top: 131px;
+        text-decoration: none;
+    }
+
+   .suggest {
+        /* background-color: #151617; */
+        width: fit-content;
+        height: fit-content;
+        /* margin-left: 8px; */
+        color: #575757;
+        border-radius: 4px;
+        padding: 9px;
+        margin: 3px;
+        /* top: 30px; */
+        position: relative;
+        top: 131px;
+        border-width: 2px;
+        border-color: #313131;
+        border-style: solid;
+        left: 3px;
+    } 
+
+
+    
+
 
 </style>
 <script>
@@ -1082,6 +1455,9 @@
 
         return ar['Rated'];
     }
+
+
+    
 
 
 
@@ -1390,7 +1766,8 @@
         a.href = `/f/${x['name']}`;
         a.setAttribute("class", "feature");
         a.setAttribute("id", `feature ${x}`);
-        let name = document.createElement('p');
+        let name = document.createElement('a');
+        name.href = `/f/${x['name']}`;
         let thumbnail = document.createElement('div');
         let count = document.createElement('p');
         thumbnail.setAttribute("class", "thumbnail_cont");
@@ -1405,10 +1782,10 @@
         name.setAttribute("class", "feature_name");
         count.setAttribute("class", "count")
         feature_name = x['name']
-        name.innerHTML = feature_name;
+        name.innerHTML = `${feature_name} >`;
         count.innerHTML = x['movie_count'];
-        a.appendChild(name);
-        a.appendChild(thumbnail);
+        // a.appendChild(name);
+        // a.appendChild(thumbnail);
 
 
         response = await fetch('/useyx', {
@@ -1438,7 +1815,7 @@
 
 
 
-        return a;
+        return name;
 
     }
 
@@ -1450,7 +1827,7 @@
 
 
 
-    console.log(resy);
+    console.log(lists);
 
 
     async function calldb(query = '', autocomplet = false) {
@@ -1481,6 +1858,7 @@
    
 
     async function show_related(movieob) {
+        console.log("related");
         movie_votes = movieob['imdb_votes']
         movie_genre = JSON.parse(movieob['Genre'])
         related_query = `SELECT * FROM movies WHERE imdb_votes BETWEEN ${movie_votes - (0.12 * movie_votes)} AND ${movie_votes + (0.12 * movie_votes)} AND Genre LIKE '%"${movie_genre[0]}"%' ORDER BY imdb_votes DESC;`;
@@ -1624,7 +2002,13 @@
         cont.setAttribute("class", "features_cont_mov");
         // up_cont.appendChild(movie_page_header);
         up_cont.appendChild(movie_descrip);
-        genere_lst = JSON.parse(movieob['Genre']);
+        console.log(movieob['Genre'])
+        if (movieob['Genre'].includes("[")) {
+            genere_lst = JSON.parse(movieob['Genre']);
+        }
+        else {
+            genere_lst = movieob['Genre'].split(",")
+        }
         genre_container = document.createElement('div');
         genre_container.setAttribute("class", "genre_container");
         for (i = 0; i < genere_lst.length; i++) {
@@ -1635,7 +2019,16 @@
             genre_container.appendChild(genre);
         }
         up_cont.appendChild(genre_container);
+        
+        
+        if (movieob['keywords'].includes("[")) {
+            
+        }
+        else {
 
+            movieob['keywords'] = JSON.stringify(movieob['keywords'].split(","))
+            movieob['keywords'] = movieob['keywords'].replaceAll(" ", "")
+        }
 
         l = ''
         for (let i = 0; i < JSON.parse(movieob['keywords']).length; i++) {
@@ -1650,6 +2043,11 @@
             f = await createfeature(rowlstt[0][i]);
             cont.appendChild(f);
         }
+
+        suggest_ = document.createElement("p");
+        suggest_.innerHTML = "Suggest +";
+        suggest_.setAttribute("class", "suggest");
+        cont.appendChild(suggest_);
         up_cont.appendChild(cont);
 
 
@@ -1660,7 +2058,7 @@
 
         if (lists.length > 0) {
             userlists_container = document.getElementById("userlists_container");
-            for (i = 0; i < 2; i++) {
+            for (i = 0; i < lists.length; i++) {
                 user_list = await create_listitem(lists[i]);
                 console.log(user_list);
                 userlists_container.appendChild(user_list);
@@ -1711,6 +2109,262 @@
 
         return ar;
     }
+
+    suggestion_lst = [];
+
+
+    async function search_() {
+        suggestion_lst = []
+        op_cont = document.getElementById("op_cont");
+        op_cont.innerHTML = '';
+
+
+         async function get_thumbnail(movie_id) {
+            console.log("movie_id", movie_id)
+            response = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb`, options);
+            ar = await response.json();
+            return `https://image.tmdb.org/t/p/w500/${ar['backdrop_path']}`;
+        }
+        
+        box = document.getElementById("search");
+        box_ = document.getElementById("box");
+
+            box.style.borderBottom = "none";
+
+        console.log(box.value)
+        if (box.value.length > 0) { 
+            quer2 = `SELECT * FROM movies WHERE name LIKE "%${box.value}%" ORDER BY vote_count DESC limit 5`;
+            quer1 = `SELECT * FROM features WHERE name LIKE "%${box.value}%" limit 5`;
+
+            queries = [quer1, quer2, box.value];
+            response = await fetch('/general_search', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ queries: queries })
+            });
+            results__ = await response.json();
+            console.log(results__)
+
+
+
+
+            async function create_autocompleteoption(type, content) {
+                    console.log("hi")
+                    console.log(content, type, "themovies");
+
+                    option_item = document.createElement("a");
+                    option_item.setAttribute("class", "option");
+                    s_type = document.createElement("p");
+                    vots = document.createElement('p');
+                    if (type=='feature') {
+                        movie_id = JSON.parse(content['movies'])[1]
+                        console.log("themovie", movie_id)
+                        thumb = await get_thumbnail(movie_id);
+                        option_item.href = `/f/${content['name']}`;
+                        s_type.innerHTML = "Feature";
+                        s_type.setAttribute("class", "s_type_f");
+                        vots.innerHTML = content['movie_count'];
+                        vots.setAttribute("class", "s_mcount");
+                    }  
+                    if (type=="movie") { // Create movie option
+                                thumb = await get_thumbnail(content['id']);
+                                option_item.href = `/m/${content['my_index']}`;
+                                s_type.innerHTML = "Movie";
+                                s_type.setAttribute("class", "s_type_m");
+                                vots.innerHTML = content['imdb_votes'];
+                                vots.setAttribute("class", "s_vots");
+                            }
+
+                    n = document.createElement('p');
+                    n.setAttribute("class", "option_n");
+                    n.innerHTML = content['name'];
+                    t = document.createElement('div');
+                    t.innerHTML = `<img class="s_thumbnail", src=${thumb}>`
+
+                    vots_cont = document.createElement("div");
+                    vots_cont.setAttribute("class", "vots_cont");
+
+                    option_item.appendChild(t);
+                    option_item.appendChild(n);
+                    option_item.appendChild(s_type);
+                    vots_cont.appendChild(vots)
+                    option_item.appendChild(vots_cont)
+
+                    return option_item;
+                }
+
+            // Add movie options
+                for (let x = 0; x < results__["movies"].length; x++) { 
+                    option = await create_autocompleteoption("movie", results__["movies"][x])
+                    if (suggestion_lst.includes(option.href) == false) {
+                                op_cont.appendChild(option);
+                                suggestion_lst.push(option.href);
+                            }
+                } 
+
+            // Add feature options
+            for (let x = 0; x < results__["features"].length; x++) { 
+                option = await create_autocompleteoption("feature", results__["features"][x]);
+                console.log("add feature")
+                if (suggestion_lst.includes(option.href) == false) {
+                            op_cont.appendChild(option);
+                            suggestion_lst.push(option.href);
+                            console.log("added")
+                        }
+            } 
+
+            line.style.visibility = 'visible';
+            box_.style.height = 'fit-content';
+            // box.style.paddingBottom = '2px';
+            box_.style.backgroundColor = "#171717";
+        } else {
+            box_.style.height = '0px';
+            op_cont.innerHTML = '';
+            line.style.visibility = 'hidden';
+
+        }
+    }
+
+    async function addtohistory() {
+        console.log("add to history")
+        const timestamp = Date.now(); // or new Date().getTime()
+        console.log(timestamp); 
+        response = await fetch('/userdata', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ moviename:resy['my_index'], list_: "", history:true, time:timestamp})
+            }); 
+
+            dtz = await response.json();
+            return dtz;
+    }
+
+
+    async function authen(username, password_ = '', enter = false) {
+        response = await fetch('/signup', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ usernamex: username, password: password_, enter: enter })
+
+        });
+
+        rex = await response.json();
+        return rex;
+
+
+    }
+
+    async function login(username, password_) {
+        response = await fetch('/login', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ usernamex: username, password: password_ })
+
+        });
+
+        console.log("rexlog");
+
+        rex = await response.json();
+        return rex;
+
+    }
+
+
+    async function test() {
+        // console.log(await authen("user12XXchas", "123"));
+        // await login("user12Xchas", "123azaz"); 
+    }
+
+
+
+    async function checkforuser() {
+        username_box = document.getElementById("username");
+        password_box = document.getElementById("password");
+        console.log(await authen(username_box.value, password_box.value));
+    }
+
+    async function createaccount() {
+        console.log("acco");
+        username_box = document.getElementById("username");
+        password_box = document.getElementById("password");
+        console.log(await authen(username_box.value, password_box.value, true));
+    }
+
+
+    async function tologin() {
+        Signup_header = document.getElementById("Signup_header");
+        tologin_ = document.getElementById("tologin");
+        signup_excute = document.getElementById("signup_excute");
+
+
+        Signup_header.innerHTML = 'Login';
+        tologin_.innerHTML = 'Sign up';
+        signup_excute.innerHTML = 'Login';
+        signup_excute.onclick = function () { loginexec() };
+
+    }
+
+    async function loginexec() {
+        username_box = document.getElementById("username");
+        password_box = document.getElementById("password");
+
+        res = await login(username_box.value, password_box.value, true);
+        console.log(res);
+        if (res[0] == 'success') {
+            window.location.replace(window.location);
+        }
+    }
+
+     async function logout() {
+        console.log("LOGOUT");
+        response = await fetch('/logout', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ A: "Hi" })
+        });
+
+        rendered = await response.json();
+
+        console.log(rendered);
+
+        window.location.replace(window.location);
+    }
+
+
+    async function check_for_user() {
+        response = await fetch('/user_check', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ user_check: "?" })
+        });
+        data = await response.json();
+
+        console.log(data, "dada");
+        if (data[0] == "user") {
+                console.log(data);
+                signup_button = document.getElementById("signup_button");
+                signup_button.innerHTML = "Hello, user"
+                user_options_win = document.getElementById("user_options");
+                signup_button.onclick = function () {
+                    user_options_win.style.visibility = "visible";
+                }}
+    }
+
+    check_for_user();
+    
+    addtohistory()
 
 
     createmoviepage(resy);
