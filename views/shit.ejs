@@ -346,13 +346,13 @@
         /* height: 35px; */
     }
 
-    #features_cont {
+   #features_cont {
         display: grid;
         flex-wrap: wrap;
         z-index: 0;
         position: relative;
-        top: -68.5px;
-        width: 77.5vw;
+        top: -16.5px;
+        width: 86.5vw;
         /* bottom: 184px; */
         left: 177.5px;
     }
@@ -1127,6 +1127,7 @@
         color: #575757;
         border-radius: 4px;
         padding: 11px;
+        text-decoration: none;
     }
 
    #asso_tags {
@@ -1135,6 +1136,7 @@
         left: 165px;
         position: relative;
         top: 4px;
+        z-index: 1;
     }
 
 
@@ -1555,10 +1557,12 @@
     console.log(ress);
     
     function create_aso_shortcut(assoca_name) {
-        sq = document.createElement("p");
+        sq = document.createElement("a");
         sq.setAttribute("class", "asso_tag");
         sq.innerHTML = `${assoca_name} >`
 
+
+        sq.href = `/f/${ress["f_name"]}/${assoca_name}`
         return sq
     } 
 
@@ -1566,7 +1570,9 @@
     asso_tags.id = "asso_tags"
 
     for (i=1; i<Object.keys(ress).length; i++) {
-        asso_tags.append(create_aso_shortcut(Object.keys(ress)[i]))
+        console.log
+        assn = Object.keys(ress)[i]
+        asso_tags.append(create_aso_shortcut(assn))
     }
 
     up_cont.appendChild(asso_tags);
