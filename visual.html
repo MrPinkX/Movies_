@@ -74,6 +74,8 @@
     </div>
 
 
+
+
 </body>
 
 </html>
@@ -1495,7 +1497,29 @@
         position: absolute;
         top: 72px;
         left: 372px;
+    } 
+
+    .circleset {
+        background-color: rgb(40, 40, 40);
+        width: 200px;
+        height: 200px;
+        border-radius: 100%;
     }
+
+    .f_asso {
+        background-color: rgb(18, 18, 18);
+        width: 10px;
+        height: 10px;
+        border-radius: 100%;
+        padding: 20px;
+    }
+
+    .setcontainer {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    
 </style>
 
 <script>
@@ -2725,6 +2749,82 @@
         return movie;
 
 
+    }
+
+    function map() {
+        max = data[0][0]["movie_count"];
+        cont.innerHTML = "";
+
+        for (i=0; i<data[0].length; i++) {
+            console.log(data[0][i]["name"]);
+            circleset = document.createElement("div"); 
+            circleset.setAttribute("class", "circleset");
+
+            circleset.innerHTML = data[0][i]["name"];
+            
+            
+            
+
+            p = data[0][i]["movie_count"] * 100 / max
+            circleset.style.scale = p * 2 / 100;
+
+
+
+            circleset.onclick = async function(e) {
+                    
+                circleset = e.originalTarget;
+
+                circleset.style.zindex = 3;
+
+                fname = e.originalTarget.innerHTML;
+                e.originalTarget.style.scale = 5;
+
+                response = await fetch('/send_feature_associates', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ feature_name: fname})
+                });
+
+                results__ = await response.json();
+                f_assos = results__;
+
+                setcontainer = document.createElement("div");
+                setcontainer.setAttribute("class", "setcontainer");
+                circleset.appendChild(setcontainer);
+
+
+                
+                for (i=0; i<f_assos.length; i++) {
+
+                    
+                    f_asso = document.createElement("p");
+                    f_asso.setAttribute("class", "f_asso");
+                    f_asso.innerHTML = f_assos[i]["name"];
+
+                    max_ = f_assos[0]["moviecount"]
+                    p_ = f_assos[i]["moviecount"] * 100 / max_
+                    // f_asso.style.scale = p_ * 1 / 100;
+
+                    setcontainer.appendChild(f_asso);
+                    
+                }
+            }
+
+            cont.appendChild(circleset)
+
+
+
+            
+        }
+        // for (i=0; i<data[0].length; i++) {
+        //     f = document.getElementById(`feature ${data[0][i]["name"]}`);
+            
+        //     p = data[0][i]["movie_count"] * 100 / max
+        //     f.style.scale = p * 2 / 100;
+            
+        // }
     }
 
 
