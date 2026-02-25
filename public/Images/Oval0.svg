@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="314" height="314" viewBox="0 0 314 314" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(13.5 13.5)">
+    <rect width="34" height="96" fill="#FFFFFF" fill-rule="evenodd" transform="translate(125 113.8)" />
+    <rect width="34" height="29" fill="#FFFFFF" fill-rule="evenodd" transform="translate(125 73)" />
+    <path d="M0 143.5C0 64.2471 64.2471 0 143.5 0C222.753 0 287 64.2471 287 143.5C287 222.753 222.753 287 143.5 287C64.2471 287 0 222.753 0 143.5Z" fill="none" stroke-width="27" stroke="#FFFFFF" />
+  </g>
+</svg>
