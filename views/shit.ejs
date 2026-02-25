@@ -107,7 +107,7 @@
         visibility: hidden;
         top: 203.5px;
         z-index: 3;
-        left: 600.5px;
+        left: 50%;
         border-radius: 5.5px;
         display: flex;
         justify-content: center;
@@ -281,6 +281,8 @@
         box-sizing: border-box;
         border-radius: 4.5px;
         z-index: 2;
+        backdrop-filter: blur(31.9px);
+
     }
 
     
@@ -289,7 +291,7 @@
         /* height: 30px; */
         position: absolute;
         top: -25px;
-        left: 90%;
+        left: 85%;
     }
 
 
@@ -354,7 +356,7 @@
         top: -16.5px;
         width: 86.5vw;
         /* bottom: 184px; */
-        left: 177.5px;
+        left: 15%;
     }
 
 
@@ -568,7 +570,7 @@
         position: fixed;
         z-index: 3;
         top: 68px;
-        left: 568px;
+        left: 50%;
         border-radius: 12px;
         color: white;
         font-family: roboto;
@@ -1032,7 +1034,7 @@
     .more {
         position: relative;
         top: -11.5px;
-        left: 84%;
+        left: 89%;
         color: white;
         text-decoration: none;
     }
@@ -1169,6 +1171,7 @@
 
 
     async function createmovie(z, id, size) {
+        console.log("create movie", id)
         x = z['name']
         movie = document.createElement("a");
         // movie.href = `/m/${z['index']}`;
@@ -1239,11 +1242,12 @@
             window.clearTimeout(timeoutId);
         }
 
+        console.log("set mouse functions");
+
 
         infob = document.createElement('div');
         infob.setAttribute("class", "infob");
         infob.id = `infob ${id}`;
-        console.log(infob.id, 'infob.id');
         infob.innerHTML = `<img class="info_icon" src="/Images/Oval0.svg" />`
 
         let thumbnail = document.createElement('a');
@@ -1263,6 +1267,8 @@
                 
             )
             .catch(err => console.error(err, x));
+        
+        console.log("got thumbnail");
 
 
             
@@ -1336,6 +1342,8 @@
         }
 
 
+        console.log("composing item 1")
+
         
         
         minitype = document.createElement('div');
@@ -1351,8 +1359,8 @@
 
         nameandratcont = document.createElement("div");
         nameandratcont.setAttribute("class", "nameandratcont");
-        respone = await getconrate(z['imdb_id']);
-        // contentr = document.createElement('div');
+        // respone = await getconrate(z['imdb_id']);
+        contentr = document.createElement('div');
         contentr.setAttribute("class", "contentr");
         contentrt = document.createElement('p');
         contentrt.setAttribute("class", "contentrt")
@@ -1367,6 +1375,7 @@
             console.log(z.keywords);
         }
 
+        console.log("composing item 1 end")
 
 
 
@@ -1381,10 +1390,8 @@
             minifeature.setAttribute("class", "minifeature");
             minifeature.innerHTML = `<p class="minifeaturename">${JSON.parse(z['keywords'])[i]}</p>`
             minifeatures.appendChild(minifeature);
-
-
-
         }
+        console.log("added mini features")
 
         more_features = document.createElement("div");
         more_features.setAttribute("class", "minifeature");
@@ -1408,7 +1415,11 @@
 
         nam = z['name']
 
+        console.log("composing item 2")
 
+
+
+        console.log(`set preview start ${id}`);
 
         // // Show info preview box when hovering on movie item 
         movie.onmousemove = function (e) {
@@ -1453,7 +1464,7 @@
             }
 
 
-            preview1.style.top = `${e.clientY + page.scrollTop}px`;
+            preview1.style.top = `${e.clientY + page.scrollTop-120}px`;
             preview1.style.left = `${e.clientX}px`;
 
             var root = document.querySelector(':root');
@@ -1467,9 +1478,13 @@
             infob.style.visibility = "hidden";
         }
 
+        console.log("set preview");
 
 
+        console.log("createmovie end", id);
         return movie;
+
+    
 
 
     }
@@ -1607,6 +1622,7 @@
                 count = count + 1;
                 mov = await createmovie(assoca_movlst[xx], count);
                 assoca_cont.appendChild(mov);
+                console.log("movie added");
             }
             if (assoca_cont.children.length > 0) {
                 upsoca_cont.appendChild(assoca_cont);
