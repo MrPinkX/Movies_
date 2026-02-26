@@ -93,8 +93,39 @@ console.log("anything");
     return rows;
   }
 
-  get_rows(`SELECT * FROM features WHERE name LIKE "jealousy" limit 10;`);
+  app.post('/send_feature_associates', jsonParser, async (request, response) => {
+    feature_n = request.body["feature_name"]; 
+    console.log(feature_n);
 
+    query = `SELECT * FROM features WHERE name LIKE "${feature_n}"`;
+
+    f_row = await get_rows(query);
+    f_associates = JSON.parse(f_row[0]['associates']);
+
+    associate_list = []
+
+    for (i=1; i<6; i++) {
+      query = `SELECT COUNT(*) FROM movies WHERE keywords LIKE '%"${f_associates[i]['name']}"%' AND keywords LIKE '%"${feature_n}"%'`;
+      console.log(query);
+      associate_moviecount = await db2.all(query);
+      associate = {"name": f_associates[i]["name"], "moviecount": associate_moviecount[0]["COUNT(*)"]};
+
+      associate_list.push(associate);
+    }
+
+    response.send(associate_list);
+
+
+
+
+  })
+
+
+
+  app.get([`/map`], async (request, response) => {
+    response.render("map", {dat:"some"})
+
+  })
 
   app.get([`/f/:name`, `/f/:name/:name1`], async (request, response) => {
 
@@ -116,6 +147,8 @@ console.log("anything");
 
     f_associates = JSON.parse(f_row[0]['associates']);
 
+
+    /// load feature associate page 
     if (f_associates) {
       if (request.params.name1) {
         name2 = request.params.name1;
@@ -124,15 +157,13 @@ console.log("anything");
         quer = `SELECT * FROM movies WHERE keywords LIKE '%"${name}"%' AND keywords LIKE '%"${name2}"%' ORDER BY imdb_votes DESC limit 20;`;
         console.log(quer);
         db.all(quer, function (err, rows) {
-          console.log("aaaSEC")
           response.render("second shit", { path: `${name} > ${name2}`, fuck: rows, associate_moviecount: associate_moviecount});
         })
       }
-      else {
+      else { /// load feature page 
         assocas = { "f_name": name }
         associates_moviecount = []
         for (i = 1; i < 5; i++) {
-          console.log(f_associates[i], "f_associatesi")
           associate_moviecount = await db2.all(`SELECT COUNT(*) FROM movies WHERE keywords LIKE '%"${f_associates[i]['name']}"%' AND keywords LIKE '%"${name}"%'`);
           assoca_movies = await get_rows(`SELECT * FROM movies WHERE keywords LIKE '%"${f_associates[i]['name']}"%' AND keywords LIKE '%"${name}"%' ORDER BY imdb_votes DESC limit 10;`);
           assocas[f_associates[i]['name']] = {"movies": assoca_movies, "movie_count": associate_moviecount[0]};
@@ -635,16 +666,20 @@ app.post(`/general_search_`, jsonParser, async (req, res) => {
       movies_query += ` AND Genre LIKE '%"${filtering_data["genres"][i]}"%'`
     }
   } 
-  nobkeys = Object.keys(filtering_data).slice(-3);
-  console.log(nobkeys);
-  for (i = 0; i < nobkeys.length; i++) {
+
+  if (Object.keys(filtering_data).length > 3) {
+    nobkeys = Object.keys(filtering_data).slice(-3);
+    for (i = 0; i < nobkeys.length; i++) {
     snipet = ` AND ${nobkeys[i]} BETWEEN ${filtering_data[nobkeys[i]]["min"]} AND ${filtering_data[nobkeys[i]]["max"]}`;
     movies_query += snipet;
     if (i == nobkeys.length - 1) {
         movies_query += ` ORDER BY imdb_votes DESC LIMIT 5`;
     }
   }
-
+  } else {
+    movies_query += ` ORDER BY imdb_votes DESC LIMIT 5`;
+  }
+  
   features_query = `SELECT * FROM features WHERE name LIKE "%${filtering_data["query"]}%" LIMIT 5;`;
   lists_query = `SELECT * FROM users_lists WHERE list_name LIKE '%${filtering_data["query"]}%'; `
 
@@ -657,6 +692,8 @@ app.post(`/general_search_`, jsonParser, async (req, res) => {
   features = await db2.all(features_query);
   movies = await db2.all(movies_query); 
   lists = await db2.all(lists_query);
+
+  console.log(movies_query);
   genres_ = []
   for (i=0; i<genres.length; i++) {
     if (genres[i].toLowerCase().includes(filtering_data["query"])) {
@@ -664,7 +701,6 @@ app.post(`/general_search_`, jsonParser, async (req, res) => {
     } 
   }
 
-  console.log(movies_query);
 
   res.send({movies: movies, features: features, lists: lists, genres_});
   
