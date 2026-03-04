@@ -1577,10 +1577,10 @@
     } 
 
     .insearch_filter {
-        background-color: #2a2a2a;
+        background-color: #a2a2a2;
         width: fit-content;
         height: fit-content;
-        color: #a2a2a2;
+        color: #2a2a2a2a;
         border-radius: 5px;
         position: relative;
         top: -21px;
@@ -2274,8 +2274,10 @@
     let condi_lst = [];
     let selected_condi;
 
-
+    insearch_filter__ = false;
+    filter_filter__ = false;
     function add_insearch_filter(auoption) {
+        insearch_filter__ = true;
         type = "";
         if (auoption.href.includes("/f/")) {
             type = "feature";
@@ -2286,12 +2288,17 @@
         else if (auoption.href.includes("/m/")==false) {
             type = "filter";
 
+            filter_filter__ = true;
+
+
+
             num_values = Object.keys(nobvalues);
 
             filter_ = auoption.children[1].innerHTML;
             console.log(filter_, nobvalues, "aadAA");
 
             if (num_values.includes(filter_)) {
+                filter_filter__ = false;
                 nob_popup = document.getElementById("nob_popup"); 
                 nob_popup.style.visibility = 'visible';
                 nob_popup.children[0].innerHTML = filter_;
@@ -2322,13 +2329,11 @@
 
 
                 })
+            } else {
+                nob_popup.style.visibility = 'hidden';
             }
             
         }
-
-
-
-
 
 
 
@@ -2405,7 +2410,8 @@
             current_selected = op_cont.children[mark];
 
 
-            add_insearch_filter(current_selected)
+            add_insearch_filter(current_selected); 
+            console.log(insearch_filter__);
 
 
             
@@ -2440,48 +2446,6 @@
 
 
 
-        /// Show actual search results after pressing enter
-        if ((event.key === "Enter")) {
-            
-            enter = true;
-            event.preventDefault();
-            cont.innerHTML = '';
-            condi_lst = [];
-
-            nob_popup = document.getElementById("nob_popup");
-            nob_popup.style.visibility = "hidden";
-
-
-
-            nobkeys = Object.keys(nobvalues);
-            for (i = 0; i < nobkeys.length; i++) {
-                min_max = {}
-                min_max["min"] = nobvalues[nobkeys[i]]["min value"]
-                min_max["max"] = nobvalues[nobkeys[i]]["max value"]
-                search_data[nobkeys[i]] = min_max
-            }
-
-            response = await fetch('/general_search_', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ search_data_: search_data })
-            });
-            results__ = await response.json();
-
-            parse_searchresults(results__);
-        }
-
-        if (event.key === "Backspace") {
-            if (inp.value == '') {
-                search_data["features"] = search_data["features"].slice(0, search_data["features"].length - 1);
-                insearchtagscont.removeChild(insearchtagscont.children[insearchtagscont.children.length - 1])
-                search.style.paddingLeft = `${(parseInt(window.getComputedStyle(insearchtagscont).width.slice(0, window.getComputedStyle(insearchtagscont).width.length - 2))) + 35}px`
-            }
-
-        }
-
 
         search_data["query"] = inp.value;
         search_data["features"] =[]
@@ -2500,6 +2464,67 @@
                 search_data["filter"].push(tag[1]);
             }
         }
+
+        /// Show actual search results after pressing enter
+        if ((event.key === "Enter")) {
+            event.preventDefault();
+            if ((insearch_filter__==false)) {
+                enter = true;
+                cont.innerHTML = '';
+                condi_lst = [];
+
+                nob_popup = document.getElementById("nob_popup");
+                nob_popup.style.visibility = "hidden";
+
+
+
+                nobkeys = Object.keys(nobvalues);
+                for (i = 0; i < nobkeys.length; i++) {
+                    min_max = {}
+                    min_max["min"] = nobvalues[nobkeys[i]]["min value"]
+                    min_max["max"] = nobvalues[nobkeys[i]]["max value"]
+                    search_data[nobkeys[i]] = min_max
+                }
+
+                response = await fetch('/general_search_', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ search_data_: search_data })
+                });
+                results__ = await response.json();
+
+                parse_searchresults(results__);
+            } else {
+                console.log("thp")
+
+                if (filter_filter__==false) {
+                    open_fornew = true;
+                } else {
+                    filter_filter__ = false;
+                }
+                insearch_filter__ = false;
+
+                insearchtagscont.children[insearchtagscont.children.length-1].style.backgroundColor = "#2a2a2a";
+                 insearchtagscont.children[insearchtagscont.children.length-1].style.color = "#a2a2a2";
+                search_();
+            }
+            }
+                
+
+
+        if (event.key === "Backspace") {
+            if (inp.value == '') {
+                search_data["features"] = search_data["features"].slice(0, search_data["features"].length - 1);
+                insearchtagscont.removeChild(insearchtagscont.children[insearchtagscont.children.length - 1])
+                search.style.paddingLeft = `${(parseInt(window.getComputedStyle(insearchtagscont).width.slice(0, window.getComputedStyle(insearchtagscont).width.length - 2))) + 35}px`
+            }
+
+        }
+
+
+        
 
         console.log(search_data)
 
