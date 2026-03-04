@@ -35,8 +35,18 @@
          <!-- <h1 id="header">The Moviebase</h1> -->
         <img id="logo" src="/Images/a4.png" alt="">
 
+        <div id="nob_popup">
+            <p id="nob_popup_title"></p>
+
+            <input type="text" id="min" placeholder="min">
+            <input type="text" id="max" placeholder="max">
+
+        </div>
+
     <!-- <div id="box-container"> -->
     <form id="box">
+
+        <div id="insearchfilters"></div>
         <div id="arrow">^</div>
         <input id="search" type="text" placeholder="search" oninput="search_handler()" onclick="searchfocus()"
             autocomplete="off">
@@ -375,7 +385,7 @@
         /* border-radius: 29.5px; */
     }
 
-    #filter_tag {
+    .filter_tag {
         color: white;
         font-family: roboto;
         background-color: #232323;
@@ -507,11 +517,12 @@
         flex-wrap: wrap;
         z-index: 0;
         position: relative;
-        top: 27.5px;
+        top: -104.5px;
         width: 90vw;
         /* bottom: 184px; */
         left: 97px;
     }
+
 
     .feature {
         position: relative;
@@ -1517,6 +1528,65 @@
     .setcontainer {
         display: flex;
         flex-wrap: wrap;
+    } 
+
+
+    #nob_popup {
+        position: relative;
+        background-color: #101010;
+        width: 177px;
+        height: 100px;
+        z-index: 6;
+        visibility: hidden;
+        border-radius: 8px;
+    }
+
+
+    #nob_popup_title {
+        color: white;
+        font-family: roboto;
+        position: relative;
+        top: 8px;
+        left: 30px;
+    }
+
+    #min {
+        background-color: #191919;
+        border: none;
+        border-radius: 3px;
+        color: white;
+        width: 53px;
+        height: 30px;
+        outline: none;
+        position: relative;
+        left: 30px;
+        top: 3px;
+    }
+
+    #max {
+        background-color: #191919;
+        border: none;
+        border-radius: 3px;
+        color: white;
+        width: 53px;
+        height: 30px;
+        outline: none;
+        position: relative;
+        left: 30px;
+        top: 3px;
+    } 
+
+    .insearch_filter {
+        background-color: #2a2a2a;
+        width: fit-content;
+        height: fit-content;
+        color: #a2a2a2;
+        border-radius: 5px;
+        position: relative;
+        top: -21px;
+        text-align: center;
+        padding: 9px;
+        font-family: roboto;
     }
 
     
@@ -1808,6 +1878,16 @@
     tags_tofilter = []
     search_data = {}
 
+
+    function search_data_init() {
+        search_data['query'] = "";
+        search_data["genres"] = []
+        search_data["features"] = []
+        search_data['filter'] = []
+    }
+
+    search_data_init()
+    
     arrow_.onclick = async function () {
         searchfocus()
         clicklst = []
@@ -1848,12 +1928,13 @@
 
             // const features__ = await calldb();
             // const features_ = features__[0];
-            console.log(features_, "fatur");
             for (i = 0; i < 15; i++) {
                 keyword = document.createElement('p');
                 keyword.innerHTML = features_[i]['name'];
                 keyword.setAttribute("class", "tagfil");
                 keyword.id = `tag ${features_[i]['name']}`;
+
+                
 
                 keyword.onclick = function (ty) {
                     keyword_ = document.getElementById(`tag ${ty['originalTarget']['innerHTML']}`)
@@ -1862,11 +1943,19 @@
                         tags_tofilter.splice(tags_tofilter.indexOf(tag_tofilter), 1)
                         keyword_.style.backgroundColor = "#1e1e1e";
                         keyword_.style.color = "white";
+                        insearchtagscont = document.getElementById("insearchfilters"); 
+                        for (i=0; i<insearchtagscont.children.length; i++) {
+                            if (insearchtagscont.children[i].innerHTML==ty['originalTarget']['innerHTML']) {
+                                insearchtagscont.removeChild(insearchtagscont.children[i]);
+                            }
+                        }
                     } else {
                         keyword_.style.backgroundColor = "white";
                         keyword_.style.color = "#1e1e1e";
                         tags_tofilter.push(tag_tofilter);
                         console.log(tags_tofilter.indexOf(tag_tofilter));
+                        add_filter_tosearchbox(ty['originalTarget']['innerHTML']);
+                        
 
                     }
 
@@ -1904,7 +1993,17 @@
     inp = document.getElementById("search");
 
 
+    function add_filter_tosearchbox(filter_name) {
+        insearchtagscont = document.getElementById("insearchfilters");
 
+        // if ((insearchtagscont.children.length < 1) || (open_fornew)) {
+                    filter_tag = document.createElement('p');
+                    filter_tag.id = `filter_tag ${filter_name}`;
+                    filter_tag.setAttribute("class", "filter_tag")
+                    filter_tag.innerHTML = filter_name; 
+                    insearchtagscont.appendChild(filter_tag);
+        // }
+    }
 
 
     async function search_handler() {
@@ -1936,21 +2035,15 @@
         fil.style.visibility = "hidden";
 
 
+        insearchfilters = Object.keys(search_data);
+        console.log(insearchfilters);
+
+
         if (inp.value.length > 0) {
 
             search_data['query'] = inp.value;
-            search_data["genres"] = []
-            search_data["features"] = []
-            if (tags_tofilter.length > 0) {
-                for (i = 0; i < tags_tofilter.length; i++) {
-                    if (tags_tofilter[i]["tag_type"] == 'g') {
-                        search_data["genres"].push(tags_tofilter[i]["content"])
-                    } else {
-                        search_data["features"].push(tags_tofilter[i]["content"])
-                    }
-                }
-            }
-        
+            console.log(search_data);
+           
 
             nobkeys = Object.keys(nobvalues);
             for (i = 0; i < nobkeys.length; i++) {
@@ -1982,8 +2075,8 @@
                 option_item.setAttribute("class", "option");
                 s_type = document.createElement("p");
                 vots = document.createElement('p');
+                thumb = '';
                 if (type=='feature') {
-                    console.log(JSON.parse(content['movies'])[1], "themovies");
                     thumb = await get_thumbnail(JSON.parse(content['movies'])[1]);
                     inpper = inp.value;
                     option_item.href = `/f/${content['name']}`;
@@ -1991,6 +2084,8 @@
                     s_type.setAttribute("class", "s_type_f");
                     vots.innerHTML = content['movie_count'];
                     vots.setAttribute("class", "s_mcount");
+                    name = content['name'];
+
                 }  
                 if (type=="movie") { // Create movie option
                             thumb = await get_thumbnail(content['id']);
@@ -2000,11 +2095,26 @@
                             s_type.setAttribute("class", "s_type_m");
                             vots.innerHTML = content['imdb_votes'];
                             vots.setAttribute("class", "s_vots");
+                            name = content['name'];
+
                         }
 
+
+                if (type=="insearch_filter") { // Create insearch_filter option
+                            inpper = inp.value;
+                            s_type.innerHTML = "filter";
+                            s_type.setAttribute("class", "s_type_filter");
+                            name = content;
+                            option_item.href = `/${name}`;
+                        }
+
+                
+                
+
+                
                 n = document.createElement('p');
                 n.setAttribute("class", "option_n");
-                n.innerHTML = content['name'];
+                n.innerHTML = name;
                 t = document.createElement('div');
                 t.innerHTML = `<img class="s_thumbnail", src=${thumb}>`
 
@@ -2015,43 +2125,9 @@
                 option_item.appendChild(n);
                 option_item.appendChild(s_type);
                 vots_cont.appendChild(vots)
-                option_item.appendChild(vots_cont)
+                option_item.appendChild(vots_cont);
 
-                return option_item;
-            }
-
-
-
-
-
-            if (enter==false) {
-                // Add movie options
-                for (let x = 0; x < results__["movies"].length; x++) { 
-                    option = await create_autocompleteoption("movie", results__["movies"][x])
-                    if (suggestion_lst.includes(option.href) == false) {
-                                op_cont.appendChild(option);
-                                suggestion_lst.push(option.href);
-                            }
-                } 
-
-                // Add feature options
-                for (let x = 0; x < results__["features"].length; x++) { 
-                    option = await create_autocompleteoption("feature", results__["features"][x]);
-                    console.log("add feature")
-                    if (suggestion_lst.includes(option.href) == false) {
-                                op_cont.appendChild(option);
-                                suggestion_lst.push(option.href);
-                                console.log("added")
-                            }
-                } 
-
-
-                if ((results__['movies'].length > 0) || (results__["features"].length > 0)) {
-                    inp.style.borderBottom = "none";
-
-                    if (results__["genres_"].length > 0) {
-                        // If matching genres, loop through genres, append to autocomplete box
-                        for (x = 0; x < results__["genres_"].length; x++) {
+                if (type=="genre") { // Create insearch_filter option
                             coun = coun + 1
                             option_item = document.createElement("a");
                             option_item.setAttribute("class", "option");
@@ -2060,47 +2136,118 @@
                             s_type.setAttribute("class", "s_type_g");
                             n = document.createElement('p');
                             n.setAttribute("class", "option_n");
-                            n.innerHTML = results__["genres_"][x];
+                            n.innerHTML = content;
                             option_item.appendChild(n);
                             option_item.appendChild(s_type);
-                            option_item.href = `/g/${results__["genres_"][x]}`;
-
-                            op_cont.appendChild(option_item);
-
+                            option_item.href = `/g/${content}`;
                         }
 
+                return option_item;
+            }
+
+
+
+
+
+                if ((results__['movies'].length > 0) || (results__["features"].length > 0)) {
+                    inp.style.borderBottom = "none";
+                    // Add manual filtering options 
+                    for (let x = 0; x < insearchfilters.length; x++) { 
+                        if (insearchfilters[x].includes(inp.value)) {
+                            option = await create_autocompleteoption("insearch_filter", insearchfilters[x]);
+                            if (suggestion_lst.includes(option.href) == false) {
+                                    op_cont.appendChild(option);
+                                    suggestion_lst.push(option.href);
+                            }
+                        }
+                        
+                    } 
+
+
+                    
+
+                    if (search_data["filter"].length > 0) {
+                        if (search_data["filter"] == "features") {
+                            // Add feature options
+                            for (let x = 0; x < results__["features"].length; x++) { 
+                                option = await create_autocompleteoption("feature", results__["features"][x]);
+                                if (suggestion_lst.includes(option.href) == false) {
+                                            op_cont.appendChild(option);
+                                            suggestion_lst.push(option.href);
+                                        }["genre", "feature"]
+                            } 
+                        } else if (search_data["filter"] == "genres") {
+                            if (results__["genres_"].length > 0) {
+                                // If matching genres, loop through genres, append to autocomplete box
+                                for (let x = 0; x < results__["genres_"].length; x++) { 
+                                    option = await create_autocompleteoption("genre", results__["genres_"][x]);
+                                    if (suggestion_lst.includes(option.href) == false) {
+                                                op_cont.appendChild(option);
+                                                suggestion_lst.push(option.href);
+                                            }["genre", "feature"]
+                                } 
+
+                            }
+                        }
+                        
+                    }
+
+                    else {
+                        // Add movie options
+                        for (let x = 0; x < results__["movies"].length; x++) { 
+                            option = await create_autocompleteoption("movie", results__["movies"][x])
+                            if (suggestion_lst.includes(option.href) == false) {
+                                        op_cont.appendChild(option);
+                                        suggestion_lst.push(option.href);
+                                    }
+                        } 
+
+                        // Add feature options
+                        for (let x = 0; x < results__["features"].length; x++) { 
+                            option = await create_autocompleteoption("feature", results__["features"][x]);
+                            if (suggestion_lst.includes(option.href) == false) {
+                                        op_cont.appendChild(option);
+                                        suggestion_lst.push(option.href);
+                                    }["genre", "feature"]
+                        } 
+
+
+                        // Add genre options
+                        for (let x = 0; x < results__["genres_"].length; x++) { 
+                            option = await create_autocompleteoption("genre", results__["genres_"][x]);
+                            if (suggestion_lst.includes(option.href) == false) {
+                                        op_cont.appendChild(option);
+                                        suggestion_lst.push(option.href);
+                                    }["genre", "feature"]
+                        } 
                     }
 
 
+                    
 
                 } else {
                     op_cont.innerHTML = "Sorry. No matching enteries"
                 }
 
-
+                                                            
                 line.style.visibility = 'visible';
                 box.style.height = 'fit-content';
                 // box.style.paddingBottom = '2px';
                 box.style.backgroundColor = "rgba(34, 33, 33, 0.83)";
-            } else {
-                parse_searchresults(results__);
             } 
             
             
             
             
-        } else {
+         else {
                 box.style.height = '0px';
                 op_cont.innerHTML = '';
                 line.style.visibility = 'hidden';
             }
-     }
+        }
 
 
-        
     
-
-
 
     async function parse_searchresults(results_) {
         cont.innerHTML = '';
@@ -2115,22 +2262,137 @@
 
 
     mark = -1;
-    form = document.getElementById("box");
-    insearchtagscont = document.createElement('div');
-    insearchtagscont.id = "insearchfilters";
-    form.appendChild(insearchtagscont);
+    
 
 
     let query_forpage = '';
     let enter = false;
     let movie_items_co = 0;
     let filtered_query;
-    let open_fornew = false;
+    let open_fornew = true;
 
     let condi_lst = [];
     let selected_condi;
 
+
+    function add_insearch_filter(auoption) {
+        type = "";
+        if (auoption.href.includes("/f/")) {
+            type = "feature";
+        } 
+        else if (auoption.href.includes("/g/")) {
+            type = "genre";
+        } 
+        else if (auoption.href.includes("/m/")==false) {
+            type = "filter";
+
+            num_values = Object.keys(nobvalues);
+
+            filter_ = auoption.children[1].innerHTML;
+            console.log(filter_, nobvalues, "aadAA");
+
+            if (num_values.includes(filter_)) {
+                nob_popup = document.getElementById("nob_popup"); 
+                nob_popup.style.visibility = 'visible';
+                nob_popup.children[0].innerHTML = filter_;
+
+                nob_popup.children[1].placeholder = nobvalues[filter_]["min value"];
+                nob_popup.children[2].placeholder = nobvalues[filter_]["max value"];
+
+                nob_popup.children[1].addEventListener("keydown", function(e) {
+                    nobvalues[filter_]["min value"] = nob_popup.children[1].value;
+
+                    if (e.key == "Enter") {
+                        nob_popup.style.visibility = 'hidden';
+                        insearch_filter.innerHTML = `${nobvalues[filter_]["min value"]} < ${filter_} > ${nobvalues[filter_]["max value"]}`;
+                        search.style.paddingLeft = `${(parseInt(window.getComputedStyle(insearchtagscont).width.slice(0, window.getComputedStyle(insearchtagscont).width.length - 2))) + 35}px`;
+                    }
+                })
+
+                nob_popup.children[2].addEventListener("keydown", function(ee) {
+                    nobvalues[filter_]["max value"] = nob_popup.children[2].value;
+
+
+                    if (ee.key == "Enter") {
+                        nob_popup.style.visibility = 'hidden';
+                        insearch_filter.innerHTML = `${nobvalues[filter_]["min value"]} < ${filter_} > ${nobvalues[filter_]["max value"]}`;
+                        search.style.paddingLeft = `${(parseInt(window.getComputedStyle(insearchtagscont).width.slice(0, window.getComputedStyle(insearchtagscont).width.length - 2))) + 35}px`
+
+                    }
+
+
+                })
+            }
+            
+        }
+
+
+
+
+
+
+
+        if (type) {
+            insearch_filter = document.createElement("p"); 
+            insearch_filter.setAttribute("class", "insearch_filter");
+            
+            insearch_filter.innerHTML = `${type}: ${auoption.children[1].innerHTML}`;
+
+            if (type=="genre") {
+                    insearch_filter.innerHTML = `${type}: ${auoption.children[0].innerHTML}`;
+                }
+
+            if ((insearchtagscont.children.length<1) | (open_fornew)) {
+                insearchtagscont.appendChild(insearch_filter);
+                open_fornew = false;
+
+
+                
+                // if (insearchtagscont.children.length > 1) {
+                //     cond = {}
+                //     cond["features"] = []
+                //     cond["genres"] = []
+                //     cond["filter"] = []
+                //     cond_ele = document.createElement("p");
+                //     cond_ele.setAttribute("class", "insearch_filter"); 
+                //     for (i=0; i<insearchtagscont.children.length; i++) {
+                //         tag = insearchtagscont.children[i].innerHTML.split(": ")
+                //         if (tag[0]=="feature") {
+                //             cond["features"].push(tag[1]);
+                //         }
+                //         if (tag[0]=="genre") {
+                //             cond["genres"].push(tag[1]);
+                //         }
+                //         if (tag[0]=="filter") {
+                //            cond["filter"].push(tag[1]);
+                //         }
+                //     }
+                //     insearchtagscont.removeChild(insearchtagscont.children[i])
+                //     condi_lst.push(cond);
+
+                // } 
+            } else {
+                insearchtagscont.removeChild(insearchtagscont.children[insearchtagscont.children.length-1]);
+                insearchtagscont.appendChild(insearch_filter);
+
+            }
+
+            
+
+            
+            
+
+
+            search.style.paddingLeft = `${(parseInt(window.getComputedStyle(insearchtagscont).width.slice(0, window.getComputedStyle(insearchtagscont).width.length - 2))) + 35}px`
+
+              
+        }
+
+    }
+
     inp.addEventListener("keydown", async function (event) {
+
+        insearchtagscont = document.getElementById("insearchfilters");
 
         // Select option from autocomplete using arrow keys 
         if (event.key == "ArrowDown") {
@@ -2140,75 +2402,37 @@
             }
             op_cont.children[mark].style.backgroundColor = "#232323";
 
-            if ((op_cont.children[mark].href.split('/')[3] == 'f') | (op_cont.children[mark].href.split('/')[3] == 'g')) {
-                search = document.getElementById("search");
-                current_padding = window.getComputedStyle(search).paddingLeft.slice(0, window.getComputedStyle(search).paddingLeft.length - 2);
-                tagtoadd = op_cont.children[mark].querySelector(".option_n");
+            current_selected = op_cont.children[mark];
 
 
-                if (op_cont.children[mark].href.split('/')[3] == 'f') {
-                    tag_type = 'f: ';
-                } else {
-                    tag_type = 'g: ';
-                }
-
-                console.log(open_fornew);
-
-                if ((insearchtagscont.children.length < 1) || (open_fornew)) {
-                    filter_tag = document.createElement('p');
-                    filter_tag.id = `filter_tag`;
-                    filter_tag.innerHTML = tag_type + tagtoadd.innerHTML;
-                    insearchtagscont.appendChild(filter_tag);
-                    tags_tofilter.push({ "tag_type": tag_type[0], "content": tagtoadd.innerHTML });
-                    open_fornew = false;
-                } else {
-                    filter_tag = insearchtagscont.children[insearchtagscont.children.length - 1];
-                    filter_tag.innerHTML = tag_type + tagtoadd.innerHTML;
-                    tags_tofilter[tags_tofilter.length - 1] = { "tag_type": tag_type[0], "content": tagtoadd.innerHTML };
-                }
+            add_insearch_filter(current_selected)
 
 
-                search.style.paddingLeft = `${(parseInt(window.getComputedStyle(insearchtagscont).width.slice(0, window.getComputedStyle(insearchtagscont).width.length - 2))) + 35}px`
-            }
-
+            
         }
+
+        
 
 
 
         if (event.key == "ArrowUp") {
             console.log("Arrow!!!!!")
             mark = mark - 1;
-            // if (mark > op_cont.children.length) {
+
             op_cont.children[mark + 1].style.backgroundColor = "";
-            // }
             op_cont.children[mark].style.backgroundColor = "#232323";
 
             tagtoadd = op_cont.children[mark].querySelector(".option_n");
-            if ((op_cont.children[mark].href.split('/')[3] == 'f') | (op_cont.children[mark].href.split('/')[3] == 'g')) {
 
-                if (op_cont.children[mark].href.split('/')[3] == 'f') {
-                    tag_type = 'f: ';
-                } else {
-                    tag_type = 'g: ';
-                }
+            current_selected = op_cont.children[mark] 
+            
+            add_insearch_filter(current_selected)
 
-                if ((insearchtagscont.children.length < 1) || (open_fornew)) {
-                    filter_tag = document.createElement('p');
-                    filter_tag.id = `filter_tag`;
-                    filter_tag.innerHTML = tag_type + tagtoadd.innerHTML;
-                    insearchtagscont.appendChild(filter_tag);
-                    tags_tofilter.push({ "tag_type": tag_type[0], "content": tagtoadd.innerHTML });
-                    open_fornew = false;
-                } else {
-                    filter_tag = insearchtagscont.children[insearchtagscont.children.length - 1];
-                    filter_tag.innerHTML = tag_type + tagtoadd.innerHTML;
-                    tags_tofilter[tags_tofilter.length - 1] = { "tag_type": tag_type[0], "content": tagtoadd.innerHTML };
-                }
+      
+            
 
-                search.style.paddingLeft = `${(parseInt(window.getComputedStyle(filter_tag).width.slice(0, window.getComputedStyle(filter_tag).width.length - 2))) + 35}px`
-                console.log(tags_tofilter);
-            }
         }
+
 
         if (event.key == "ArrowRight") {
             open_fornew = true;
@@ -2224,21 +2448,9 @@
             cont.innerHTML = '';
             condi_lst = [];
 
+            nob_popup = document.getElementById("nob_popup");
+            nob_popup.style.visibility = "hidden";
 
-
-           
-            search_data['query'] = inp.value;
-            search_data["genres"] = []
-            search_data["features"] = []
-            if (tags_tofilter.length > 0) {
-                for (i = 0; i < tags_tofilter.length; i++) {
-                    if (tags_tofilter[i]["tag_type"] == 'g') {
-                        search_data["genres"].push(tags_tofilter[i]["content"])
-                    } else {
-                        search_data["features"].push(tags_tofilter[i]["content"])
-                    }
-                }
-            }
 
 
             nobkeys = Object.keys(nobvalues);
@@ -2263,13 +2475,35 @@
 
         if (event.key === "Backspace") {
             if (inp.value == '') {
-                tags_tofilter = tags_tofilter.slice(0, tags_tofilter.length - 1);
-                console.log(tags_tofilter);
+                search_data["features"] = search_data["features"].slice(0, search_data["features"].length - 1);
                 insearchtagscont.removeChild(insearchtagscont.children[insearchtagscont.children.length - 1])
                 search.style.paddingLeft = `${(parseInt(window.getComputedStyle(insearchtagscont).width.slice(0, window.getComputedStyle(insearchtagscont).width.length - 2))) + 35}px`
             }
 
         }
+
+
+        search_data["query"] = inp.value;
+        search_data["features"] =[]
+        search_data["filter"] = []
+        search_data["genres"] = []
+        
+        for (i=0; i<insearchtagscont.children.length; i++) {
+            tag = insearchtagscont.children[i].innerHTML.split(": ")
+            if (tag[0]=="feature") {
+                search_data["features"].push(tag[1]);
+            }
+            if (tag[0]=="genre") {
+                search_data["genres"].push(tag[1]);
+            }
+            if (tag[0]=="filter") {
+                search_data["filter"].push(tag[1]);
+            }
+        }
+
+        console.log(search_data)
+
+
 
     });
 
