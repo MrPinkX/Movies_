@@ -1577,16 +1577,17 @@
     } 
 
     .insearch_filter {
-        background-color: #a2a2a2;
+        background-color: #ffffff;
         width: fit-content;
         height: fit-content;
-        color: #2a2a2a2a;
+        color: #373737;
         border-radius: 5px;
         position: relative;
         top: -21px;
         text-align: center;
         padding: 9px;
         font-family: roboto;
+        margin-right: 3px;
     }
 
     
@@ -2040,6 +2041,23 @@
 
 
         if (inp.value.length > 0) {
+            search_data["query"] = inp.value;
+        search_data["features"] =[]
+        search_data["filter"] = []
+        search_data["genres"] = []
+        
+        for (i=0; i<insearchtagscont.children.length; i++) {
+            tag = insearchtagscont.children[i].innerHTML.split(": ")
+            if (tag[0]=="feature") {
+                search_data["features"].push(tag[1]);
+            }
+            if (tag[0]=="genre") {
+                search_data["genres"].push(tag[1]);
+            }
+            if (tag[0]=="filter") {
+                search_data["filter"].push(tag[1]);
+            }
+        }
 
             search_data['query'] = inp.value;
             console.log(search_data);
@@ -2329,11 +2347,11 @@
 
 
                 })
-            } else {
+            } 
+            
+        } else {
                 nob_popup.style.visibility = 'hidden';
             }
-            
-        }
 
 
 
@@ -2507,7 +2525,8 @@
                 insearch_filter__ = false;
 
                 insearchtagscont.children[insearchtagscont.children.length-1].style.backgroundColor = "#2a2a2a";
-                 insearchtagscont.children[insearchtagscont.children.length-1].style.color = "#a2a2a2";
+                insearchtagscont.children[insearchtagscont.children.length-1].style.color = "#a2a2a2";
+                inp.value = "";
                 search_();
             }
             }
