@@ -20,6 +20,7 @@ app.use( express.static( "public" ) );
 
 const sqlite3 = require('sqlite3');
 const { open } = require('sqlite');
+const { features } = require('process');
 
 
 const genres = ["Musical", "Adult",
@@ -689,7 +690,7 @@ app.post(`/general_search_`, jsonParser, async (req, res) => {
     driver: sqlite3.Database
   }) 
 
-  features = await db2.all(features_query);
+  features_ = await db2.all(features_query);
   movies = await db2.all(movies_query); 
   lists = await db2.all(lists_query);
 
@@ -702,8 +703,29 @@ app.post(`/general_search_`, jsonParser, async (req, res) => {
   }
 
 
-  res.send({movies: movies, features: features, lists: lists, genres_});
+  res.send({movies: movies, features: features_, lists: lists, genres_});
   
+})
+
+
+app.post(`/search_features_`, jsonParser, async (req, res) => {
+  query = req["body"]["content__"]; 
+
+  features_query = `SELECT * FROM features WHERE name like "%${query}%" LIMIT 5`; 
+
+  const db2 = await open({
+    filename: 'farter_2.db',
+    driver: sqlite3.Database
+  }) 
+
+  features_ = await db2.all(features_query);
+
+  res.send({features: features_});
+
+
+
+
+
 })
 
 
