@@ -62,7 +62,7 @@
         <div id="genreinfo_container"></div>
 
 
-        <div id="keywords_container"></div>
+        
 
     </div>
 
@@ -78,6 +78,11 @@
             <h2 id="lists_header">User lists</h2>
 
         </div>
+
+
+        <div id="suggestion_autocomplete">
+
+            </div>
 
 
 
@@ -1421,9 +1426,9 @@
         text-decoration: none;
     }
 
-   .suggest {
+   #suggest {
         /* background-color: #151617; */
-        width: fit-content;
+        width: 65px;
         height: fit-content;
         /* margin-left: 8px; */
         color: #575757;
@@ -1437,7 +1442,31 @@
         border-color: #313131;
         border-style: solid;
         left: 3px;
+        background-color: #111;
+        outline: none;
+        font-family: roboto;
+        font-size: 16px;
     } 
+
+
+   #suggestion_autocomplete {
+        background-color: #040404;
+        width: 100px;
+        height: fit-content;
+        position: absolute;
+        top: 1168px;
+        left: 226px;
+        z-index: 1;
+        padding: 10px;
+    }
+
+
+    .suggestion_autocompleteoption {
+        color: white;
+        font-family: roboto;
+        margin: 3px;
+        top: 3px;
+    }
 
 
     
@@ -1741,8 +1770,8 @@
             }
 
 
-            preview1.style.top = `${e.clientY + page.scrollTop}px`;
-            preview1.style.left = `${e.clientX}px`;
+            preview1.style.top = `${e.clientY + page.scrollTop+90}px`;
+            preview1.style.left = `${e.clientX+50}px`;
 
             var root = document.querySelector(':root');
             root.style.setProperty('--deg', `"${z['release_year']}"`);
@@ -2045,9 +2074,59 @@
             cont.appendChild(f);
         }
 
-        suggest_ = document.createElement("p");
-        suggest_.innerHTML = "Suggest +";
-        suggest_.setAttribute("class", "suggest");
+        suggest_ = document.createElement("input");
+        suggest_.placeholder = "Suggest +";
+        suggest_.setAttribute("id", "suggest");
+        suggest_.addEventListener("keydown", async function(e) {
+            if (e.key=="Enter") {
+                f = document.createElement("p");
+                f.setAttribute("class", "feature_name");
+                f.innerHTML = suggest_.value;
+                cont.appendChild(f);
+            }
+
+            content_ = suggest.value;
+            console.log(content_);
+
+            response = await fetch('/search_features_', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ content__: content_ })
+            });
+            results__ = await response.json();
+
+            console.log(results__);
+
+            suggestion_autocomplete = document.getElementById("suggestion_autocomplete");
+            suggestion_autocomplete.innerHTML = "";
+
+            for (i=0; i<results__['features'].length; i++) {
+
+                suggestion_autocompleteoption = document.createElement("p");
+                suggestion_autocompleteoption.setAttribute("class", "suggestion_autocompleteoption")
+
+                suggestion_autocompleteoption.innerHTML = results__['features'][i]['name']
+                suggestion_autocomplete.appendChild(suggestion_autocompleteoption)
+            }
+
+
+            if (e.key == "ArrowDown") {
+                count += 1;
+                suggestion_autocomplete.children[count].style.backgroundColor = "red";
+            } 
+            else if (e.key=="ArrowUp") {
+                count -= 1;
+                suggestion_autocomplete.children[count].style.backgroundColor = "red";
+            } 
+            else {
+                count = 0
+            }
+
+
+            
+        })
         cont.appendChild(suggest_);
         up_cont.appendChild(cont);
 
@@ -2094,6 +2173,9 @@
         }
         return new_element;
     }
+
+
+    
 
 
 
@@ -2370,4 +2452,3 @@
 
     createmoviepage(resy);
 </script>
-
