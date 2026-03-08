@@ -539,12 +539,12 @@ app.post('/general_search', jsonParser, async (request, response) => {
   }) 
 
 
-  features = await db2.all(features_query);
+  features_ = await db2.all(features_query);
   movies = await db2.all(movies_query); 
   lists = await db2.all(lists_query);
   
 
-  response.send({movies: movies, features: features, lists: lists})
+  response.send({movies: movies, features: features_, lists: lists})
 
 
 
@@ -723,10 +723,40 @@ app.post(`/search_features_`, jsonParser, async (req, res) => {
   res.send({features: features_});
 
 
-
-
-
 })
+
+
+// app.post(`/add_feature_to_movie_`, jsonParser, async (req, res) => {
+  
+//   console.log(req["body"])
+
+//   suggested_feature = req["body"]["suggested_feature"];
+//   movie_id = req["body"]["movie_id"];
+
+
+  
+//   const db2 = await open({
+//     filename: 'farter_2.db',
+//     driver: sqlite3.Database
+//   }) 
+  
+  
+//   db2.exec(`UPDATE movies
+//                     SET suggested_features = "${suggested_feature}"
+//                     WHERE my_index = ${movie_id};`)
+
+  
+
+//   features_ = await db2.all(features_query);
+
+//   res.send({features: features_});
+
+
+// })
+
+
+
+
 
 
 app.post(`/scroll`, jsonParser, async (req, res) => {
