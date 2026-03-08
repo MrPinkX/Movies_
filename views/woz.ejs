@@ -2077,12 +2077,28 @@
         suggest_ = document.createElement("input");
         suggest_.placeholder = "Suggest +";
         suggest_.setAttribute("id", "suggest");
+
+
+        // sugges
         suggest_.addEventListener("keydown", async function(e) {
             if (e.key=="Enter") {
+                if (selected_) 
+                    suggest_.value = selected_;
+                
                 f = document.createElement("p");
                 f.setAttribute("class", "feature_name");
-                f.innerHTML = suggest_.value;
-                cont.appendChild(f);
+                f.innerHTML = `${suggest_.value} >`;
+                cont.insertBefore(f, cont.children[cont.children.length-1]);
+                
+
+                response = await fetch('/add_feature_to_movie_', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ suggested_feature: suggest_.value, movie_id: movieob["my_index"] })
+                });
+                results__ = await response.json();
             }
 
             content_ = suggest.value;
@@ -2114,14 +2130,15 @@
 
             if (e.key == "ArrowDown") {
                 count += 1;
-                suggestion_autocomplete.children[count].style.backgroundColor = "red";
+                suggestion_autocomplete.children[count].style.backgroundColor = "grey";
             } 
             else if (e.key=="ArrowUp") {
                 count -= 1;
-                suggestion_autocomplete.children[count].style.backgroundColor = "red";
+                suggestion_autocomplete.children[count].style.backgroundColor = "grey";
             } 
             else {
-                count = 0
+                count = -1
+                selected_ = false;
             }
 
 
