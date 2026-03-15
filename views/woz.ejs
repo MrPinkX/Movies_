@@ -59,7 +59,10 @@
         <h1 id="movie_name_infob">Movie name</h1>
         <p id="movie_descript_infob">Movie name</p>
 
+
         <div id="genreinfo_container"></div>
+
+        <div id="keywords_container"></div>
 
 
         
@@ -80,9 +83,9 @@
         </div>
 
 
-        <div id="suggestion_autocomplete">
+        <!-- <div id="suggestion_autocomplete">
 
-            </div>
+            </div> -->
 
 
 
@@ -1454,10 +1457,11 @@
         width: 100px;
         height: fit-content;
         position: absolute;
-        top: 1168px;
-        left: 226px;
+        top: 176px;
+        left: 5px;
         z-index: 1;
         padding: 10px;
+        visibility: hidden;
     }
 
 
@@ -1466,6 +1470,10 @@
         font-family: roboto;
         margin: 3px;
         top: 3px;
+    } 
+
+    #suggest_container {
+        position: relative;
     }
 
 
@@ -2064,6 +2072,7 @@
         for (let i = 0; i < JSON.parse(movieob['keywords']).length; i++) {
             l = l + `"${JSON.parse(movieob['keywords'])[i]}"` + ", "
         }
+        console.log(movieob);
 
         query = `SELECT * FROM features
         WHERE name IN (${l.slice(0, l.length - 2)}) limit 20;`
@@ -2074,35 +2083,33 @@
             cont.appendChild(f);
         }
 
+        suggested = JSON.parse(movieob["suggested_features"])
+        console.log(suggested)
+        for (let i = 0; i < suggested.length; i++) {
+            console.log("suggesss")
+            f = document.createElement("a");
+            f.setAttribute("class", "feature_name");
+            f.innerHTML = `${suggested[i]} >`
+            f.href = `/f/${suggested[i]}/`;
+            cont.appendChild(f);
+        }
+
         suggest_ = document.createElement("input");
         suggest_.placeholder = "Suggest +";
         suggest_.setAttribute("id", "suggest");
+        suggestion_autocomplete = document.createElement("div");
+        suggestion_autocomplete.setAttribute("id", "suggestion_autocomplete");
+
+       
 
 
         // sugges
         suggest_.addEventListener("keydown", async function(e) {
-            if (e.key=="Enter") {
-                if (selected_) 
-                    suggest_.value = selected_;
-                
-                f = document.createElement("p");
-                f.setAttribute("class", "feature_name");
-                f.innerHTML = `${suggest_.value} >`;
-                cont.insertBefore(f, cont.children[cont.children.length-1]);
-                
 
-                response = await fetch('/add_feature_to_movie_', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ suggested_feature: suggest_.value, movie_id: movieob["my_index"] })
-                });
-                results__ = await response.json();
-            }
+            suggestion_autocomplete.style.visibility = "visible";
+            
 
             content_ = suggest.value;
-            console.log(content_);
 
             response = await fetch('/search_features_', {
                 method: "POST",
@@ -2113,9 +2120,9 @@
             });
             results__ = await response.json();
 
-            console.log(results__);
 
-            suggestion_autocomplete = document.getElementById("suggestion_autocomplete");
+            // suggestion_autocomplete = document.getElementById("suggestion_autocomplete");
+            
             suggestion_autocomplete.innerHTML = "";
 
             for (i=0; i<results__['features'].length; i++) {
@@ -2131,20 +2138,62 @@
             if (e.key == "ArrowDown") {
                 count += 1;
                 suggestion_autocomplete.children[count].style.backgroundColor = "grey";
+                selected_ = suggestion_autocomplete.children[count].innerHTML;
+
             } 
             else if (e.key=="ArrowUp") {
                 count -= 1;
                 suggestion_autocomplete.children[count].style.backgroundColor = "grey";
+                selected_ = suggestion_autocomplete.children[count].innerHTML;
             } 
-            else {
+            else if ((e.key=="Enter")==false) {
                 count = -1
                 selected_ = false;
             }
 
 
+            if (e.key==="Enter") {
+                e.preventDefault();
+                console.log("preventing default");
+
+                console.log(selected_, "selected_")
+
+                if (selected_) 
+
+                    suggest_.value = selected_;
+                
+                f = document.createElement("a");
+                f.setAttribute("class", "feature_name");
+                f.href = `/f/${suggest_.value}`
+                f.innerHTML = `${suggest_.value} >`;
+                cont.insertBefore(f, cont.children[cont.children.length-1]);
+
+
+                response = await fetch('/add_feature_to_movie_', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ suggested_feature: suggest_.value, movie_id: movieob["my_index"] })
+                });
+                results__ = await response.json();
+            }
+
+
             
         })
-        cont.appendChild(suggest_);
+
+        suggest_container = document.createElement("form");
+        suggest_container.setAttribute("id", "suggest_container")
+        suggest_container.appendChild(suggest_);
+        suggest_container.addEventListener("keydown", async function(e) {
+
+            if (e.key==="Enter") 
+                e.preventDefault();
+
+        })
+        suggest_container.appendChild(suggestion_autocomplete);
+        cont.appendChild(suggest_container);
         up_cont.appendChild(cont);
 
 
