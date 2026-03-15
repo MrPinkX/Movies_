@@ -726,33 +726,63 @@ app.post(`/search_features_`, jsonParser, async (req, res) => {
 })
 
 
-// app.post(`/add_feature_to_movie_`, jsonParser, async (req, res) => {
+app.post(`/add_feature_to_movie_`, jsonParser, async (req, res) => {
   
-//   console.log(req["body"])
+  console.log(req["body"])
 
-//   suggested_feature = req["body"]["suggested_feature"];
-//   movie_id = req["body"]["movie_id"];
+  suggested_feature = req["body"]["suggested_feature"];
+  movie_id = req["body"]["movie_id"];
 
 
   
-//   const db2 = await open({
-//     filename: 'farter_2.db',
-//     driver: sqlite3.Database
-//   }) 
+  const db2 = await open({
+    filename: 'farter_2.db',
+    driver: sqlite3.Database
+  }) 
   
   
 //   db2.exec(`UPDATE movies
-//                     SET suggested_features = "${suggested_feature}"
-//                     WHERE my_index = ${movie_id};`)
+// SET suggested_features = json_array(json_extract(suggested_features, '$'), "${suggested_feature}")
+// WHERE my_index = ${movie_id};
+// `);
+
+
+  current_suggested = await db2.all(`SELECT suggested_features FROM movies
+        WHERE my_index = ${movie_id};`);
+
+
+  console.log(current_suggested, "current_suggested");
+
+  if (current_suggested[0]["suggested_features"]) {
+    console.log("list is not empty");
+    current_suggested = JSON.parse(current_suggested[0]["suggested_features"]); 
+    current_suggested.push(suggested_feature)
+  } else {
+    current_suggested = [suggested_feature];
+  }
+
+  console.log("some");
+
+  console.log(`UPDATE movies
+SET suggested_features = ${current_suggested}
+WHERE my_index = ${movie_id};
+`);
+
+
+   db2.exec(`UPDATE movies
+SET suggested_features = '${JSON.stringify(current_suggested)}'
+WHERE my_index = ${movie_id};
+`);
+
 
   
 
-//   features_ = await db2.all(features_query);
+  features_ = await db2.all(features_query);
 
-//   res.send({features: features_});
+  res.send({features: features_});
 
 
-// })
+})
 
 
 
