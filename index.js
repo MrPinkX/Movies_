@@ -51,15 +51,6 @@ const db = new sqlite3.Database("farter_2.db");
 
 
 
-(async () => {
-  console.log("asyns");
-
-  (async () => {
-    console.log("asyns2");
-  })()
-})()
-
-console.log("anything");
 
 (async () => {
 
@@ -88,6 +79,12 @@ console.log("anything");
     thumbnail VARCAHR
   );`)
 
+  db2.exec(`CREATE TABLE IF NOT EXISTS history (
+    user_id VARCHAR,
+    query VARCHAR,
+    timestamp INTEGER
+  );`)
+
 
   async function get_rows(query) {
     rows = await db2.all(query);
@@ -96,7 +93,6 @@ console.log("anything");
 
   app.post('/send_feature_associates', jsonParser, async (request, response) => {
     feature_n = request.body["feature_name"]; 
-    console.log(feature_n);
 
     query = `SELECT * FROM features WHERE name LIKE "${feature_n}"`;
 
@@ -107,7 +103,6 @@ console.log("anything");
 
     for (i=1; i<6; i++) {
       query = `SELECT COUNT(*) FROM movies WHERE keywords LIKE '%"${f_associates[i]['name']}"%' AND keywords LIKE '%"${feature_n}"%'`;
-      console.log(query);
       associate_moviecount = await db2.all(query);
       associate = {"name": f_associates[i]["name"], "moviecount": associate_moviecount[0]["COUNT(*)"]};
 
@@ -140,11 +135,9 @@ console.log("anything");
     
     const { name } = request.params
     query = `SELECT * FROM features WHERE name LIKE "${name}"`;
-    console.log(query);
 
     f_row = await get_rows(query);
 
-    console.log(f_row[0], "rows[0]");
 
     f_associates = JSON.parse(f_row[0]['associates']);
 
@@ -153,10 +146,8 @@ console.log("anything");
     if (f_associates) {
       if (request.params.name1) {
         name2 = request.params.name1;
-        console.log(name2);
 
         quer = `SELECT * FROM movies WHERE keywords LIKE '%"${name}"%' AND keywords LIKE '%"${name2}"%' ORDER BY imdb_votes DESC limit 20;`;
-        console.log(quer);
         db.all(quer, function (err, rows) {
           response.render("second shit", { path: `${name} > ${name2}`, fuck: rows, associate_moviecount: associate_moviecount});
         })
@@ -231,7 +222,6 @@ app.post('/usey', jsonParser, async (request, response) => {
     lstr = []
 
     if (request.body["c"]) {
-      console.log("C")
       send_associated_categories(request.body["b"], request.body["c"])
     } 
 
@@ -244,7 +234,6 @@ app.post('/usey', jsonParser, async (request, response) => {
 
           
           filtered_genres = []
-          console.log(request.body["b"], "genre query");
           for (i=0; i<genres.length; i++) {
             if (genres[i].toLowerCase().includes(request.body["b"][2])) {
               filtered_genres.push(genres[i])
@@ -258,7 +247,7 @@ app.post('/usey', jsonParser, async (request, response) => {
             lstr.push(autocomplet_features);
           }
           
-            autocomplet_movies = await db2.all(query2);
+          autocomplet_movies = await db2.all(query2);
           if (lstr.length == 1) {
 
             lstr.push(autocomplet_movies);
@@ -277,13 +266,11 @@ app.post('/usey', jsonParser, async (request, response) => {
           // Inner condition autocomplete
           usinput = request.body["b"][0];
           query1 = `SELECT * FROM features WHERE name LIKE '%${usinput}%' LIMIT 5`;
-          console.log(query1);
 
           autocomplet_features = await db2.all(query1);
           autocomplet_genres = []
 
 
-          console.log(request.body["b"], "genre query");
           for (i=0; i<genres.length; i++) {
             if (genres[i].toLowerCase().includes(usinput)) {
               autocomplet_genres.push(genres[i])
@@ -300,14 +287,16 @@ app.post('/usey', jsonParser, async (request, response) => {
 
       }
       else {
+
+        history = await db2.all("SELECT * FROM history");
+
         db.all(query, function (err, rows) {
           // if (request.cookies.toky);
           try {
             user = jwt.verify(request.cookies.toky, "shhhhh");
-            console.log("user detec");
-            response.send([rows, "user"]);
+            response.send([rows, history, "user"]);
           } catch {
-            response.send([rows]);
+            response.send([rows, history]);
           }
           
         })
@@ -317,7 +306,6 @@ app.post('/usey', jsonParser, async (request, response) => {
 
     async function send_associated_categories(f_name, amount) {
       query = `SELECT * FROM features WHERE name LIKE "${f_name}"`;
-      console.log(query);
 
       f_row = await get_rows(query);
 
@@ -325,7 +313,6 @@ app.post('/usey', jsonParser, async (request, response) => {
 
       assocas = { "f_name": f_name }
       for (i = amount; i < amount + 5; i++) {
-        console.log(f_associates[i], "f_associatesi")
         associate_moviecount = await db2.all(`SELECT COUNT(*) FROM movies WHERE keywords LIKE '%"${f_associates[i]['name']}"%' AND keywords LIKE '%"${f_name}"%'`);
         assoca_movies = await get_rows(`SELECT * FROM movies WHERE keywords LIKE '%"${f_associates[i]['name']}"%' AND keywords LIKE '%"${f_name}"%' ORDER BY imdb_votes DESC limit 10;`);
         assocas[f_associates[i]['name']] = {"movies": assoca_movies, "movie_count": associate_moviecount[0]};
@@ -341,10 +328,13 @@ app.post('/usey', jsonParser, async (request, response) => {
   })
 
 
+
+
+
+
   app.post('/user_check', jsonParser, async (request, response) => { 
     try {
       user = jwt.verify(request.cookies.toky, "shhhhh");
-      console.log("user detec");
       response.send(["user"]);
     } catch {
       response.send(["none"]);
@@ -387,12 +377,8 @@ app.get(`/m/:name`, async (request, response) => {
   }) 
 
   movierow = await db2.all(query);
-  console.log(movierow)
-  console.log(movierow[0], 'movierow0');
-  console.log(`SELECT * FROM users_lists WHERE movie_id LIKE ${movierow[0]['id']};`);
   movieuserslists = await db2.all(`SELECT DISTINCT list_name, * FROM users_lists WHERE movie_id LIKE ${movierow[0]['id']}`);
 
-  console.log(movieuserslists, "movieuserslists");
 
   
   response.render("woz", { movie: movierow[0], lists: movieuserslists, user: user});
@@ -456,7 +442,6 @@ app.get(`/g/:name`, async (request, response) => {
   genre_moviecount = await db2.all(`SELECT COUNT(*) FROM movies WHERE genre LIKE '%"${name}"%'; `)
 
 
-  console.log(genremovies, query, genre_moviecount, "genremovies");
   genre_movies = {}
   genre_movies[name] = genremovies;
   genre_movies["count"] = genre_moviecount['COUNT(*)'];
@@ -478,7 +463,6 @@ app.get(`/s/:name`, async (request, response) => {
   query = `SELECT * FROM movies WHERE ${conditions[0].split(':')[0]} LIKE '%"${conditions[0].split(':')[1]}"%' ORDER BY imdb_votes DESC limit 10;`;
   // }
   
-  console.log(query);
   const db2 = await open({
     filename: 'farter_2.db',
     driver: sqlite3.Database
@@ -504,9 +488,7 @@ app.get(`/s/:name`, async (request, response) => {
 
 
 app.post('/singlemovie', jsonParser, async (request, response) => {
-  console.log("SINGLEMOVIE");
   query = `SELECT * FROM movies WHERE id LIKE ${request.body["movie_id"]}`;
-  console.log("singlemoviequery", query);
 
   const db2 = await open({
     filename: 'farter_2.db',
@@ -525,7 +507,6 @@ app.post('/singlemovie', jsonParser, async (request, response) => {
 
 app.post('/general_search', jsonParser, async (request, response) => {
   
-  console.log(request.body['queries']);
 
   features_query = request.body["queries"][0];
   movies_query = request.body["queries"][1];
@@ -657,7 +638,6 @@ app.post(`/general_search_`, jsonParser, async (req, res) => {
 
   movies_query = `SELECT * FROM movies WHERE name LIKE "%${filtering_data["query"]}%" `;
   if (filtering_data["features"]) {
-    console.log("adding feature");
     for (let i=0; i<filtering_data["features"].length; i++) {
       movies_query += ` AND keywords LIKE '%"${filtering_data["features"][i]}"%'`
     }
@@ -694,13 +674,21 @@ app.post(`/general_search_`, jsonParser, async (req, res) => {
   movies = await db2.all(movies_query); 
   lists = await db2.all(lists_query);
 
-  console.log(movies_query);
   genres_ = []
   for (i=0; i<genres.length; i++) {
     if (genres[i].toLowerCase().includes(filtering_data["query"])) {
       genres_.push(genres[i])
     } 
   }
+
+  // Add search to history 
+  const timestamp = req.body["timestamp_"]
+  
+  db2.exec(`INSERT INTO history
+            VALUES ("${"user_id"}", '${JSON.stringify(filtering_data)}', "${timestamp}"); `);
+
+
+  history = await db2.all("SELECT * FROM history");
 
 
   res.send({movies: movies, features: features_, lists: lists, genres_});
@@ -728,7 +716,6 @@ app.post(`/search_features_`, jsonParser, async (req, res) => {
 
 app.post(`/add_feature_to_movie_`, jsonParser, async (req, res) => {
   
-  console.log(req["body"])
 
   suggested_feature = req["body"]["suggested_feature"];
   movie_id = req["body"]["movie_id"];
@@ -751,22 +738,16 @@ app.post(`/add_feature_to_movie_`, jsonParser, async (req, res) => {
         WHERE my_index = ${movie_id};`);
 
 
-  console.log(current_suggested, "current_suggested");
 
   if (current_suggested[0]["suggested_features"]) {
-    console.log("list is not empty");
     current_suggested = JSON.parse(current_suggested[0]["suggested_features"]); 
     current_suggested.push(suggested_feature)
   } else {
     current_suggested = [suggested_feature];
   }
 
-  console.log("some");
 
-  console.log(`UPDATE movies
-SET suggested_features = ${current_suggested}
-WHERE my_index = ${movie_id};
-`);
+  
 
 
    db2.exec(`UPDATE movies
@@ -777,12 +758,12 @@ WHERE my_index = ${movie_id};
 
   
 
-  features_ = await db2.all(features_query);
-
   res.send({features: features_});
 
 
 })
+
+
 
 
 
