@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -74,7 +73,11 @@
 
 
 
-    <!-- </div> -->
+
+    <div id="condition_cont"> 
+
+    </div>
+
     <div id="cont">
         <div id="perc_info"></div>
         <div id="features_cont">
@@ -92,6 +95,9 @@
 
 
 <style>
+
+
+
 
     #logo_search_container {
         width: 100px;
@@ -170,6 +176,7 @@
         border-style: solid;
         border-width: 1px;
         border-color: #232323;
+        padding-left: 12px;
     }
 
     #username {
@@ -439,21 +446,26 @@
         text-decoration: none;
         display: flex;
         flex-wrap: wrap;
-        margin-top: 13.5px;
+        /* margin-top: 13.5px; */
+        padding: 6px;
+        width: 449px;
+        height: 56px;
+        border-radius: 6px;
     }
 
     .option_n {
         position: relative;
         left: 11.5px;
         margin: 0px;
-        top: 1px;
+        top: 17px;
+        height: fit-content;
     }
 
 
     .s_thumbnail {
         position: relative;
         width: 57px;
-        top: -9px;
+        top: 12px;
         border-radius: 7.5px;
     }
 
@@ -1085,7 +1097,7 @@
         font-size: 12px;
         width: fit-content;
         height: 17px;
-        top: -4px;
+        top: 12px;
         color: #7d8d9b;
     }
 
@@ -1115,7 +1127,7 @@
         font-size: 12px;
         width: fit-content;
         height: 17px;
-        top: -4px;
+        top: 11px;
         color: #805f5f;
     }
 
@@ -1258,26 +1270,27 @@
     }
 
     .s_vots {
-        /* position: relative; */
+        position: relative;
         text-decoration: none;
         color: #111;
         font-size: 11px;
         font-family: roboto;
         margin: 0px;
-        left: 10px;
-        top: 7.5%;
+        left: 3px;
+        top: 18px;
         background-color: #469b6f;
         height: fit-content;
         padding: 3px;
         border-radius: 3px;
         width: fit-content;
+        /*! top: 30px; */
     }
 
     .s_mcount {
         font-family: roboto;
         color: #111;
         /* position: relative; */
-        bottom: 2px;
+        bottom: -15px;
         /* left: 214px; */
         font-size: 11.5px;
         background-color: white;
@@ -1286,6 +1299,7 @@
         margin-left: 3.5px;
         margin: 0px;
         height: fit-content;
+        position: relative;
     }
 
     .vots_cont {
@@ -1294,6 +1308,7 @@
         left: 378.5px;
         width: 58.5px;
         display: flex;
+        /*! top: 99px; */
     }
 
 
@@ -1588,7 +1603,30 @@
         padding: 9px;
         font-family: roboto;
         margin-right: 3px;
+    } 
+
+    #condition_cont {
+        display: flex;
+        position: relative;
+        left: 157px;
+        top: -121px;
+        width: fit-content;
     }
+    
+
+    
+
+
+    
+
+    
+
+    
+
+    
+
+
+    
 
     
 </style>
@@ -2041,7 +2079,7 @@
 
 
         if (inp.value.length > 0) {
-            search_data["query"] = inp.value;
+        search_data["query"] = inp.value;
         search_data["features"] =[]
         search_data["filter"] = []
         search_data["genres"] = []
@@ -2071,12 +2109,16 @@
                 search_data[nobkeys[i]] = min_max
             }
 
+
+            const timestamp = Date.now(); 
+
+
             response = await fetch('/general_search_', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ search_data_: search_data })
+                body: JSON.stringify({ search_data_: search_data, timestamp_:timestamp })
             });
             results__ = await response.json();
 
@@ -2304,6 +2346,7 @@
             type = "genre";
         } 
         else if (auoption.href.includes("/m/")==false) {
+            // Numerical nobs 
             type = "filter";
 
             filter_filter__ = true;
@@ -2321,24 +2364,41 @@
                 nob_popup.style.visibility = 'visible';
                 nob_popup.children[0].innerHTML = filter_;
 
-                nob_popup.children[1].placeholder = nobvalues[filter_]["min value"];
-                nob_popup.children[2].placeholder = nobvalues[filter_]["max value"];
+                nob_popup.children[1].value = nobvalues[filter_]["min value"];
+                nob_popup.children[2].value = nobvalues[filter_]["max value"];
+
+                nob_popup.children[1].oninput = function() {
+                    nobvalues[filter_]["min value"] = nob_popup.children[1].value;
+                    mins = document.getElementById("min")
+                    console.log(nobvalues)
+                }
 
                 nob_popup.children[1].addEventListener("keydown", function(e) {
-                    nobvalues[filter_]["min value"] = nob_popup.children[1].value;
+                    
+
 
                     if (e.key == "Enter") {
+                        nobvalues[filter_]["min value"] = nob_popup.children[1].value;
+                        nobvalues[filter_]["max value"] = nob_popup.children[2].value;
                         nob_popup.style.visibility = 'hidden';
                         insearch_filter.innerHTML = `${nobvalues[filter_]["min value"]} < ${filter_} > ${nobvalues[filter_]["max value"]}`;
                         search.style.paddingLeft = `${(parseInt(window.getComputedStyle(insearchtagscont).width.slice(0, window.getComputedStyle(insearchtagscont).width.length - 2))) + 35}px`;
                     }
                 })
 
-                nob_popup.children[2].addEventListener("keydown", function(ee) {
+                nob_popup.children[2].oninput = function() {
                     nobvalues[filter_]["max value"] = nob_popup.children[2].value;
+                    mins = document.getElementById("min")
+                    console.log(nobvalues)
+                }
+
+                nob_popup.children[2].addEventListener("keydown", function(ee) {
+                    
 
 
                     if (ee.key == "Enter") {
+                        nobvalues[filter_]["min value"] = nob_popup.children[1].value;
+                        nobvalues[filter_]["max value"] = nob_popup.children[2].value;
                         nob_popup.style.visibility = 'hidden';
                         insearch_filter.innerHTML = `${nobvalues[filter_]["min value"]} < ${filter_} > ${nobvalues[filter_]["max value"]}`;
                         search.style.paddingLeft = `${(parseInt(window.getComputedStyle(insearchtagscont).width.slice(0, window.getComputedStyle(insearchtagscont).width.length - 2))) + 35}px`
@@ -2349,6 +2409,7 @@
                 })
             } 
             
+
         } else {
                 nob_popup.style.visibility = 'hidden';
             }
@@ -2371,29 +2432,7 @@
 
 
                 
-                // if (insearchtagscont.children.length > 1) {
-                //     cond = {}
-                //     cond["features"] = []
-                //     cond["genres"] = []
-                //     cond["filter"] = []
-                //     cond_ele = document.createElement("p");
-                //     cond_ele.setAttribute("class", "insearch_filter"); 
-                //     for (i=0; i<insearchtagscont.children.length; i++) {
-                //         tag = insearchtagscont.children[i].innerHTML.split(": ")
-                //         if (tag[0]=="feature") {
-                //             cond["features"].push(tag[1]);
-                //         }
-                //         if (tag[0]=="genre") {
-                //             cond["genres"].push(tag[1]);
-                //         }
-                //         if (tag[0]=="filter") {
-                //            cond["filter"].push(tag[1]);
-                //         }
-                //     }
-                //     insearchtagscont.removeChild(insearchtagscont.children[i])
-                //     condi_lst.push(cond);
-
-                // } 
+                
             } else {
                 insearchtagscont.removeChild(insearchtagscont.children[insearchtagscont.children.length-1]);
                 insearchtagscont.appendChild(insearch_filter);
@@ -2402,16 +2441,18 @@
 
             
 
-            
-            
-
-
             search.style.paddingLeft = `${(parseInt(window.getComputedStyle(insearchtagscont).width.slice(0, window.getComputedStyle(insearchtagscont).width.length - 2))) + 35}px`
 
               
+        } else if (open_fornew==false) {
+            insearchtagscont.removeChild(insearchtagscont.children[insearchtagscont.children.length-1]);
         }
 
     }
+
+
+
+   
 
     inp.addEventListener("keydown", async function (event) {
 
@@ -2535,6 +2576,7 @@
 
         if (event.key === "Backspace") {
             if (inp.value == '') {
+                nob_popup.style.visibility = "hidden";
                 search_data["features"] = search_data["features"].slice(0, search_data["features"].length - 1);
                 insearchtagscont.removeChild(insearchtagscont.children[insearchtagscont.children.length - 1])
                 search.style.paddingLeft = `${(parseInt(window.getComputedStyle(insearchtagscont).width.slice(0, window.getComputedStyle(insearchtagscont).width.length - 2))) + 35}px`
@@ -2681,61 +2723,6 @@
                 cont.appendChild(movie);
 
              }
-
-
-        //     if (enter) { /// Adds more movies
-        //         updated_query = quer2 + ` ORDER BY imdb_votes DESC LIMIT ${amount}, ${15};`
-        //         queries = [quer1, updated_query, inp.value];
-        //         response = await fetch('/general_search', {
-        //             method: "POST",
-        //             headers: {
-        //                 "Content-Type": "application/json"
-        //             },
-        //             body: JSON.stringify({ queries: queries })
-        //             });
-        //         items_ = await response.json();
-        //         movies = items_['movies'];
-        //         c = 0
-        //         console.log(items_, "movies");
-        //         for (i = 0; i < movies.length; i++) {
-        //             if (shown_movies.includes(movies[i]['my_index']) == false) {
-        //                 movie = await createmovie(movies[i], movie_items_co);
-        //                 shown_movies.push(movies[i]['my_index'])
-
-        //                 cont.appendChild(movie);
-        //                 console.log(shown_movies.includes(movies[i]['my_index']), i, "movie", shown_movies)
-
-        //                 movie_items_co = movie_items_co + 1;
-        //                 c = i;
-        //             }   
-        //         }
-        //         amount = amount + 15;
-        //         console.log(c);
-        //         if (c == 14) {
-        //             che = 0;
-        //         }
-
-
-
-        //     } else { /// Adds more features 
-        //         items_ = await calldb(`SELECT * FROM features ORDER BY movie_count DESC` + ` LIMIT ${amount}, ${15};`);
-        //         features = items_[0];
-        //         c = 0
-        //         console.log(features, "features");
-        //         for (i = 0; i < features.length; i++) {
-        //             feature = await createfeature(features[i]);
-        //             cont.appendChild(feature);
-        //             console.log(feature in cont.children, i, "feature")
-
-        //             movie_items_co = movie_items_co + 1;
-        //             c = i;
-        //         }
-        //         amount = amount + 15;
-        //         console.log(c);
-        //         if (c == 14) {
-        //             che = 0;
-        //         }
-        //     }
 
 
 
@@ -2887,6 +2874,76 @@
 
         return a;
 
+    }
+
+
+    insearch_conditionclusters = [0]
+    async function create_cond(cond_object) {
+        condition_element = document.createElement("div");
+        condition_element.setAttribute("class", "condition");
+        
+
+
+        for (x=0; x<Object.keys(cond_object).length; x++) {
+
+            filter_name = Object.keys(cond_object)[x]
+
+            console.log("aaa", x);
+            attribute = document.createElement("p"); 
+            attribute.setAttribute("class", "insearch_filter"); 
+            attribute.style.backgroundColor = "grey";
+            filter_name = Object.keys(cond_object)[x]
+            filtered = true;
+
+
+            if (Object.keys(nobvalues).includes(filter_name)) {
+                attribute.innerHTML = `${nobvalues[filter_name]["min value"]} < ${filter_name} > ${nobvalues[filter_name]["max value"]}`
+            } else {
+                if (cond_object[filter_name].length>0) {
+                    attribute.innerHTML = `${filter_name}: ${cond_object[filter_name]}`;
+                } else{
+                    filtered = false;
+                }
+            }
+            
+
+            // attribute_content = cond_object[feature_name];
+
+            if (filtered) {
+                condition_element.appendChild(attribute);
+            }
+        }
+
+
+        condition_element.onclick = function(e) {
+            insearch_conditioncluster = document.createElement("p");
+            insearch_conditioncluster.id = `insearch_conditioncluseter ${insearch_conditionclusters.length}`
+            insearch_conditioncluster.setAttribute("class", "insearch_filter");
+            insearch_conditioncluster.innerHTML = `Condition ${insearch_conditionclusters.length}`
+            insearch_conditioncluster.onclick = function(e) {
+                console.log(insearch_conditionclusters, e.target.id.slice(0, 5));
+                console.log(insearch_conditionclusters[e.target.id.slice(-1)])
+            }
+
+
+            console.log(cond_object["query"], condition_element.children.length);
+            
+            inp.value = cond_object["query"];
+
+
+            insearch_conditionclusters.push(cond_object)
+            insearchfilters.appendChild(insearch_conditioncluster);
+
+            // for (i=0; i<e.target.children.length; i++) {
+            //     insearch_filter = document.createElement("p");
+            //     insearch_filter.innerHTML = e.target.children[i].innerHTML; 
+            //     insearch_filter.setAttribute("class", "insearch_filter");
+                
+            //     insearchfilters.appendChild(insearch_filter)
+            // }
+        }
+
+        return condition_element;
     }
 
 
@@ -3161,9 +3218,10 @@
         return new_element;
     }
 
+
+
     let features_ = [];
     async function calldb(query = '', autocomplet = false, request_id = '') {
-        console.log("change scrol top");
         win.scrollTop = "0spx";
         response = await fetch('/usey', {
             method: "POST",
@@ -3179,11 +3237,35 @@
         }
 
         if (query.length < 1) {
+
+
+            condition_cont = document.getElementById("condition_cont");
+            
+            // Conditions
+            for (i = data[1].length; i > (data[1].length - 4); i--) {
+                try {
+                    condition_ = JSON.parse(data[1][i]["query"]); 
+
+
+                    condition_element = await create_cond(condition_)
+                    condition_cont.appendChild(condition_element);
+
+                } catch (e) {
+                    console.log(e);
+                    console.log(i);
+                }
+
+            }
+
+
+
+            // Create homepage; append default feature items 
             for (i = 0; i < data[0].length; i++) {
                 resy = await createfeature(data[0][i]);
                 cont.appendChild(resy);
+
             }
-            if (data[1]) {
+            if (data[2]) {
                 console.log(data);
                 signup_button = document.getElementById("signup_button");
                 signup_button.innerHTML = "Hello, user"
@@ -3191,9 +3273,9 @@
                 signup_button.onclick = function () {
                     user_options_win.style.visibility = "visible";
                 }
-
-
             }
+
+
             return data;
         } else {
             return data;
@@ -3287,6 +3369,8 @@
             window.location.replace("/");
         }
     }
+
+
 
     async function logout() {
         console.log("LOGOUT");
